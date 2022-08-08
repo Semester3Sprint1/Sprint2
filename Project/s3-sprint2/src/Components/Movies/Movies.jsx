@@ -33,11 +33,9 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
-   getMoviesByGenre(selectedGenre)
+    getMoviesByGenre(selectedGenre);
   }, [selectedGenre]);
 
-
-  
   const handleGenreSelect = (genres) => {
     setSelectedGenre(genres);
   };
@@ -58,7 +56,7 @@ const Movies = () => {
         </div>
 
         <div className="col">
-          <div>
+          <div className={styles.searchResults}>
             <table className="table table">
               <thead className="thead-dark">
                 <tr>

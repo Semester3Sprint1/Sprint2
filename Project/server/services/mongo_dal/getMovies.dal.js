@@ -35,9 +35,6 @@ const getGenres = async () => {
     .collection("movies")
     .distinct("genres");
 
-  console.log("I do the thing.");
-  console.log(cursor);
-
   return cursor;
 };
 
