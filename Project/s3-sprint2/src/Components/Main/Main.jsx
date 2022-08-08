@@ -9,7 +9,7 @@ Footer
 */
 
 const Main = () => {
-  return <div>Main</div>;
+  return <div>home</div>;
 };
 
 export default Main;
