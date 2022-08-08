@@ -18,7 +18,7 @@ function App() {
   return (
     <Fragment>
       <NavBar />
-      <div className="App">
+      <div className="App ">
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/movies" element={<Movies />}></Route>
@@ -33,6 +33,9 @@ function App() {
         </Routes>
         <Footer />
       </div>
+  
+    
+ 
     </Fragment>
   );
 }

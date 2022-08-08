@@ -2,7 +2,8 @@ import React from "react";
 import classes from "./Footer.module.css";
 
 const Footer = () => {
-  return <footer><nav className="navbar navbar-expand-lg navbar-dark bg-dark"> 
+  return <footer>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark"> 
   <div className="container-fluid d-flex flex-row justify-content-evenly">
                     <span className="list-group-item list-group-item-action active" aria-current="true">
                         {/* Store Hours */}
