@@ -30,7 +30,6 @@ const submitHandler = (event) =>{
 
     fetch(url, {
         method: "POST",
-        
         body: JSON.stringify({
         email: email,
         password:password,
