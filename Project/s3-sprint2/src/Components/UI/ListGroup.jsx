@@ -2,7 +2,6 @@ import React from "react";
 
 let ListGroup = ({
   genres,
-  textProperty,
   valueProperty,
   onItemSelect,
   selectedItem,
@@ -23,8 +22,8 @@ let ListGroup = ({
               key={genre[valueProperty]}
               className={
                 selectedItem === genre
-                  ? "list-group-item list-group-item-action active"
-                  : "list-group-item list-group-item-action "
+                  ? " bg-primary list-group-item list-group-item-action active "
+                  : " list-group-item list-group-item-action "
               }
             >
               {" "}

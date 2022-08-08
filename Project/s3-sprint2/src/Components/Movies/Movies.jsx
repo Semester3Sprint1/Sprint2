@@ -24,7 +24,6 @@ const Movies = () => {
   const getMoviesByGenre = async (genre) => {
     const res = await fetch(`http://localhost:3001/movies/${genre}`);
     const data = await res.json();
-
     setMovies(data);
   };
 
@@ -33,6 +32,12 @@ const Movies = () => {
     getMovies();
   }, []);
 
+  useEffect(() => {
+   getMoviesByGenre(selectedGenre)
+  }, [selectedGenre]);
+
+
+  
   const handleGenreSelect = (genres) => {
     setSelectedGenre(genres);
   };
