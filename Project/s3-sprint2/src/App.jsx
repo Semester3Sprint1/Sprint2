@@ -8,6 +8,7 @@ import Account from "./Components/Account/Account";
 import Auth from "./Components/Account/Auth/Auth";
 import Footer from "./Components/UI/Footer";
 import AuthContext from "./Components/Context/auth-context";
+import NotFound from "./Components/Main/notFound";
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <Fragment>
       <NavBar />
-      <div className="App ">
+      <div className="App">
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/movies" element={<Movies />}></Route>
@@ -28,7 +29,7 @@ function App() {
           {!authCtx.isLoggedIn &&(
             <Route path="/auth" element={<Auth />}></Route>
           )}
-          <Route path="*" element={<Main/>}/>
+          <Route path="*" element={<NotFound/>}/>
           <Route path="/footer" element={<Footer/>}/>
         </Routes>
         <Footer />
