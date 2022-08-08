@@ -16,7 +16,13 @@ app.use(function (req, res, next) {
     "Content-Type, Access-Control-Allow-Headers"
   );
   next();
+  next();
 });
+
+// Routes
+const searchEngine = require("./routes/search");
+
+app.use("/search", searchEngine);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
