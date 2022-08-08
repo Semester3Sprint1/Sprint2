@@ -1,0 +1,100 @@
+import {useState, useRef, useContext} from 'react'
+import AuthContext from '../../Context/auth-context';
+import { useNavigate } from 'react-router-dom';
+import classes from './AuthForm.module.css'
+const AuthForm = () =>{
+
+const navigate = useNavigate();
+const emailInputRef = useRef();
+const passwordInputRef = useRef();
+const authCtx = useContext(AuthContext)
+const [isLogin, setIsLogin] = useState(true);
+const [isLoading, setisLoading] = useState(false)
+
+const switchAuthModeHandler = () =>{
+    setIsLogin((prevsState) => !prevsState)
+}
+
+const submitHandler = (event) =>{
+    event.preventDefault();
+    const email = emailInputRef.current.value;
+    const password = passwordInputRef.current.value;
+    // donwload maybe joi for validation or create some
+    setisLoading(true);
+    let url;
+    if(isLogin){
+        url = 'Sign in With Password filler'
+    } else{
+        url= "Sign up Filler"
+    }
+
+    fetch(url, {
+        method: "POST",
+        
+        body: JSON.stringify({
+        email: email,
+        password:password,
+        returnSecureToken: true,
+        }),
+        headers:{
+            "Content-Type": "application/json",   
+        }, 
+
+    })
+    .then((res) =>{
+        setisLoading(false);
+        if(res.ok){
+            return res.json();
+        }else{
+            return res.json().then((data) =>{
+                let errorMessage = "Authentication Fails!";
+                if(data && data.error && data.error.message){
+                    errorMessage = data.error.message
+                }
+                throw new Error(errorMessage)
+            });
+        }
+    }).then((data) =>{
+        authCtx.login(data.idToken);
+        navigate("/", { replace:true});
+        // add sucessfull Responce Maybe use toast
+    }).catch((err) =>{
+        alert(err.message)
+    });
+}
+
+return (
+    <section className= {classes.auth}>
+        <h1>{isLogin ? "Login" : "Sign Up"}</h1>
+        <form onSubmit={submitHandler}>
+            <div className={classes.control}>
+                <label htmlFor='email'>You Email</label>
+                <input type ="email" id="email" name = "email" required ref = {emailInputRef} />
+            </div>
+            <div className={classes.control}>
+                <label htmlFor='password'>Your Password</label>
+                <input 
+                type = "password"
+                name = "password"
+                id= "password"
+                required ref = {passwordInputRef}
+                minLength = "5"
+                maxLength="25" />  
+            </div>
+            <div className={classes.actions}>
+                {!isLoading &&(
+                    <button>{isLogin ? "Login" : "Create Account"}</button>
+                )}
+                {isLoading && <p className={classes.loading}>Loading.......</p>}
+                <button
+                type = "button"
+                className={classes.toggle}
+                onClick = {switchAuthModeHandler} >
+                    {isLogin ? "Create new account" : "Login with existing account"}
+                </button>
+            </div>
+        </form>
+    </section>
+);
+}
+export default AuthForm
