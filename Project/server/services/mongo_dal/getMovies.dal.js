@@ -6,7 +6,7 @@ const getMovies = async (body) => {
   const cursor = await client
     .db("sample_mflix")
     .collection("movies")
-    .find({ genres: "Action" })
+    .find()
     .skip(page_number * page_size)
     .limit(page_size);
   const results = await cursor.toArray();
@@ -28,7 +28,20 @@ const getMoviesByGenre = async (body) => {
   return results;
 };
 
-module.exports = { getMovies, getMoviesByGenre };
+const getGenres = async () => {
+  await client.connect();
+  const cursor = await client
+    .db("sample_mflix")
+    .collection("movies")
+    .distinct("genres");
+
+  console.log("I do the thing.");
+  console.log(cursor);
+
+  return cursor;
+};
+
+module.exports = { getMovies, getMoviesByGenre, getGenres };
 
 // const getMovies = async () => {
 //     //   const { searchText } = body;

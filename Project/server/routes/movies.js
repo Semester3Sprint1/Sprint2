@@ -4,11 +4,17 @@ const router = express.Router();
 const {
   getMovies,
   getMoviesByGenre,
+  getGenres,
 } = require("../services/mongo_dal/getMovies.dal");
 
 router.get("/", async (req, res) => {
   let response = await getMovies({ page_number: 2, page_size: 15 });
   // console.log(response);
+  res.status(200).send(response);
+});
+
+router.get("/getGenres", async (req, res) => {
+  let response = await getGenres();
   res.status(200).send(response);
 });
 
