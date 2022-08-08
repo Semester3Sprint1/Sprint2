@@ -2,8 +2,12 @@ import {useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-
+import AuthContext from "../Context/auth-context";
+import { useContext } from "react";
 export default function NavBar(props) {
+    const authCtx = useContext(AuthContext)
+    const isLoggedIn = authCtx.isLoggedIn
+
   const [isNavCollaspsed, setIsNavCollapsed] = useState(true);
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollaspsed);
@@ -54,30 +58,38 @@ export default function NavBar(props) {
                Movies
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                className="nav-link clickable h3"
-                to= '/account'
-              >
-                Account
-              </NavLink>
-            </li>
+            {isLoggedIn &&(
+                 <li className="nav-item">
+                 <NavLink
+                   className="nav-link clickable h3"
+                   to= '/account'
+                 >
+                   Account
+                 </NavLink>
+               </li>
+            )}
+           
           </ul>
         </div>
-        <NavLink className="nav-link clickable " to="/auth">
+        {!isLoggedIn &&(
+             <NavLink className="nav-link clickable " to="/auth">
+             <button
+               type="button"
+               className="btn btn-outline-light btn-lg me-2 "
+             >
+               {userIcon} Login
+             </button>
+           </NavLink>
+        )}
+        {isLoggedIn &&(
             <button
-              type="button"
-              className="btn btn-outline-light btn-lg me-2 "
-            >
-              {userIcon} Login
-            </button>
-          </NavLink>
-          <button
             type="button"
             className="btn btn-outline-light btn-lg me-2 "
           >
             {userIcon} Logout
           </button>
+        )}
+          
       
       </div>
     </nav>
