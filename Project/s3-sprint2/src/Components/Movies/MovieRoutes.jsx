@@ -15,7 +15,7 @@ const MovieRoutes = () => {
   const loadingToast = (message) => {
     toast.info(message, {
       position: "top-center",
-      autoClose: 500,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

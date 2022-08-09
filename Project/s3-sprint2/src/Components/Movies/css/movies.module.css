@@ -2,8 +2,14 @@
   margin: 1% auto;
 }
 
+.dataRow {
+  transition: all 0.2s ease-in-out;
+}
+
 .dataRow:hover {
   cursor: pointer;
+  background-color: rgb(209, 208, 208) !important;
+  transition: all 0.2s ease-in-out;
 }
 
 .dataSelect {
@@ -22,7 +28,8 @@
 
 .next,
 .previous,
-.grey {
+.grey,
+.loadData {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -35,5 +42,9 @@
 
 .previous:hover,
 .next:hover {
+  cursor: pointer;
+}
+
+.loadData:hover {
   cursor: pointer;
 }

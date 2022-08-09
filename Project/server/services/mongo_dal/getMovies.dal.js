@@ -2,11 +2,12 @@ const { client } = require("./mongo");
 
 const getMovies = async (body) => {
   const { page_number, page_size } = body;
+  const sort = { title: 1 };
   await client.connect();
   const cursor = await client
     .db("sample_mflix")
     .collection("movies")
-    .find()
+    .find({ sort })
     .skip(page_number * page_size)
     .limit(page_size);
   const results = await cursor.toArray();
