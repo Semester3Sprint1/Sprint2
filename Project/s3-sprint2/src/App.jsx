@@ -9,6 +9,8 @@ import Auth from "./Components/Account/Auth/Auth";
 import Footer from "./Components/Main/Footer";
 import AuthContext from "./Components/Context/auth-context";
 import NotFound from "./Components/Main/notFound";
+import MovieDetail from "./Components/Movies/MovieDetails/MovieDetail";
+import MovieRoutes from "./Components/Movies/MovieRoutes";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -21,8 +23,9 @@ function App() {
 
       <main className="App">
         <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/movies" element={<Movies />}></Route>
+          <Route path="/" element={<Main />} />
+          <Route path="/movies/*" element={<MovieRoutes />} />
+
           {authCtx.isLoggedIn && (
             <Route path="/account" element={<Account />}></Route>
           )}
@@ -30,7 +33,7 @@ function App() {
             <Route path="/auth" element={<Auth />}></Route>
           )}
           <Route path="*" element={<NotFound />} />
-          <Route path="/footer" element={<Footer />} />
+          {/* <Route path="/footer" element={<Footer />} /> */}
         </Routes>
       </main>
 
