@@ -1,0 +1,52 @@
+.slideshow {
+  height: 250px;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.slideshow > div {
+  height: 250px;
+  width: 5000px;
+  background: url("../images/fullBanner.webp");
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+}
+.slideshow .mover1 {
+  animation: moveSlideshow 25s linear infinite;
+}
+.slideshow .mover2 {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  background-position: 0 -500px;
+  animation: moveSlideshow 25s linear infinite;
+}
+
+@keyframes moveSlideshow {
+  100% {
+    transform: translateX(-52%);
+  }
+}
+
+.review {
+  display: flex;
+  padding-left: 20px;
+}
+.review2 {
+  display: flex;
+  padding-left: 20px;
+}
+
+.reviewquote {
+  padding-left: 20px;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
