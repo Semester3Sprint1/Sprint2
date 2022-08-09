@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./css/movies.modules.css";
 import ListGroup from "../UI/ListGroup";
+import usePagination from "../../Hooks/usePagination";
 
 const Movies = () => {
   const [movies, setMovies] = useState(false);
