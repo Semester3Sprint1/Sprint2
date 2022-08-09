@@ -9,11 +9,12 @@ body,
   flex-direction: column;
 }
 
+/* Footer */
+
 footer {
   height: auto;
   margin-top: auto;
 }
-
 
 .spaceAdded {
   margin-bottom: 1.5vw;
@@ -31,7 +32,6 @@ footer a:hover {
 footer h5 {
   color: white;
 }
-
 
 /* .App {
   text-align: center;
