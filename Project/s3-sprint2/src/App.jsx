@@ -6,37 +6,37 @@ import Main from "./Components/Main/Main";
 import Movies from "./Components/Movies/Movies";
 import Account from "./Components/Account/Account";
 import Auth from "./Components/Account/Auth/Auth";
-import Footer from "./Components/UI/Footer";
+import Footer from "./Components/Main/Footer";
 import AuthContext from "./Components/Context/auth-context";
 import NotFound from "./Components/Main/notFound";
 
 function App() {
-
   const authCtx = useContext(AuthContext);
 
-
-  
   return (
     <Fragment>
-      <NavBar />
-      <div className="App">
+      <header>
+        <NavBar />
+      </header>
+
+      <main className="App">
         <Routes>
           <Route path="/" element={<Main />}></Route>
           <Route path="/movies" element={<Movies />}></Route>
-          {authCtx.isLoggedIn &&(
+          {authCtx.isLoggedIn && (
             <Route path="/account" element={<Account />}></Route>
           )}
-          {!authCtx.isLoggedIn &&(
+          {!authCtx.isLoggedIn && (
             <Route path="/auth" element={<Auth />}></Route>
           )}
-          <Route path="*" element={<NotFound/>}/>
-          <Route path="/footer" element={<Footer/>}/>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/footer" element={<Footer />} />
         </Routes>
+      </main>
+
+      <footer>
         <Footer />
-      </div>
-  
-    
- 
+      </footer>
     </Fragment>
   );
 }
