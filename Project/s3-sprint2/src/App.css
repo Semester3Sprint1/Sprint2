@@ -16,6 +16,10 @@ footer {
   margin-top: auto;
 }
 
+.spaceAdded {
+  margin-bottom: 1.5vw;
+}
+
 footer a {
   color: white;
   text-decoration: none;

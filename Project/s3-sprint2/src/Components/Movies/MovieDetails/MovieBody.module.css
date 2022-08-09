@@ -1,0 +1,28 @@
+.title{
+    text-align: left;
+}
+
+.body ul {
+    display: flex;
+    list-style:none;
+    flex-wrap: wrap;
+   
+    
+}
+
+.body li, .rating{
+    margin-right: 0.5rem;
+    border-radius: 20px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    white-space: nowrap;
+    background:#03045e;
+    color: white;
+    margin-top: 0.3rem;
+
+}
+
+
+
+  

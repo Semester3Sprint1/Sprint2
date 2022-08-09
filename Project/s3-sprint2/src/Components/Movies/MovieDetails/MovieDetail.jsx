@@ -4,26 +4,23 @@ import MovieImage from "./MovieImage";
 import classes from "./MovieDetails.module.css"
 import MovieBody from "./MovieBody";
 import Card from "../../UI/Card";
+
 const MovieDetail = ({ movie }) => {
   const {
     _id,
     awards,
     cast,
-    countries,
+    languages,
     directors,
     fullplot,
     genres,
     imdb,
-    lastupdated,
-    plot,
     poster,
     rated,
     released,
     runtime,
     title,
-    tomatoes,
-    type,
-    year,
+    writers,
   } = movie;
 
   
@@ -35,15 +32,28 @@ const MovieDetail = ({ movie }) => {
   rating = {rated}
   date = {released}
   length = {runtime}
-  imdb = {imdb}/>
+  lang = {languages}
+  id = {_id}/>
   <div className={classes.grid}>
     <div className={classes.image}>
   <MovieImage image = {poster} />
   </div>
+  
   <Card>
-    <MovieBody plot = {plot}/>
+  <div className={classes.body}>
+    <MovieBody 
+    plot = {fullplot}
+    genre = {genres}
+    director = {directors}
+    writer = {writers}
+    stars = {cast}
+    imdb = {imdb}
+    id = {_id}
+    />
+    </div>
   </Card>
   </div>
+
   </div>;
 };
 
