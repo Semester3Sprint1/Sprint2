@@ -2,14 +2,14 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./Components/Main/Nav";
 import React, { Fragment, useContext, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Main from "./Components/Main/Main";
-import Movies from "./Components/Movies/Movies";
 import Account from "./Components/Account/Account";
 import Auth from "./Components/Account/Auth/Auth";
 import Footer from "./Components/Main/Footer";
 import AuthContext from "./Components/Context/auth-context";
 import NotFound from "./Components/Main/notFound";
-import MovieDetail from "./Components/Movies/MovieDetails/MovieDetail";
 import MovieRoutes from "./Components/Movies/MovieRoutes";
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
       </header>
 
       <main className="App">
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/movies/*" element={<MovieRoutes />} />
@@ -33,7 +34,6 @@ function App() {
             <Route path="/auth" element={<Auth />}></Route>
           )}
           <Route path="*" element={<NotFound />} />
-          {/* <Route path="/footer" element={<Footer />} /> */}
         </Routes>
       </main>
 
