@@ -1,0 +1,39 @@
+.searchResults table {
+  margin: 1% auto;
+}
+
+.dataRow:hover {
+  cursor: pointer;
+}
+
+.dataSelect {
+  color: blue;
+  margin: 1% auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pageSelect {
+  color: blue;
+  margin: 1% auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.next,
+.previous,
+.grey {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.grey {
+  opacity: 30%;
+}
+
+.previous:hover,
+.next:hover {
+  cursor: pointer;
+}
