@@ -33,7 +33,6 @@ const Movies = ({ handleSelect, toast }) => {
   };
 
   const getMoviesByGenre = async (page, genre) => {
-    toast("Loading movies...");
     const page_num = encodeURIComponent(page);
     console.log(page + 1);
 
@@ -48,10 +47,12 @@ const Movies = ({ handleSelect, toast }) => {
 
   useEffect(() => {
     getGenres();
+    getMoviesByGenre(0, selectedGenre);
   }, []);
 
   useEffect(() => {
     getMoviesByGenre(0, selectedGenre);
+    toast("UseEffect Loading movies...");
   }, [selectedGenre]);
 
   const handleGenreSelect = (genres) => {
@@ -67,6 +68,7 @@ const Movies = ({ handleSelect, toast }) => {
     let newPage = pageNum + 1;
     setPageNum(newPage);
     getMoviesByGenre(newPage, selectedGenre);
+    toast("Loading movies...");
     paginate.jump(1);
   };
 
@@ -75,6 +77,7 @@ const Movies = ({ handleSelect, toast }) => {
     if (pageNum !== 0) {
       setPageNum(newPage);
       getMoviesByGenre(newPage, selectedGenre);
+      toast("Loading movies...");
       paginate.jump(1);
     }
   };
