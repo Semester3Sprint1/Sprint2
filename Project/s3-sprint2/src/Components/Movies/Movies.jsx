@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./css/movies.modules.css";
+import styles from "./css/movies.module.css";
 import ListGroup from "../UI/ListGroup";
 import usePagination from "../../Hooks/usePagination";
 
-const Movies = ({ handleSelect }) => {
+const Movies = ({ handleSelect, toast }) => {
   const [movies, setMovies] = useState(false);
   const [genre, setGenre] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("Action");
+  const [pageNum, setPageNum] = useState(0);
 
   const navigate = useNavigate();
   const goToMovieDetail = (id) => navigate(`/movies/${id}/detail`);
 
-  const getMovies = async () => {
-    const res = await fetch("http://localhost:3001/movies");
-    const data = await res.json();
+  const paginate = usePagination(movies, 20); // THE SECOND NUMBER HERE CONTROLS HOW MANY MOVIES ARE DISPLAYED PER PAGE
 
-    setMovies(data);
-  };
+  // const getMovies = async () => {
+  //   const res = await fetch(`http://localhost:3001/movies?page=${page_num}`, {
+  //     method: "GET",
+  //     headers: { "Content-Type": "application/json" },
+  //   });
+  //   const data = await res.json();
+
+  //   setMovies(data);
+  // };
 
   const getGenres = async () => {
     const res = await fetch("http://localhost:3001/movies/getGenres");
@@ -26,19 +32,26 @@ const Movies = ({ handleSelect }) => {
     setGenre(data);
   };
 
-  const getMoviesByGenre = async (genre) => {
-    const res = await fetch(`http://localhost:3001/movies/${genre}`);
+  const getMoviesByGenre = async (page, genre) => {
+    toast("Loading movies...");
+    const page_num = encodeURIComponent(page);
+    console.log(page + 1);
+
+    const res = await fetch(
+      `http://localhost:3001/movies/${genre}?page=${page_num}`
+    );
     const data = await res.json();
+
     setMovies(data);
+    paginate.jump(1);
   };
 
   useEffect(() => {
     getGenres();
-    getMovies();
   }, []);
 
   useEffect(() => {
-    getMoviesByGenre(selectedGenre);
+    getMoviesByGenre(0, selectedGenre);
   }, [selectedGenre]);
 
   const handleGenreSelect = (genres) => {
@@ -48,6 +61,22 @@ const Movies = ({ handleSelect }) => {
   const onSelect = (movie) => {
     handleSelect(movie);
     goToMovieDetail(movie._id);
+  };
+
+  const loadNextData = () => {
+    let newPage = pageNum + 1;
+    setPageNum(newPage);
+    getMoviesByGenre(newPage, selectedGenre);
+    paginate.jump(1);
+  };
+
+  const loadLastData = () => {
+    let newPage = pageNum - 1;
+    if (pageNum !== 0) {
+      setPageNum(newPage);
+      getMoviesByGenre(newPage, selectedGenre);
+      paginate.jump(1);
+    }
   };
 
   return (
@@ -63,7 +92,40 @@ const Movies = ({ handleSelect }) => {
           </div>
 
           <div className="col">
-            <div className={styles.searchResults} style={{ margin: "1%" }}>
+            <div className={styles.searchResults}>
+              {/* This secion will load other data when clicked */}
+              <div className={styles.dataSelect}>
+                <span onClick={loadLastData}>Load Previous</span>
+
+                <span>Page No: {pageNum + 1}</span>
+
+                <span onClick={loadNextData}>Load More</span>
+              </div>
+
+              {/* This section will filter the loaded data */}
+              <div className={styles.pageSelect}>
+                <span
+                  onClick={paginate.prev}
+                  className={
+                    paginate.currentPage === 1
+                      ? `${styles.previous} ${styles.grey}`
+                      : styles.previous
+                  }
+                >
+                  Previous Page
+                </span>
+                <span
+                  onClick={paginate.next}
+                  className={
+                    paginate.currentPage === paginate.maxPage
+                      ? `${styles.next} ${styles.grey}`
+                      : styles.next
+                  }
+                >
+                  Next Page
+                </span>
+              </div>
+
               <table className="table table">
                 <thead className="thead-dark">
                   <tr>
@@ -75,7 +137,7 @@ const Movies = ({ handleSelect }) => {
                 <tbody>
                   {movies && (
                     <>
-                      {movies.map((movie) => {
+                      {paginate.currentData().map((movie) => {
                         let date = new Date(movie.released);
                         return (
                           <tr

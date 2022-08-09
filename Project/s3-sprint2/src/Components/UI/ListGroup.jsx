@@ -1,12 +1,7 @@
 import React from "react";
 
-let ListGroup = ({
-  genres,
-  valueProperty,
-  onItemSelect,
-  selectedItem,
-}) => {
-  console.log(genres);
+let ListGroup = ({ genres, valueProperty, onItemSelect, selectedItem }) => {
+  // console.log(genres);
 
   return (
     <div className="mt-2">
@@ -37,6 +32,7 @@ let ListGroup = ({
 };
 
 ListGroup.defaultProps = {
+  selectedItem: "Action",
   textProperty: "genre",
   valueProperty: "id",
 };

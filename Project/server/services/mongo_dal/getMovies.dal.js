@@ -16,11 +16,13 @@ const getMovies = async (body) => {
 
 const getMoviesByGenre = async (body) => {
   const { page_number, page_size, genre } = body;
+  const sort = { title: 1 };
+  console.log(`Page Num: ${page_number}`);
   await client.connect();
   const cursor = await client
     .db("sample_mflix")
     .collection("movies")
-    .find({ genres: genre })
+    .find({ genres: genre }, { sort })
     .skip(page_number * page_size)
     .limit(page_size);
   const results = await cursor.toArray();
