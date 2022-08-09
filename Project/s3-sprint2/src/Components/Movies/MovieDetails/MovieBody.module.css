@@ -10,7 +10,7 @@
     
 }
 
-.body li{
+.body li, .rating{
     margin-right: 0.5rem;
     border-radius: 20px;
     font-size: 1.6rem;
@@ -22,7 +22,6 @@
     margin-top: 0.3rem;
 
 }
-
 
 
 

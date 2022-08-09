@@ -1,18 +1,18 @@
 import React from 'react'
 import classes from './MovieBody.module.css'
 
-const MovieBody = ({plot, genre, director, writer}) => {
+const MovieBody = ({plot, genre, director, writer, stars, imdb, id}) => {
 
    
   return (
-    <div className={classes.body}>
+    <div   className={classes.body}>
         <h1 className={classes.title}>Synopsis</h1>
         <p className={classes.plot}>{plot}</p>
         <div className= {classes.block}>
         <h2 className={classes.title}>Genres:</h2>
         <ul>
         {genre.map((genres) =>   
-        <li>{genres}</li>
+        <li key={id}> {genres}</li>
         )}
         </ul>
         </div>
@@ -20,7 +20,7 @@ const MovieBody = ({plot, genre, director, writer}) => {
         <h2 className={classes.title}>Director(s):</h2>
         <ul>
         {director.map((directors) =>
-        <li>{directors}</li>
+        <li key={id}>{directors}</li>
         )}
         </ul>
         </div>
@@ -28,9 +28,18 @@ const MovieBody = ({plot, genre, director, writer}) => {
         <h2 className={classes.title}>Writer(s):</h2>
         <ul>
         {writer.map((writers) =>
-        <li>{writers}</li>
+        <li key={id}>{writers}</li>
         )}
         </ul>
+        </div>
+        <div className= {classes.block}>
+        <h2 className={classes.title}>Stars:</h2>
+        <ul>
+        {stars.map((star) =>
+        <li key={id}>{star}</li>
+        )}
+        </ul>
+        <h2 className={classes.title}>IMDb Rating: <span className={classes.rating}>{imdb.rating}/10</span>  </h2>
         </div>
         </div>
   )
