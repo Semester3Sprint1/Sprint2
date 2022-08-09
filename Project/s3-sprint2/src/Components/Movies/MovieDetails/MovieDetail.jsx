@@ -9,21 +9,17 @@ const MovieDetail = ({ movie }) => {
     _id,
     awards,
     cast,
-    countries,
+    languages,
     directors,
     fullplot,
     genres,
     imdb,
-    lastupdated,
-    plot,
     poster,
     rated,
     released,
     runtime,
     title,
-    tomatoes,
-    type,
-    year,
+    writers,
   } = movie;
 
   
@@ -35,14 +31,24 @@ const MovieDetail = ({ movie }) => {
   rating = {rated}
   date = {released}
   length = {runtime}
-  imdb = {imdb}/>
+  imdb = {imdb}
+  lang = {languages}/>
   <div className={classes.grid}>
     <div className={classes.image}>
   <MovieImage image = {poster} />
   </div>
+  
   <Card>
-    <MovieBody plot = {plot}/>
+  <div className={classes.body}>
+    <MovieBody 
+    plot = {fullplot}
+    genre = {genres}
+    director = {directors}
+    writer = {writers}
+    />
+    </div>
   </Card>
+  
   </div>
   </div>;
 };

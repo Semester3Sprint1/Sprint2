@@ -14,6 +14,25 @@ footer {
   margin-top: auto;
 }
 
+
+.spaceAdded {
+  margin-bottom: 1.5vw;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  background-color: white;
+}
+
+footer h5 {
+  color: white;
+}
+
+
 /* .App {
   text-align: center;
 }
