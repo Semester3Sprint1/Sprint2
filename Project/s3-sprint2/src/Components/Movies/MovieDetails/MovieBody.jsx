@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './MovieBody.module.css'
 
-const MovieBody = ({plot, genre, director, writer, stars, imdb, id}) => {
+const MovieBody = ({plot, genre, director, writer, stars, imdb, id, award}) => {
 
    
   return (
@@ -40,6 +40,8 @@ const MovieBody = ({plot, genre, director, writer, stars, imdb, id}) => {
         )}
         </ul>
         <h2 className={classes.title}>IMDb Rating: <span className={classes.rating}>{imdb.rating}/10</span>  </h2>
+        <h2 className={classes.title}>Award Details:</h2>
+        <p className={classes.award}>{award.text}</p>
         </div>
         </div>
   )

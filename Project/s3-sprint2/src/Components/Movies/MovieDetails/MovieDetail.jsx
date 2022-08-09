@@ -49,6 +49,7 @@ const MovieDetail = ({ movie }) => {
     stars = {cast}
     imdb = {imdb}
     id = {_id}
+    award = {awards}
     />
     </div>
   </Card>
