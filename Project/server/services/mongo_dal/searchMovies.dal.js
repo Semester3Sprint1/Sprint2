@@ -8,7 +8,7 @@ const searchMovies = async (body) => {
     .collection("movies")
     .find({ $text: { $search: searchText } });
   const results = await cursor.toArray();
-  // console.log(results);
+  console.log(results);
 
   return results;
 };
