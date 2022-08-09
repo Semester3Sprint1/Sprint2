@@ -6,6 +6,7 @@ const MovieImage = ({image}) => {
     <div className={classes.image}>
         <img src = {image} alt = 'Movie Poster' />
         <StarRating/>
+        <button className={classes.btnReview}>44 User Reviews</button>
         </div>
   )
 }

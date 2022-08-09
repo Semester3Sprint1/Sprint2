@@ -52,9 +52,10 @@ const MovieDetail = ({ movie }) => {
     award = {awards}
     />
     </div>
+    
   </Card>
   </div>
-
+  
   </div>;
 };
 
