@@ -18,6 +18,7 @@ img{
     padding: 0.5rem 2rem;
     border-radius: 25px;
     margin-left: 1rem;
+    font-weight: 500;
   }
   
   .btnReview:hover,
