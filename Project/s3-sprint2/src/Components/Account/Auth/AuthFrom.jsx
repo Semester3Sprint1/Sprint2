@@ -7,6 +7,7 @@ const AuthForm = () =>{
 const navigate = useNavigate();
 const emailInputRef = useRef();
 const passwordInputRef = useRef();
+const userNameInputRef = useRef();
 const authCtx = useContext(AuthContext)
 const [isLogin, setIsLogin] = useState(true);
 const [isLoading, setisLoading] = useState(false)
@@ -17,6 +18,7 @@ const switchAuthModeHandler = () =>{
 
 const submitHandler = (event) =>{
     event.preventDefault();
+    const userName = userNameInputRef.current.value;
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
     // donwload maybe joi for validation or create some
@@ -31,6 +33,7 @@ const submitHandler = (event) =>{
     fetch(url, {
         method: "POST",
         body: JSON.stringify({
+        userName: userName,    
         email: email,
         password:password,
         returnSecureToken: true,
@@ -66,6 +69,12 @@ return (
     <section className= {classes.auth}>
         <h1>{isLogin ? "Login" : "Sign Up"}</h1>
         <form onSubmit={submitHandler}>
+        {!isLogin &&  <div className={classes.control}>
+            
+            <label htmlFor='username'>UserName</label>
+            <input type ="text" id="username" name = "username" required ref = {userNameInputRef} minLength = "5"  maxLength="25" />
+        </div>}
+        
             <div className={classes.control}>
                 <label htmlFor='email'>You Email</label>
                 <input type ="email" id="email" name = "email" required ref = {emailInputRef} />
