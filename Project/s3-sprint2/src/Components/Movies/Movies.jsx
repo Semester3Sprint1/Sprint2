@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./css/movies.module.css";
 import ListGroup from "../UI/ListGroup";
 import usePagination from "../../Hooks/usePagination";
 import SearchBar from "../UI/SearchBar";
+import SortIcons from "../UI/SortIcons";
 
 const Movies = ({ handleSelect, toast }) => {
   const [movies, setMovies] = useState([]);
@@ -12,6 +13,7 @@ const Movies = ({ handleSelect, toast }) => {
   const [pageNum, setPageNum] = useState(0);
   const [selectionMade, setSelectionMade] = useState(false);
   const [searchResults, setSearchResults] = useState(false);
+  const [sortMethod, setSortMethod] = useState("");
 
   const navigate = useNavigate();
   const goToMovieDetail = (id) => navigate(`/movies/${id}/detail`);
@@ -24,11 +26,64 @@ const Movies = ({ handleSelect, toast }) => {
   }, []);
 
   useEffect(() => {
-    getMoviesByGenre(0, selectedGenre);
+    getMoviesByGenre(0, selectedGenre, "title");
   }, [selectedGenre]);
 
   const paginate = usePagination(movies, 20); // THE SECOND NUMBER HERE CONTROLS HOW MANY MOVIES ARE DISPLAYED PER PAGE
 
+  // const sortedMovies = useMemo(
+  //   () => movies.sort((a, b) => a.title.localeCompare(b.title)),
+  //   [movies, sortMethod]
+  // );
+
+  const sortMoviesByTitle = (direction) => {
+    var newMovies = [];
+
+    if (direction) {
+      newMovies = movies.sort((a, b) => a.title.localeCompare(b.title));
+      console.log(newMovies);
+    } else {
+      newMovies = movies.sort((a, b) => b.title.localeCompare(a.title));
+      console.log(newMovies);
+    }
+    return newMovies;
+  };
+
+  const sortMoviesByRating = (direction) => {
+    var newMovies = {};
+
+    if (direction) {
+      newMovies = movies.sort((a, b) =>
+        a.imdb.rating > b.imdb.rating
+          ? 1
+          : b.imdb.rating > a.imdb.rating
+          ? -1
+          : 0
+      );
+    } else {
+      newMovies = movies.sort((a, b) =>
+        a.imdb.rating < b.imdb.rating
+          ? 1
+          : b.imdb.rating < a.imdb.rating
+          ? -1
+          : 0
+      );
+    }
+    return newMovies;
+  };
+
+  const sortMoviesByDate = (direction) => {
+    var newMovies = [];
+
+    if (direction) {
+      newMovies = movies.sort((a, b) => a.released.localeCompare(b.released));
+    } else {
+      newMovies = movies.sort((a, b) => b.released.localeCompare(a.released));
+    }
+    return newMovies;
+  };
+
+  //movies.sort((a, b) => b.title.localeCompare(a.title));
   const getGenres = async () => {
     const res = await fetch("http://localhost:3001/movies/getGenres");
     const data = await res.json();
@@ -36,10 +91,10 @@ const Movies = ({ handleSelect, toast }) => {
     setGenre(data);
   };
 
-  const getMoviesByGenre = async (page, genre) => {
+  const getMoviesByGenre = async (page, genre, sort) => {
     const page_num = encodeURIComponent(page);
     const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}`
+      `http://localhost:3001/movies/${genre}?page=${page_num}?sort=${sort}`
     );
     const data = await res.json();
 
@@ -48,11 +103,11 @@ const Movies = ({ handleSelect, toast }) => {
     paginate.jump(1);
   };
 
-  const loadMoreMoviesByGenre = async (page, genre) => {
+  const loadMoreMoviesByGenre = async (page, genre, sort) => {
     const page_num = encodeURIComponent(page);
 
     const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}`
+      `http://localhost:3001/movies/${genre}?page=${page_num}?sort=${sort}`
     );
     const data = await res.json();
 
@@ -100,6 +155,42 @@ const Movies = ({ handleSelect, toast }) => {
   //     paginate.jump(0);
   //   }
   // };
+
+  const displayMovies = () => {
+    if (sortMethod === "title") {
+      var sortBy = (a, b) => a.title.localeCompare(b.title);
+    } else if (sortMethod === "rating") {
+      var sortBy = (a, b) =>
+        a.imdb.rating > b.imdb.rating
+          ? 1
+          : b.imdb.rating > a.imdb.rating
+          ? -1
+          : 0;
+    }
+    return (
+      <>
+        {paginate
+          .currentData()
+          .sort(sortBy)
+          .map((movie) => {
+            let date = new Date(movie.released);
+            return (
+              <tr
+                key={movie._id}
+                onClick={() => onSelect(movie)}
+                className={styles.dataRow}
+              >
+                <td>
+                  <strong>{movie.title}</strong>
+                </td>
+                <td>{date.toLocaleDateString()}</td>
+                <td>{movie.imdb.rating}</td>
+              </tr>
+            );
+          })}
+      </>
+    );
+  };
 
   return (
     <>
@@ -157,31 +248,41 @@ const Movies = ({ handleSelect, toast }) => {
                 <table className="table table">
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">Movie Title</th>
-                      <th scope="col">Release Date</th>
-                      <th scope="col">Rating</th>
+                      <th scope="col">
+                        Movie Title{" "}
+                        <span
+                          onClick={() => {
+                            setSortMethod("title");
+                          }}
+                        >
+                          <SortIcons type="alpha" />
+                        </span>
+                      </th>
+                      <th scope="col">
+                        Release Date{" "}
+                        <span
+                          onClick={() => {
+                            setSortMethod("date");
+                          }}
+                        >
+                          <SortIcons />
+                        </span>
+                      </th>
+                      <th scope="col">
+                        Rating{" "}
+                        <span
+                          onClick={() => {
+                            setSortMethod("rating");
+                          }}
+                        >
+                          <SortIcons />
+                        </span>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {movies.length > 0 ? (
-                      <>
-                        {paginate.currentData().map((movie) => {
-                          let date = new Date(movie.released);
-                          return (
-                            <tr
-                              key={movie._id}
-                              onClick={() => onSelect(movie)}
-                              className={styles.dataRow}
-                            >
-                              <td>
-                                <strong>{movie.title}</strong>
-                              </td>
-                              <td>{date.toLocaleDateString()}</td>
-                              <td>{movie.imdb.rating}</td>
-                            </tr>
-                          );
-                        })}
-                      </>
+                      <>{displayMovies()}</>
                     ) : (
                       `No movie data available.`
                     )}
