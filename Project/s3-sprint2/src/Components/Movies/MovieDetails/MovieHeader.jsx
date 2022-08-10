@@ -1,8 +1,7 @@
 import {Fragment} from "react";
-import { useEffect } from "react";
 import classes from './MovieHeader.module.css'
 
-const MovieHeader = ({movie,rating, date, length,lang, id}) => {
+const MovieHeader = ({movie,rating, date, length,lang}) => {
 
     let newDate = new Date(date)
 
@@ -17,8 +16,9 @@ const MovieHeader = ({movie,rating, date, length,lang, id}) => {
                     <li> Year: {newDate.toLocaleDateString('en-us',{year:"numeric"})}</li>
                     <li>Rating: {!rating ? `Not Rated`: rating}</li>
                     <li>Length: {length}m</li>
-                    {lang.map((languages) =>   
-                     <li key ={id}>Language: {languages}</li>
+                    <li>Language(s):</li>
+                    {lang.map((languages,i) =>   
+                     <li key ={i}> {languages}</li>
         )}                       
                 </ul>
             </div>

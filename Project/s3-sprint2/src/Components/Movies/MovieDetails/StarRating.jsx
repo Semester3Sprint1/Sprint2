@@ -11,8 +11,8 @@ import { FaStar } from 'react-icons/fa'
         <h2>Your Rating {rating}/10</h2>
         {[...Array(10)].map((star,i) =>{
             const ratingValue = i + 1;
-            return  <label>
-                <input 
+            return  <label key= {i} >
+                <input
                 type="radio" 
                 name="rating" 
                 id="rating" 

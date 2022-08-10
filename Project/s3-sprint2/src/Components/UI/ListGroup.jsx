@@ -1,6 +1,6 @@
 import React from "react";
 
-let ListGroup = ({ genres, valueProperty, onItemSelect, selectedItem }) => {
+let ListGroup = ({ genres,  onItemSelect, selectedItem }) => {
   // console.log(genres);
 
   return (
@@ -8,13 +8,13 @@ let ListGroup = ({ genres, valueProperty, onItemSelect, selectedItem }) => {
       <ul className="list-group clickable">
         <li className="list-group-item active bg-dark">Select Genre</li>
 
-        {genres.map((genre) => {
+        {genres.map((genre, i) => {
           return (
             <li
               onClick={() => {
                 onItemSelect(genre);
               }}
-              key={genre[valueProperty]}
+              key={i}
               className={
                 selectedItem === genre
                   ? " bg-primary list-group-item list-group-item-action active "
@@ -34,7 +34,7 @@ let ListGroup = ({ genres, valueProperty, onItemSelect, selectedItem }) => {
 ListGroup.defaultProps = {
   selectedItem: "Action",
   textProperty: "genre",
-  valueProperty: "id",
+  
 };
 
 export default ListGroup;

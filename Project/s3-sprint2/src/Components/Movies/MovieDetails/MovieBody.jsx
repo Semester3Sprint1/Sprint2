@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './MovieBody.module.css'
 
-const MovieBody = ({plot, genre, director, writer, stars, imdb, id, award}) => {
+const MovieBody = ({plot, genre, director, writer, stars, imdb, award}) => {
 
    
   return (
@@ -9,34 +9,34 @@ const MovieBody = ({plot, genre, director, writer, stars, imdb, id, award}) => {
         <h1 className={classes.title}>Synopsis</h1>
         <p className={classes.plot}>{plot}</p>
         <div className= {classes.block}>
-        <h2 className={classes.title}>Genres:</h2>
+        <h2 className={classes.title}>Genre(s):</h2>
         <ul>
-        {genre.map((genres) =>   
-        <li key={id}> {genres}</li>
+        {genre.map((genres,i) =>   
+        <li key={i}> {genres}</li>
         )}
         </ul>
         </div>
         <div className= {classes.block}>
         <h2 className={classes.title}>Director(s):</h2>
         <ul>
-        {director.map((directors) =>
-        <li key={id}>{directors}</li>
+        {director.map((directors,i) =>
+        <li key={i}>{directors}</li>
         )}
         </ul>
         </div>
         <div className= {classes.block}>
         <h2 className={classes.title}>Writer(s):</h2>
         <ul>
-        {writer.map((writers) =>
-        <li key={id}>{writers}</li>
+        {writer.map((writers,i) =>
+        <li key={i}>{writers}</li>
         )}
         </ul>
         </div>
         <div className= {classes.block}>
         <h2 className={classes.title}>Stars:</h2>
         <ul>
-        {stars.map((star) =>
-        <li key={id}>{star}</li>
+        {stars.map((star,i) =>
+        <li key={i}>{star}</li>
         )}
         </ul>
         <h2 className={classes.title}>IMDb Rating: <span className={classes.rating}>{imdb.rating}/10</span>  </h2>
