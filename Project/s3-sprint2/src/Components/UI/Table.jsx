@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from "react";
-import Pagination from "../../Hooks/Pagination";
+import Pagination from "./Pagination";
 import { sortRows, filterRows, paginateRows } from "./helpers/helpers";
 import SortIcons from "./SortIcons";
 import styles from "./css/table.module.css";
 
-const Table = ({ rows, columns, onSelect }) => {
+const Table = ({ rows, columns, onSelect, loadMoreData }) => {
   const [activePage, setActivePage] = useState(1);
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState({ order: "asc", orderBy: "_id" });
@@ -137,6 +137,7 @@ const Table = ({ rows, columns, onSelect }) => {
         rowsPerPage={rowsPerPage}
         totalPages={totalPages}
         setActivePage={setActivePage}
+        loadMoreData={loadMoreData}
       />
     </>
   );

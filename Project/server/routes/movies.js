@@ -25,7 +25,7 @@ router.get("/:genre", async (req, res) => {
   // console.log(`The page number query: ${page}`);
   let response = await getMoviesByGenre({
     page_number: page,
-    page_size: 1000,
+    page_size: 3000,
     genre: req.params.genre,
   });
   // console.log(response);

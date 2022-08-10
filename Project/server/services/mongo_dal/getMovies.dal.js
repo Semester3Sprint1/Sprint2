@@ -20,13 +20,21 @@ const getMoviesByGenre = async (body) => {
   const sort = { title: 1 };
   // console.log(`Page Num: ${page_number}`);
   await client.connect();
-  const cursor = await client
-    .db("sample_mflix")
-    .collection("movies")
-    .find({ genres: genre }, { sort })
-    .skip(page_number * page_size)
-    .limit(page_size);
-  const results = await cursor.toArray();
+  const cursor = await client.db("sample_mflix").collection("movies");
+
+  if (genre === "All") {
+    var finder = cursor
+      .find()
+      .skip(page_number * page_size)
+      .limit(page_size);
+  } else {
+    var finder = cursor
+      .find({ genres: genre }, { sort })
+      .skip(page_number * page_size)
+      .limit(page_size);
+  }
+
+  const results = await finder.toArray();
 
   return results;
 };

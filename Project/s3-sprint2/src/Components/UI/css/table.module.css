@@ -14,3 +14,14 @@
   display: flex;
   justify-content: space-between;
 }
+
+.controlBar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pageInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3%;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./css/table.module.css";
 
 const Pagination = ({
   activePage,
@@ -6,13 +7,14 @@ const Pagination = ({
   rowsPerPage,
   totalPages,
   setActivePage,
+  loadMoreData,
 }) => {
   const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
   const end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
 
   return (
     <>
-      <div className="pagination">
+      <div className={styles.controlBar}>
         <button disabled={activePage === 1} onClick={() => setActivePage(1)}>
           ⏮️ First
         </button>
@@ -35,12 +37,15 @@ const Pagination = ({
           Last ⏭️
         </button>
       </div>
-      <p>
-        Page {activePage} of {totalPages}
-      </p>
-      <p>
-        Rows: {beginning === end ? end : `${beginning} - ${end}`} of {count}
-      </p>
+      <div className={styles.pageInfo}>
+        <p>
+          Page {activePage} of {totalPages}
+        </p>
+        <button onClick={loadMoreData}>Load More</button>
+        <p>
+          Rows: {beginning === end ? end : `${beginning} - ${end}`} of {count}
+        </p>
+      </div>
     </>
   );
 };
