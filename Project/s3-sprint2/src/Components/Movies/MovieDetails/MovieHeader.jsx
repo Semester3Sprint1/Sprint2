@@ -16,10 +16,11 @@ const MovieHeader = ({movie,rating, date, length,lang}) => {
                     <li> Year: {newDate.toLocaleDateString('en-us',{year:"numeric"})}</li>
                     <li>Rating: {!rating ? `Not Rated`: rating}</li>
                     <li>Length: {length}m</li>
-                    <li>Language(s):</li>
-                    {lang.map((languages,i) =>   
-                     <li key ={i}> {languages},</li>
-        )}                       
+                    <li>Language(s): {!lang ? 'Silent Movie' : lang}</li>
+                    {lang && 
+                 lang.map((languages,i) =>   
+                     <li key ={i}> {languages},</li>   
+        ) }                     
                 </ul>
             </div>
         </header>
