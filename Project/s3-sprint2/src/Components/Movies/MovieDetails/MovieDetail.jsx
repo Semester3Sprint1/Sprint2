@@ -33,7 +33,7 @@ const MovieDetail = ({ movie }) => {
   date = {released}
   length = {runtime}
   lang = {languages}
-  id = {_id}/>
+  />
   <div className={classes.grid}>
     <div className={classes.image}>
   <MovieImage image = {poster} />
@@ -48,7 +48,6 @@ const MovieDetail = ({ movie }) => {
     writer = {writers}
     stars = {cast}
     imdb = {imdb}
-    id = {_id}
     award = {awards}
     />
     </div>

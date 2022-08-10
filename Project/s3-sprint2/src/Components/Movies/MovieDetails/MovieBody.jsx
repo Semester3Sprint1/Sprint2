@@ -1,7 +1,7 @@
 import React from 'react'
 import classes from './MovieBody.module.css'
 
-const MovieBody = ({plot, genre, director, writer, stars, imdb, id, award}) => {
+const MovieBody = ({plot, genre, director, writer, stars, imdb, award}) => {
 
    
   return (
