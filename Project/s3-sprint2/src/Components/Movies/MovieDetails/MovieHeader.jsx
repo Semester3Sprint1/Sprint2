@@ -18,7 +18,7 @@ const MovieHeader = ({movie,rating, date, length,lang}) => {
                     <li>Length: {length}m</li>
                     <li>Language(s):</li>
                     {lang.map((languages,i) =>   
-                     <li key ={i}> {languages}</li>
+                     <li key ={i}> {languages},</li>
         )}                       
                 </ul>
             </div>
