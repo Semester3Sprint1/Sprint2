@@ -2,6 +2,8 @@ import { Fragment } from "react";
 import styles from "./css/Main.module.css";
 import joe from "./images/joeYoung.jpg";
 import devil from "./images/devilToPay.jpg";
+import React from "react";
+
 /*
 --- COMPONENTS TO ADD ---
 Header
