@@ -9,7 +9,7 @@ const MovieBody = ({plot, genre, director, writer, stars, imdb, id, award}) => {
         <h1 className={classes.title}>Synopsis</h1>
         <p className={classes.plot}>{plot}</p>
         <div className= {classes.block}>
-        <h2 className={classes.title}>Genres:</h2>
+        <h2 className={classes.title}>Genre(s):</h2>
         <ul>
         {genre.map((genres) =>   
         <li key={id}> {genres}</li>
