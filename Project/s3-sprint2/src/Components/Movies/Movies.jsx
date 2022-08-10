@@ -7,26 +7,27 @@ import SearchBar from "../UI/SearchBar";
 import SortIcons from "../UI/SortIcons";
 import Table from "../UI/Table";
 
-const Movies = ({ handleSelect, toast, movies, setMovies }) => {
-  const [genre, setGenre] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [pageNum, setPageNum] = useState(0);
-  const [selectionMade, setSelectionMade] = useState(false);
+const Movies = ({ handleSelect, toast, moviePackage }) => {
   const [searchResults, setSearchResults] = useState(false);
   const [sortMethod, setSortMethod] = useState("");
+
+  const {
+    movies,
+    setMovies,
+    genres,
+    setGenres,
+    selectedGenre,
+    setSelectedGenre,
+    loadNextData,
+  } = moviePackage;
 
   const navigate = useNavigate();
   const goToMovieDetail = (id) => navigate(`/movies/${id}/detail`);
 
-  useEffect(() => {
-    getGenres();
-    // setSelectedGenre("Action");
-    // getMoviesByGenre(0, selectedGenre);
-  }, []);
-
-  useEffect(() => {
-    getMoviesByGenre(0, selectedGenre, "title");
-  }, [selectedGenre]);
+  // useEffect(() => {
+  //   // setSelectedGenre("Action");
+  //   // getMoviesByGenre(0, selectedGenre);
+  // }, []);
 
   const paginate = usePagination(movies, 20); // THE SECOND NUMBER HERE CONTROLS HOW MANY MOVIES ARE DISPLAYED PER PAGE
 
@@ -42,59 +43,10 @@ const Movies = ({ handleSelect, toast, movies, setMovies }) => {
       type: "date",
     },
     {
-      //accessor: "imdb.rating",
       accessor: "rated",
       label: "Rated",
-      //type: "rating",
     },
   ];
-
-  //movies.sort((a, b) => b.title.localeCompare(a.title));
-  const getGenres = async () => {
-    const res = await fetch("http://localhost:3001/movies/getGenres");
-    const data = await res.json();
-
-    setGenre(data);
-  };
-
-  const getMovies = async (page) => {
-    const page_num = encodeURIComponent(page);
-    const res = await fetch(`http://localhost:3001/movies?page=${page_num}`);
-    const data = await res.json();
-
-    setMovies(data);
-  };
-
-  const loadMoreMovies = async (page) => {
-    const page_num = encodeURIComponent(page);
-    const res = await fetch(`http://localhost:3001/movies?page=${page_num}`);
-    const data = await res.json();
-
-    setMovies([...movies, ...data]);
-  };
-
-  const getMoviesByGenre = async (page, genre, sort) => {
-    const page_num = encodeURIComponent(page);
-    const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}`
-    );
-    const data = await res.json();
-
-    setMovies(data);
-    setPageNum(0);
-    paginate.jump(1);
-  };
-
-  const loadMoreMoviesByGenre = async (page, genre, sort) => {
-    const page_num = encodeURIComponent(page);
-
-    const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}?sort=${sort}`
-    );
-    const data = await res.json();
-
-    setMovies([...movies, ...data]);
-  };
 
   const getMoviesBySearch = async (text) => {
     const res = await fetch(`http://localhost:3001/search`, {
@@ -104,13 +56,11 @@ const Movies = ({ handleSelect, toast, movies, setMovies }) => {
     });
     const data = await res.json();
 
-    setSelectionMade(true);
     setMovies(data);
     paginate.jump(1);
   };
 
   const handleGenreSelect = (genres) => {
-    setSelectionMade(true);
     setSelectedGenre(genres);
     toast("Loading movies...");
   };
@@ -118,14 +68,6 @@ const Movies = ({ handleSelect, toast, movies, setMovies }) => {
   const onSelect = (movie) => {
     handleSelect(movie);
     goToMovieDetail(movie._id);
-  };
-
-  const loadNextData = () => {
-    let newPage = pageNum + 1;
-    setPageNum(newPage);
-    loadMoreMoviesByGenre(newPage, selectedGenre);
-    toast("Loading movies...");
-    // paginate.jump(0);
   };
 
   const displayMovies = () => {
@@ -173,7 +115,7 @@ const Movies = ({ handleSelect, toast, movies, setMovies }) => {
         <div className="row">
           <div className="col-2">
             <ListGroup
-              genres={genre}
+              genres={genres}
               selectedItem={selectedGenre}
               onItemSelect={handleGenreSelect}
             />
@@ -219,7 +161,12 @@ const Movies = ({ handleSelect, toast, movies, setMovies }) => {
                 </span>
               </div> */}
 
-              <Table rows={movies} columns={columns} onSelect={onSelect} />
+              <Table
+                rows={movies}
+                columns={columns}
+                onSelect={onSelect}
+                loadMoreData={loadNextData}
+              />
               {/* <table className="table table">
                   <thead className="thead-dark">
                     <tr>
