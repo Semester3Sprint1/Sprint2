@@ -5,7 +5,7 @@ import MovieDetail from "./MovieDetails/MovieDetail";
 import { useState } from "react";
 import Movies from "./Movies";
 
-const MovieRoutes = () => {
+const MovieRoutes = ({ movies, setMovies }) => {
   const [selectedMovie, setSelectedMovie] = useState(false);
 
   const handleMovieSelect = (movie) => {
@@ -30,7 +30,12 @@ const MovieRoutes = () => {
       <Route
         path="/"
         element={
-          <Movies handleSelect={handleMovieSelect} toast={loadingToast} />
+          <Movies
+            handleSelect={handleMovieSelect}
+            toast={loadingToast}
+            movies={movies}
+            setMovies={setMovies}
+          />
         }
       />
       <Route
