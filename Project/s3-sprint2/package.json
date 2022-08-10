@@ -12,6 +12,7 @@
     "bootstrap": "^5.2.0",
     "concurrently": "^7.3.0",
     "install": "^0.13.0",
+    "lodash": "^4.17.21",
     "npm": "^8.16.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",

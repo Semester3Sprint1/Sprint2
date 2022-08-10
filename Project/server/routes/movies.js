@@ -10,7 +10,7 @@ const {
 router.get("/", async (req, res) => {
   let { page } = req.query;
   console.log(page);
-  let response = await getMovies({ page_number: page, page_size: 1000 });
+  let response = await getMovies({ page_number: 0, page_size: 3000 });
   // console.log(response);
   res.status(200).send(response);
 });

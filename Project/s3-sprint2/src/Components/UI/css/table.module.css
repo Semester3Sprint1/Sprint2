@@ -1,0 +1,16 @@
+.dataRow {
+  transition: all 0.2s ease-in-out;
+}
+
+.dataRow:hover {
+  cursor: pointer;
+  background-color: rgb(209, 208, 208) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.dataSelect {
+  color: blue;
+  margin: 1% auto;
+  display: flex;
+  justify-content: space-between;
+}
