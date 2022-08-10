@@ -19,13 +19,13 @@ const Main = () => {
         <div className={styles.mover1}></div>
         <div className={styles.mover2}></div>
       </div>
-      <div>
-        <h1>Your source for classic movie reviews!</h1>
+      <div className={styles.pagewrapper}>
+        <h1>Your source for movie reviews!</h1>
         <p>
-          Classic movies from the early 1900's and up, Movies Reviews will have
-          what you need when you need information about your favorite classic
-          film. Tell the world what you think about the classics, whether it be
-          mainstream or obscure films. Movies Reviews has it all!
+          Classic and recent movies from the early 1900's and up, Movies Reviews
+          will have what you need when you need information about your favorite
+          film. Tell the world what you think about your favorite movie, whether
+          it be mainstream or obscure films. Movies Reviews has it all!
         </p>
         <h2>Reviews:</h2>
         <div className={styles.gridContainer}>
