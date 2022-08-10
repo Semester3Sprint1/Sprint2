@@ -1,5 +1,4 @@
 import {Fragment} from "react";
-import { useEffect } from "react";
 import classes from './MovieHeader.module.css'
 
 const MovieHeader = ({movie,rating, date, length,lang}) => {
