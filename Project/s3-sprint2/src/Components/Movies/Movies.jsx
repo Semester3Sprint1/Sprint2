@@ -5,114 +5,48 @@ import ListGroup from "../UI/ListGroup";
 import usePagination from "../../Hooks/usePagination";
 import SearchBar from "../UI/SearchBar";
 import SortIcons from "../UI/SortIcons";
+import Table from "../UI/Table";
 
-const Movies = ({ handleSelect, toast }) => {
-  const [movies, setMovies] = useState([]);
-  const [genre, setGenre] = useState([]);
-  const [selectedGenre, setSelectedGenre] = useState("Action");
-  const [pageNum, setPageNum] = useState(0);
-  const [selectionMade, setSelectionMade] = useState(false);
+const Movies = ({ handleSelect, toast, moviePackage }) => {
   const [searchResults, setSearchResults] = useState(false);
   const [sortMethod, setSortMethod] = useState("");
+
+  const {
+    movies,
+    setMovies,
+    genres,
+    setGenres,
+    selectedGenre,
+    setSelectedGenre,
+    loadNextData,
+  } = moviePackage;
 
   const navigate = useNavigate();
   const goToMovieDetail = (id) => navigate(`/movies/${id}/detail`);
 
-  useEffect(() => {
-    getGenres();
-    // setSelectedGenre("Action");
-    // getMoviesByGenre(0, selectedGenre);
-    // getMovies();
-  }, []);
-
-  useEffect(() => {
-    getMoviesByGenre(0, selectedGenre, "title");
-  }, [selectedGenre]);
+  // useEffect(() => {
+  //   // setSelectedGenre("Action");
+  //   // getMoviesByGenre(0, selectedGenre);
+  // }, []);
 
   const paginate = usePagination(movies, 20); // THE SECOND NUMBER HERE CONTROLS HOW MANY MOVIES ARE DISPLAYED PER PAGE
 
-  // const sortedMovies = useMemo(
-  //   () => movies.sort((a, b) => a.title.localeCompare(b.title)),
-  //   [movies, sortMethod]
-  // );
-
-  const sortMoviesByTitle = (direction) => {
-    var newMovies = [];
-
-    if (direction) {
-      newMovies = movies.sort((a, b) => a.title.localeCompare(b.title));
-      console.log(newMovies);
-    } else {
-      newMovies = movies.sort((a, b) => b.title.localeCompare(a.title));
-      console.log(newMovies);
-    }
-    return newMovies;
-  };
-
-  const sortMoviesByRating = (direction) => {
-    var newMovies = {};
-
-    if (direction) {
-      newMovies = movies.sort((a, b) =>
-        a.imdb.rating > b.imdb.rating
-          ? 1
-          : b.imdb.rating > a.imdb.rating
-          ? -1
-          : 0
-      );
-    } else {
-      newMovies = movies.sort((a, b) =>
-        a.imdb.rating < b.imdb.rating
-          ? 1
-          : b.imdb.rating < a.imdb.rating
-          ? -1
-          : 0
-      );
-    }
-    return newMovies;
-  };
-
-  const sortMoviesByDate = (direction) => {
-    var newMovies = [];
-
-    if (direction) {
-      newMovies = movies.sort((a, b) => a.released.localeCompare(b.released));
-    } else {
-      newMovies = movies.sort((a, b) => b.released.localeCompare(a.released));
-    }
-    return newMovies;
-  };
-
-  //movies.sort((a, b) => b.title.localeCompare(a.title));
-  const getGenres = async () => {
-    const res = await fetch("http://localhost:3001/movies/getGenres");
-    const data = await res.json();
-
-    setGenre(data);
-  };
-
-  const getMoviesByGenre = async (page, genre, sort) => {
-    const page_num = encodeURIComponent(page);
-    const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}?sort=${sort}`
-    );
-    const data = await res.json();
-
-    setMovies(data);
-    setPageNum(0);
-    paginate.jump(1);
-  };
-
-  const loadMoreMoviesByGenre = async (page, genre, sort) => {
-    const page_num = encodeURIComponent(page);
-
-    const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}?sort=${sort}`
-    );
-    const data = await res.json();
-
-    setMovies([...movies, ...data]);
-  };
+  const columns = [
+    {
+      accessor: "title",
+      label: "Movie Title",
+      sort: "alpha",
+    },
+    {
+      accessor: "released",
+      label: "Release Date",
+      type: "date",
+    },
+    {
+      accessor: "rated",
+      label: "Rated",
+    },
+  ];
 
   const getMoviesBySearch = async (text) => {
     const res = await fetch(`http://localhost:3001/search`, {
@@ -122,13 +56,11 @@ const Movies = ({ handleSelect, toast }) => {
     });
     const data = await res.json();
 
-    setSelectionMade(true);
     setMovies(data);
     paginate.jump(1);
   };
 
   const handleGenreSelect = (genres) => {
-    setSelectionMade(true);
     setSelectedGenre(genres);
     toast("Loading movies...");
   };
@@ -137,24 +69,6 @@ const Movies = ({ handleSelect, toast }) => {
     handleSelect(movie);
     goToMovieDetail(movie._id);
   };
-
-  const loadNextData = () => {
-    let newPage = pageNum + 1;
-    setPageNum(newPage);
-    loadMoreMoviesByGenre(newPage, selectedGenre);
-    toast("Loading movies...");
-    // paginate.jump(0);
-  };
-
-  // const loadLastData = () => {
-  //   let newPage = pageNum - 1;
-  //   if (pageNum !== 0) {
-  //     setPageNum(newPage);
-  //     getMoviesByGenre(newPage, selectedGenre);
-  //     toast("Loading movies...");
-  //     paginate.jump(0);
-  //   }
-  // };
 
   const displayMovies = () => {
     if (sortMethod === "title") {
@@ -166,7 +80,10 @@ const Movies = ({ handleSelect, toast }) => {
           : b.imdb.rating > a.imdb.rating
           ? -1
           : 0;
+    } else if (sortMethod === "date") {
+      var sortBy = () => (a, b) => a.released.localeCompare(b.released);
     }
+
     return (
       <>
         {paginate
@@ -198,54 +115,59 @@ const Movies = ({ handleSelect, toast }) => {
         <div className="row">
           <div className="col-2">
             <ListGroup
-              genres={genre}
+              genres={genres}
               selectedItem={selectedGenre}
               onItemSelect={handleGenreSelect}
             />
           </div>
 
           <div className="col">
-            {selectionMade ? (
-              <div className={styles.searchResults}>
-                {/* This secion will load other data when clicked */}
-                <div className={styles.dataSelect}>
-                  <span className={styles.loadData}>{/* Load Previous */}</span>
+            <div className={styles.searchResults}>
+              {/* This secion will load other data when clicked */}
+              {/* <div className={styles.dataSelect}>
+                <span className={styles.loadData}></span>
 
-                  {/* <span>Page No: {pageNum + 1}</span> */}
+             
 
-                  <span onClick={loadNextData} className={styles.loadData}>
-                    Load More
-                  </span>
-                </div>
+                <span onClick={loadNextData} className={styles.loadData}>
+                  Load More
+                </span>
+              </div> */}
 
-                {/* This section will filter the loaded data */}
-                <div className={styles.pageSelect}>
-                  <span
-                    onClick={paginate.prev}
-                    className={
-                      paginate.currentPage === 1
-                        ? `${styles.previous} ${styles.grey}`
-                        : styles.previous
-                    }
-                  >
-                    Previous Page
-                  </span>
-                  <span>
-                    Page {paginate.currentPage} of {paginate.maxPage}
-                  </span>
-                  <span
-                    onClick={paginate.next}
-                    className={
-                      paginate.currentPage === paginate.maxPage
-                        ? `${styles.next} ${styles.grey}`
-                        : styles.next
-                    }
-                  >
-                    Next Page
-                  </span>
-                </div>
+              {/* This section will filter the loaded data */}
+              {/* <div className={styles.pageSelect}>
+                <span
+                  onClick={paginate.prev}
+                  className={
+                    paginate.currentPage === 1
+                      ? `${styles.previous} ${styles.grey}`
+                      : styles.previous
+                  }
+                >
+                  Previous Page
+                </span>
+                <span>
+                  Page {paginate.currentPage} of {paginate.maxPage}
+                </span>
+                <span
+                  onClick={paginate.next}
+                  className={
+                    paginate.currentPage === paginate.maxPage
+                      ? `${styles.next} ${styles.grey}`
+                      : styles.next
+                  }
+                >
+                  Next Page
+                </span>
+              </div> */}
 
-                <table className="table table">
+              <Table
+                rows={movies}
+                columns={columns}
+                onSelect={onSelect}
+                loadMoreData={loadNextData}
+              />
+              {/* <table className="table table">
                   <thead className="thead-dark">
                     <tr>
                       <th scope="col">
@@ -287,11 +209,8 @@ const Movies = ({ handleSelect, toast }) => {
                       `No movie data available.`
                     )}
                   </tbody>
-                </table>
-              </div>
-            ) : (
-              <h2>Select a genre or search for a film to begin.</h2>
-            )}
+                </table> */}
+            </div>
           </div>
 
           <div className="col-2">
