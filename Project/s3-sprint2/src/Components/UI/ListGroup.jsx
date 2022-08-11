@@ -1,8 +1,8 @@
 import React from "react";
 
-let ListGroup = ({ genres, onItemSelect, selectedItem }) => {
-  // console.log(genres);
 
+let ListGroup = ({ genres, onItemSelect, selectedItem }) => {
+ 
   return (
     <div className="mt-2">
       <ul className="list-group clickable">
@@ -13,8 +13,9 @@ let ListGroup = ({ genres, onItemSelect, selectedItem }) => {
           }}
           className={
             selectedItem === "All"
-              ? " bg-primary list-group-item list-group-item-action active "
-              : " list-group-item list-group-item-action "
+              ? " bg-primary list-group-item list-group-item-action active"
+              : " list-group-item list-group-item-action"
+            
           }
         >
           All
@@ -28,8 +29,8 @@ let ListGroup = ({ genres, onItemSelect, selectedItem }) => {
               key={i}
               className={
                 selectedItem === genre
-                  ? " bg-primary list-group-item list-group-item-action active "
-                  : " list-group-item list-group-item-action "
+                  ? " bg-primary list-group-item list-group-item-action active"
+                  : " list-group-item list-group-item-action"
               }
             >
               {" "}
