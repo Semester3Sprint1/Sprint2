@@ -11,6 +11,7 @@ import Footer from "./Components/Main/Footer";
 import AuthContext from "./Components/Context/auth-context";
 import NotFound from "./Components/Main/notFound";
 import MovieRoutes from "./Components/Movies/MovieRoutes";
+import ReviewTemplate from "./Components/ReviewTemplate/ReviewTemplate";
 
 function App() {
   const [pageNum, setPageNum] = useState(1);
@@ -116,6 +117,7 @@ function App() {
               <MovieRoutes moviePackage={moviePackage} toast={loadingToast} />
             }
           />
+          <Route path="/ReviewTemplate" element={<ReviewTemplate />} />
 
           {authCtx.isLoggedIn && (
             <Route path="/account" element={<Account />}></Route>

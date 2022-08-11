@@ -6,8 +6,10 @@ const ReviewTemplate = () => {
   return (
     <Fragment>
       <div>
-        <h1 className={styles.reviewTitle}></h1>
+        <h1 className={styles.reviewTitle}>Test</h1>
       </div>
     </Fragment>
   );
 };
+
+export default ReviewTemplate;
