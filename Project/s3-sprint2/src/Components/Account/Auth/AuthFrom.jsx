@@ -27,7 +27,7 @@ const submitHandler = (event) =>{
     if(isLogin){
         url = 'Sign in With Password filler'
     } else{
-        url= "Sign up Filler"
+        url= "http://localhost:3000/api/users"
     }
 
     fetch(url, {
