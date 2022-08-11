@@ -7,7 +7,7 @@ const User = mongoose.model(
     username: {
       type: String,
       required: true,
-      minlength: 5,
+      minlength: 3,
       maxlength: 50,
     },
     email: {
@@ -23,14 +23,18 @@ const User = mongoose.model(
       minlength: 5,
       maxlength: 1024,
     },
+    returnSecureToken: {
+      type: Boolean,
+    },
   })
 );
 
 function validateUser(user) {
   const schema = Joi.object({
-    username: Joi.string().min(5).max(50).required(),
-    email: Joi.string().email().min(5).max(255).require(),
-    password: Joi.string().min(5).max(255).required,
+    username: Joi.string().min(3).max(50).required(),
+    email: Joi.string().email().min(5).max(255).required(),
+    password: Joi.string().min(5).max(255).required(),
+    returnSecureToken: Joi.boolean(),
   });
   return schema.validate(user);
 }

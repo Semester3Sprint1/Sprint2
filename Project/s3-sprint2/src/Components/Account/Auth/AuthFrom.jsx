@@ -27,13 +27,13 @@ const submitHandler = (event) =>{
     if(isLogin){
         url = 'Sign in With Password filler'
     } else{
-        url= "http://localhost:3000/api/users"
+        url= "http://localhost:3001/api/users"
     }
 
     fetch(url, {
         method: "POST",
         body: JSON.stringify({
-        userName: userName,    
+        username: userName,    
         email: email,
         password:password,
         returnSecureToken: true,
