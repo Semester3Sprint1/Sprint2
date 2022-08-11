@@ -13,7 +13,7 @@ import NotFound from "./Components/Main/notFound";
 import MovieRoutes from "./Components/Movies/MovieRoutes";
 
 function App() {
-  const [pageNum, setPageNum] = useState(0);
+  const [pageNum, setPageNum] = useState(1);
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -25,6 +25,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log("Genre get");
     getMoviesByGenre(0, selectedGenre, "title");
   }, [selectedGenre]);
 
@@ -53,11 +54,11 @@ function App() {
     setMovies(data);
   };
 
-  const loadMoreMoviesByGenre = async (page, genre, sort) => {
+  const loadMoreMoviesByGenre = async (page, genre) => {
     const page_num = encodeURIComponent(page);
 
     const res = await fetch(
-      `http://localhost:3001/movies/${genre}?page=${page_num}?sort=${sort}`
+      `http://localhost:3001/movies/${genre}?page=${page_num}`
     );
     const data = await res.json();
 
@@ -83,7 +84,7 @@ function App() {
     let newPage = pageNum + 1;
     setPageNum(newPage);
     loadMoreMoviesByGenre(newPage, selectedGenre);
-    toast("Loading movies...");
+    loadingToast("Loading movies...");
     // paginate.jump(0);
   };
 
