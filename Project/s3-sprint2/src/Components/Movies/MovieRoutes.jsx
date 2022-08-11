@@ -2,58 +2,34 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import MovieDetail from "./MovieDetails/MovieDetail";
-import { useState } from "react";
-import MongoMovies from "./MongoMovies";
-import PgMovies from "./PgMovies";
+import Movies from "./Movies";
 
 const MovieRoutes = ({ moviePackage, toast, useMongo }) => {
-  const [selectedMongoMovie, setSelectedMongoMovie] = useState(false);
-  const [selectedPgMovie, setSelectedPgMovie] = useState(false);
-
-  const handleMongoMovieSelect = (movie) => {
-    setSelectedMongoMovie(movie);
-  };
-
-  const handlePgMovieSelect = (movie) => {
-    setSelectedPgMovie(movie);
-  };
+  const { handleSelect, selectedMovie } = moviePackage;
 
   return (
     <Routes>
+      <Route
+        path="/"
+        element={
+          <Movies
+            handleSelect={handleSelect}
+            toast={toast}
+            moviePackage={moviePackage}
+          />
+        }
+      />
+      {/* Gonna need to replace these with Database specific view pages... probably */}
       {useMongo ? (
-        <>
-          <Route
-            path="/"
-            element={
-              <MongoMovies
-                handleSelect={handleMongoMovieSelect}
-                toast={toast}
-                moviePackage={moviePackage}
-              />
-            }
-          />
-          <Route
-            path="/:id/detail"
-            element={<MovieDetail movie={selectedMongoMovie} />}
-          />{" "}
-        </>
+        <Route
+          path="/:id/detail"
+          element={<MovieDetail movie={selectedMovie} />}
+        />
       ) : (
-        <>
-          <Route
-            path="/"
-            element={
-              <PgMovies
-                handleSelect={handlePgMovieSelect}
-                toast={toast}
-                moviePackage={moviePackage}
-              />
-            }
-          />
-          <Route
-            path="/:id/detail"
-            element={<MovieDetail movie={selectedPgMovie} />}
-          />{" "}
-        </>
+        <Route
+          path="/:id/detail"
+          element={<MovieDetail movie={selectedMovie} />}
+        />
       )}
     </Routes>
   );
