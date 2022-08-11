@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../Context/auth-context";
 import { useContext } from "react";
+import ChangeDB from "../Services/ChangeDB";
+
 export default function NavBar(props) {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.isLoggedIn;
@@ -61,6 +63,9 @@ export default function NavBar(props) {
               >
                 Leave a Review!
               </NavLink>
+            </li>
+            <li>
+              <ChangeDB databasePackage={props.dbPackage} />
             </li>
             <li className="nav-item px-2">
               <NavLink className="nav-link clickable h3" to="/movies">

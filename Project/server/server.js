@@ -19,11 +19,13 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-const movieRouter = require("./routes/movies");
+const mongoMovieRouter = require("./routes/mongoMovies");
+const pgMovieRouter = require("./routes/pgMovies");
 const searchEngine = require("./routes/search");
 
 app.use("/search", searchEngine);
-app.use("/movies", movieRouter);
+app.use("/movies/mongo", mongoMovieRouter);
+app.use("/movies/pg", pgMovieRouter);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

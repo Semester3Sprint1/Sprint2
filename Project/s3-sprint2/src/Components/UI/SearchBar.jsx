@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./css/searchBar.module.css";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineUndo } from "react-icons/ai";
 import { useState } from "react";
 
-const SearchBar = ({ handleSearch }) => {
+const SearchBar = ({ handleSearch, setSearched, searched }) => {
   const [searchText, setSearchText] = useState("");
 
   const searchMovies = (e) => {
@@ -25,7 +25,19 @@ const SearchBar = ({ handleSearch }) => {
         <button type="submit">
           <AiOutlineSearch />
         </button>
-      </form>
+      </form>{" "}
+      {searched && (
+        <>
+          <br />
+          <button
+            onClick={() => {
+              setSearched(false);
+            }}
+          >
+            Reset Search <AiOutlineUndo />
+          </button>
+        </>
+      )}
     </div>
   );
 };
