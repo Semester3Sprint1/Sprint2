@@ -22,7 +22,7 @@ const getMoviesByGenre = async (body) => {
   await client.connect();
   const cursor = await client.db("sample_mflix").collection("movies");
 
-  if (genre === "All") {
+  if (genre === "All" || genre === "") {
     var finder = cursor
       .find()
       .skip(page_number * page_size)

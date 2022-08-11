@@ -7,7 +7,7 @@ import styles from "./css/table.module.css";
 const Table = ({ rows, columns, onSelect, loadMoreData }) => {
   const [activePage, setActivePage] = useState(1);
   const [filters, setFilters] = useState({});
-  const [sort, setSort] = useState({ order: "asc", orderBy: "_id" });
+  const [sort, setSort] = useState({ order: "asc", orderBy: "" });
   const rowsPerPage = 20;
 
   const filteredRows = useMemo(
@@ -92,7 +92,7 @@ const Table = ({ rows, columns, onSelect, loadMoreData }) => {
                     <input
                       key={`${column.accessor}-search`}
                       type="search"
-                      placeholder={`Search ${column.label}`}
+                      placeholder={`Filter by ${column.label}`}
                       value={filters[column.accessor]}
                       onChange={(event) =>
                         handleSearch(event.target.value, column.accessor)

@@ -10,7 +10,7 @@ const {
 router.get("/", async (req, res) => {
   let { page } = req.query;
   console.log(page);
-  let response = await getMovies({ page_number: 0, page_size: 3000 });
+  let response = await getMovies({ page_number: 0, page_size: 10000 });
   // console.log(response);
   res.status(200).send(response);
 });
@@ -25,7 +25,7 @@ router.get("/:genre", async (req, res) => {
   // console.log(`The page number query: ${page}`);
   let response = await getMoviesByGenre({
     page_number: page,
-    page_size: 3000,
+    page_size: 10000,
     genre: req.params.genre,
   });
   // console.log(response);
