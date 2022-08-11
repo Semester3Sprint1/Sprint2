@@ -26,6 +26,7 @@ function App() {
   // Mongo States
   const [pageNum, setPageNum] = useState(1);
   const [mongoMovies, setMongoMovies] = useState([]);
+  const [selectedMongoMovie, setSelectedMongoMovie] = useState(false);
   const [mongoGenres, setMongoGenres] = useState([]);
   const [selectedMongoGenre, setSelectedMongoGenre] = useState("All");
   const [mongoSearchResults, setMongoSearchResults] = useState([]);
@@ -33,6 +34,7 @@ function App() {
 
   // PG States
   const [pgMovies, setPgMovies] = useState([]);
+  const [selectedPgMovie, setSelectedPgMovie] = useState(false);
   const [pgGenres, setPgGenres] = useState([]);
   const [selectedPgGenre, setSelectedPgGenre] = useState("All");
   const [pgSearchResults, setPgSearchResults] = useState([]);
@@ -116,20 +118,30 @@ function App() {
     setPgSearchResults(data);
   };
 
+  const handlePgMovieSelect = (movie) => {
+    setSelectedPgMovie(movie);
+  };
+
   const pgMoviePackage = {
     movies: pgMovies,
     setMovies: setPgMovies,
+
     genres: pgGenres,
     setGenres: setPgGenres,
     selectedGenre: selectedPgGenre,
     setSelectedGenre: setSelectedPgGenre,
+
     filteredMovies: currentPgGenre,
+
     searchMovies: getPgMoviesBySearch,
     searched: pgSearched,
     setSearched: setPgSearched,
     searchResults: pgSearchResults,
     filteredSearchResults: currentPgSearchResults,
+
     loadNextData: null,
+    handleSelect: handlePgMovieSelect,
+    selectedMovie: selectedPgMovie,
     columns: [
       {
         accessor: "title",
@@ -199,7 +211,10 @@ function App() {
     setPageNum(newPage);
     loadMoreMongoMovies(newPage, "All");
     loadingToast("Loading movies...");
-    // paginate.jump(0);
+  };
+
+  const handleMongoMovieSelect = (movie) => {
+    setSelectedMongoMovie(movie);
   };
 
   const mongoMoviePackage = {
@@ -216,6 +231,8 @@ function App() {
     searchResults: mongoSearchResults,
     filteredMovies: currentMongoGenre,
     filteredSearchResults: currentMongoSearchResults,
+    handleSelect: handleMongoMovieSelect,
+    selectedMovie: selectedMongoMovie,
     columns: [
       {
         accessor: "title",
