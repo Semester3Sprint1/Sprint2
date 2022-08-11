@@ -27,7 +27,7 @@ const Main = () => {
           film. Tell the world what you think about your favorite movie, whether
           it be mainstream or obscure films. Movies Reviews has it all!
         </p>
-        <h2>Reviews:</h2>
+        <p className={styles.reviewTitle}>Reviews:</p>
         <div className={styles.gridContainer}>
           <div className={styles.review}>
             <img src={joe} alt="Joe Young" height="200" />

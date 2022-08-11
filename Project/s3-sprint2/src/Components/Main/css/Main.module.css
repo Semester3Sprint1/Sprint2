@@ -52,4 +52,15 @@
 }
 .pagewrapper {
   margin: 20px;
+  font-family: inherit;
+}
+
+@font-face {
+  font-family: "Showtime";
+  src: url("../fonts/Showtime.ttf");
+}
+
+.reviewTitle {
+  font-family: "Showtime";
+  font-size: 50px;
 }
