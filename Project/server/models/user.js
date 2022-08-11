@@ -23,9 +23,6 @@ const User = mongoose.model(
       minlength: 5,
       maxlength: 1024,
     },
-    returnSecureToken: {
-      type: Boolean,
-    },
   })
 );
 
@@ -34,7 +31,6 @@ function validateUser(user) {
     username: Joi.string().min(3).max(50).required(),
     email: Joi.string().email().min(5).max(255).required(),
     password: Joi.string().min(5).max(255).required(),
-    returnSecureToken: Joi.boolean(),
   });
   return schema.validate(user);
 }
