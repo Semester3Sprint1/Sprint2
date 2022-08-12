@@ -16,8 +16,8 @@ const AuthForm = () => {
     setIsLogin((prevsState) => !prevsState);
   };
 
-  const submitHandler = (event) => {
-    console.log(event);
+  const submitHandler = async (event) => {
+    // console.log(event);
     event.preventDefault();
     if (!isLogin) {
       var userName = userNameInputRef.current.value;
@@ -47,37 +47,28 @@ const AuthForm = () => {
       };
     }
 
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        setisLoading(false);
-        if (res.ok) {
-          console.log("where did it fail");
-          return res.json();
-        } else {
-          return res.json().then((data) => {
-            //let errorMessage = "Authentication Fails!";
-            let errorMessage = data;
-            // if (data && data.error && data.error.message) {
-            //   errorMessage = data.error.message;
-            // }
-            throw new Error(errorMessage);
-          });
-        }
-      })
-      .then((data) => {
-        authCtx.login(data._id);
-        navigate("/", { replace: true });
-        // add sucessfull Responce Maybe use toast
-      })
-      .catch((err) => {
-        alert(err.message);
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
+
+      setisLoading(false);
+      const data = await res.json();
+
+      if (!res.ok) {
+        let errorMessage = data;
+        throw new Error(errorMessage);
+      }
+
+      authCtx.login(data._id);
+      navigate("/", { replace: true });
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
