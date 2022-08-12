@@ -5,11 +5,11 @@ const bcrypt = require("bcrypt");
 const router = express.Router();
 const auth = require("../middleware/auth.middle");
 const { User, validate } = require("../models/user");
-// JSON.stringify(req.user._id)
+
 // STEP 1
 
 router.get("/me", auth, async (req, res) => {
-  const user = User.findById(JSON.stringify(req.user._id)).select("-password");
+  const user = await User.findById(req.user._id).select("-password");
   res.send(user);
 });
 
