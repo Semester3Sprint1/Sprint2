@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const error = require("./middleware/error");
 require("dotenv").config();
 const port = process.env.PORT;
 global.DEBUG = false;
@@ -36,6 +37,8 @@ app.use("/movies/mongo", mongoMovieRouter);
 app.use("/movies/pg", pgMovieRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+
+app.use(error);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
