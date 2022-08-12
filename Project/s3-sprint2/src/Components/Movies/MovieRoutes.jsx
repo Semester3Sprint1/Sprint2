@@ -19,18 +19,10 @@ const MovieRoutes = ({ moviePackage, toast, useMongo }) => {
           />
         }
       />
-      {/* Gonna need to replace these with Database specific view pages... probably */}
-      {useMongo ? (
-        <Route
-          path="/:id/detail"
-          element={<MovieDetail movie={selectedMovie} />}
-        />
-      ) : (
-        <Route
-          path="/:id/detail"
-          element={<MovieDetail movie={selectedMovie} />}
-        />
-      )}
+      <Route
+        path="/:id/detail"
+        element={<MovieDetail movie={selectedMovie} useMongo={useMongo} />}
+      />
     </Routes>
   );
 };
