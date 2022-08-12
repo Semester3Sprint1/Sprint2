@@ -17,27 +17,39 @@ const switchAuthModeHandler = () =>{
 }
 
 const submitHandler = (event) =>{
+    console.log(event)
     event.preventDefault();
-    const userName = userNameInputRef.current.value;
+    // const userName = (userNameInputRef.current.value)
+    const userName = ""
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
     // donwload maybe joi for validation or create some
     setisLoading(true);
     let url;
     if(isLogin){
-        url = 'Sign in With Password filler'
+        url = 'http://localhost:3001/api/auth'
     } else{
-        url= "Sign up Filler"
+        url= "http://localhost:3001/api/users"
+    }
+
+    let body;
+    if(isLogin){
+        body = {               
+        email: email,
+        password:password,               
+
+        }
+    } else{
+        body = {
+            username: userName,    
+            email: email,
+            password:password, }
     }
 
     fetch(url, {
+
         method: "POST",
-        body: JSON.stringify({
-        userName: userName,    
-        email: email,
-        password:password,
-        returnSecureToken: true,
-        }),
+        body: JSON.stringify(body),
         headers:{
             "Content-Type": "application/json",   
         }, 
@@ -46,6 +58,7 @@ const submitHandler = (event) =>{
     .then((res) =>{
         setisLoading(false);
         if(res.ok){
+            console.log('where did it fail')
             return res.json();
         }else{
             return res.json().then((data) =>{
@@ -57,7 +70,7 @@ const submitHandler = (event) =>{
             });
         }
     }).then((data) =>{
-        authCtx.login(data.idToken);
+        authCtx.login(data._id);
         navigate("/", { replace:true});
         // add sucessfull Responce Maybe use toast
     }).catch((err) =>{

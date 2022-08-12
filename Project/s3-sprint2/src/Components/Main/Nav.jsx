@@ -86,13 +86,17 @@ export default function NavBar(props) {
             <button
               type="button"
               className="btn btn-outline-light btn-lg me-2 "
+           
             >
               {userIcon} Login
             </button>
           </NavLink>
         )}
         {isLoggedIn && (
-          <button type="button" className="btn btn-outline-light btn-lg me-2 ">
+          <button type="button" 
+          className="btn btn-outline-light btn-lg me-2 "
+          onClick={authCtx.logout}
+          >
             {userIcon} Logout
           </button>
         )}
