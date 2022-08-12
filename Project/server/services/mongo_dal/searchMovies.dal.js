@@ -6,7 +6,7 @@ const searchMovies = async (body) => {
   const cursor = client
     .db("sample_mflix")
     .collection("movies")
-    .find({ $text: { $search: searchText } });
+    .find({ $text: { $search: `"${searchText}"` } });
   const results = await cursor.toArray();
   DEBUG && console.log(results);
 
