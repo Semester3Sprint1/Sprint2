@@ -7,7 +7,7 @@ import SearchBar from "../UI/SearchBar";
 import SortIcons from "../UI/SortIcons";
 import Table from "../UI/Table";
 
-const MongoMovies = ({ handleSelect, toast, moviePackage }) => {
+const Movies = ({ handleSelect, toast, moviePackage }) => {
   const {
     columns,
     movies,
@@ -30,7 +30,6 @@ const MongoMovies = ({ handleSelect, toast, moviePackage }) => {
 
   const handleGenreSelect = (genres) => {
     setSelectedGenre(genres);
-    // toast("Loading movies...");
   };
 
   const onSelect = (movie) => {
@@ -87,4 +86,4 @@ const MongoMovies = ({ handleSelect, toast, moviePackage }) => {
   );
 };
 
-export default MongoMovies;
+export default Movies;
