@@ -19,8 +19,8 @@ const switchAuthModeHandler = () =>{
 const submitHandler = (event) =>{
     console.log(event)
     event.preventDefault();
-    // const userName = (userNameInputRef.current.value)
-    const userName = ""
+    const userName = (userNameInputRef.current.value)
+    // const userName = ""
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
     // donwload maybe joi for validation or create some
