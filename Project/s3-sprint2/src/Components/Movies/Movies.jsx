@@ -1,19 +1,15 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./css/movies.module.css";
 import ListGroup from "../UI/ListGroup";
-import usePagination from "../../Hooks/usePagination";
 import SearchBar from "../UI/SearchBar";
-import SortIcons from "../UI/SortIcons";
 import Table from "../UI/Table";
 
 const Movies = ({ handleSelect, toast, moviePackage }) => {
   const {
     columns,
     movies,
-    setMovies,
     genres,
-    setGenres,
     selectedGenre,
     setSelectedGenre,
     searchMovies,

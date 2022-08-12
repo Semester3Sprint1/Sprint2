@@ -61,10 +61,11 @@ const AuthForm = () => {
           return res.json();
         } else {
           return res.json().then((data) => {
-            let errorMessage = "Authentication Fails!";
-            if (data && data.error && data.error.message) {
-              errorMessage = data.error.message;
-            }
+            //let errorMessage = "Authentication Fails!";
+            let errorMessage = data;
+            // if (data && data.error && data.error.message) {
+            //   errorMessage = data.error.message;
+            // }
             throw new Error(errorMessage);
           });
         }
