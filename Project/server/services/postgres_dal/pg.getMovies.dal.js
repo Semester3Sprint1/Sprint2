@@ -9,7 +9,7 @@ let getMovies = async () => {
 };
 
 const getFilms = async () => {
-  let sql = `SELECT film_id, title, description, release_year as released, length, rating as rated, lang.name AS language, special_features, poster, imdb as rating FROM public.film
+  let sql = `SELECT film_id AS _id, title, description AS fullplot, release_year as released, length AS runtime, rating as rated, lang.name AS languages, special_features, poster, imdb FROM public.film
   JOIN public.language AS lang USING (language_id)
   ORDER BY film_id ASC`;
   let res = await dal.query(sql);
@@ -24,7 +24,12 @@ JOIN actor USING (actor_id)
 WHERE film_id = $1`;
   let res = await dal.query(sql, [id]);
 
-  return res.rows;
+  let arr = [];
+  res.rows.forEach((row) => {
+    arr.push(row.name);
+  });
+
+  return arr;
 };
 
 const getFilmGenres = async (id) => {
@@ -36,6 +41,34 @@ WHERE film_id = $1`;
   let arr = [];
   res.rows.forEach((row) => {
     arr.push(row.genre);
+  });
+
+  return arr;
+};
+
+const getFilmWriters = async (id) => {
+  let sql = `SELECT first_name ||' '|| last_name AS name FROM writer
+  JOIN film_writer USING (writer_id)
+  WHERE film_id = $1`;
+  let res = await dal.query(sql, [id]);
+
+  let arr = [];
+  res.rows.forEach((row) => {
+    arr.push(row.name);
+  });
+
+  return arr;
+};
+
+const getFilmDirectors = async (id) => {
+  let sql = `SELECT first_name ||' '|| last_name AS name FROM director
+  JOIN film_director USING (director_id)
+  WHERE film_id = $1`;
+  let res = await dal.query(sql, [id]);
+
+  let arr = [];
+  res.rows.forEach((row) => {
+    arr.push(row.name);
   });
 
   return arr;
@@ -60,5 +93,7 @@ module.exports = {
   getFilms,
   getFilmActors,
   getFilmGenres,
+  getFilmWriters,
+  getFilmDirectors,
   getGenres,
 };

@@ -35,7 +35,7 @@ function App() {
   // PG States
   const [pgMovies, setPgMovies] = useState([]);
   const [selectedPgMovie, setSelectedPgMovie] = useState(false);
-  const [pgGenres, setPgGenres] = useState([]);
+  const [pgGenres, setPgGenres] = useState([{ genres: ["Genre"] }]);
   const [selectedPgGenre, setSelectedPgGenre] = useState("All");
   const [pgSearchResults, setPgSearchResults] = useState([]);
   const [pgSearched, setPgSearched] = useState(false);
@@ -156,7 +156,7 @@ function App() {
         label: "Rated",
       },
       {
-        accessor: "rating",
+        accessor: "imdb",
         label: "IMDB Rating",
       },
     ],
