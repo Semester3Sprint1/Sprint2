@@ -13,6 +13,7 @@ const MovieDetail = ({ movie, useMongo }) => {
     cast,
     languages,
     directors,
+    plot,
     fullplot,
     genres,
     imdb,
@@ -44,6 +45,7 @@ const MovieDetail = ({ movie, useMongo }) => {
           <div className={classes.body}>
             <MovieBody
               plot={fullplot}
+              otherPlot={plot}
               genre={genres}
               director={directors}
               writer={writers}
