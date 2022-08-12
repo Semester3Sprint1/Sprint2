@@ -6,7 +6,7 @@ const ReviewTemplate = () => {
   return (
     <Fragment>
       <div>
-        <h1 className={styles.reviewTitle}>Test</h1>
+        <h1 className={styles.reviewTitle}>Leave a Review:</h1>
       </div>
     </Fragment>
   );
