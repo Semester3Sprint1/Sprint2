@@ -13,4 +13,7 @@ function auth(req, res, next) {
   }
 }
 
+//Auth function goes here with this only logged in users can use this post
+// router.post("/mongo", auth, async (req, res) =>
+
 module.exports = auth;
