@@ -31,11 +31,13 @@ const mongoMovieRouter = require("./routes/mongoMovies");
 const pgMovieRouter = require("./routes/pgMovies");
 const searchEngine = require("./routes/search");
 const userRouter = require("./routes/user");
+const authRouter = require("./routes/auth");
 
 app.use("/search", searchEngine);
 app.use("/movies/mongo", mongoMovieRouter);
 app.use("/movies/pg", pgMovieRouter);
 app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);

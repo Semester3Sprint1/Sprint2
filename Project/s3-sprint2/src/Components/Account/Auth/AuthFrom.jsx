@@ -18,26 +18,36 @@ const switchAuthModeHandler = () =>{
 
 const submitHandler = (event) =>{
     event.preventDefault();
-    const userName = userNameInputRef.current.value;
+    const userName = (userNameInputRef.current.value) 
     const email = emailInputRef.current.value;
     const password = passwordInputRef.current.value;
     // donwload maybe joi for validation or create some
     setisLoading(true);
     let url;
     if(isLogin){
-        url = 'Sign in With Password filler'
+        url = 'http://localhost:3001/api/auth'
     } else{
         url= "http://localhost:3001/api/users"
     }
 
-    fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-        username: userName,    
+    let body;
+    if(isLogin){
+        body = {               
         email: email,
-        password:password,
-        // returnSecureToken: true,
-        }),
+        password:password,               
+
+        }
+    } else{
+        body = {
+            username: userName,    
+            email: email,
+            password:password, }
+    }
+
+    fetch(url, {
+
+        method: "POST",
+        body: JSON.stringify(body),
         headers:{
             "Content-Type": "application/json",   
         }, 
@@ -57,7 +67,7 @@ const submitHandler = (event) =>{
             });
         }
     }).then((data) =>{
-        authCtx.login(data.idToken);
+        authCtx.login(data._id);
         navigate("/", { replace:true});
         // add sucessfull Responce Maybe use toast
     }).catch((err) =>{
