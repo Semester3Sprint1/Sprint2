@@ -9,9 +9,7 @@ var cors = require("cors");
 app.use(cors({ origin: "http://localhost:3000" }));
 
 mongoose
-  .connect(
-    "mongodb+srv://mikewadden:database@cluster0.k857l01.mongodb.net/sample_mflix"
-  )
+  .connect(process.env.URI2)
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Could not connect to MongoDB...", err));
 

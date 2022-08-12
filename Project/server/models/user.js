@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
+// STEP 1
+
 const User = mongoose.model(
   "User",
   new mongoose.Schema({
