@@ -58,13 +58,14 @@ const AuthForm = () => {
 
       setisLoading(false);
       const data = await res.json();
+      console.log(`data ${data}`)
 
       if (!res.ok) {
         let errorMessage = data;
         throw new Error(errorMessage);
       }
 
-      authCtx.login(data._id);
+      authCtx.login(data);
       navigate("/", { replace: true });
     } catch (error) {
       alert(error.message);
