@@ -27,7 +27,7 @@ const MovieHeader = ({ movie, rating, date, length, lang }) => {
                       {lang.length > i + 1 && `,`}
                     </span>
                   ))
-                : "This is silent film"}
+                : " This is a silent film"}
             </li>
           </ul>
         </div>
