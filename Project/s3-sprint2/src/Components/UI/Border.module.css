@@ -1,0 +1,11 @@
+.border{
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-color: #e5e5f7;
+    background-image:  linear-gradient(135deg, #03045e 25%, transparent 25%), linear-gradient(225deg, #03045e 25%, transparent 25%), linear-gradient(45deg, #03045e 25%, transparent 25%), linear-gradient(315deg, #03045e 25%, #e5e5f7 25%);
+    background-position:  12px 0, 12px 0, 0 0, 0 0;
+    background-size: 24px 24px;
+    background-repeat: repeat;
+    margin-bottom: 0.5rem;
+}

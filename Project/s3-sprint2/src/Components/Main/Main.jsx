@@ -3,7 +3,7 @@ import styles from "./css/Main.module.css";
 import joe from "./images/joeYoung.jpg";
 import devil from "./images/devilToPay.jpg";
 import React from "react";
-
+import Border from '../UI/Border'
 /*
 --- COMPONENTS TO ADD ---
 Header
@@ -15,11 +15,14 @@ Footer
 const Main = () => {
   return (
     <Fragment>
+      <Border>
       <div className={styles.slideshow}>
         <div className={styles.mover1}></div>
         <div className={styles.mover2}></div>
       </div>
+      </Border>
       <div className={styles.pagewrapper}>
+        
         <h1>Your source for movie reviews!</h1>
         <p>
           Classic and recent movies from the early 1900's and up, Movies Reviews
