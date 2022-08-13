@@ -1,3 +1,5 @@
+// found a better way to do this keep for reference or we can delete
+
 function asyncMiddleware(handler) {
   return async (req, res, next) => {
     try {
