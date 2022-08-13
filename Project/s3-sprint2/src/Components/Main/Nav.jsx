@@ -45,6 +45,9 @@ export default function NavBar(props) {
           } navbar-collapse justify-content-end`}
           id="navbarNav"
         >
+          <div className="collapse navbar-collapse justify-content-center">
+          <ChangeDB databasePackage={props.dbPackage} />
+          </div>
           <ul className="navbar-nav me-4 text-center ">
             <li className="nav-item px-2">
               <NavLink
@@ -63,9 +66,6 @@ export default function NavBar(props) {
               >
                 Leave a Review!
               </NavLink>
-            </li>
-            <li>
-              <ChangeDB databasePackage={props.dbPackage} />
             </li>
             <li className="nav-item px-2">
               <NavLink className="nav-link clickable h3" to="/movies">
