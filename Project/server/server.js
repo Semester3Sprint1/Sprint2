@@ -1,19 +1,17 @@
-require("express-async-errors");
 const express = require("express");
+const winston = require("winston");
 const app = express();
-const mongoose = require("mongoose");
 const error = require("./middleware/error");
 require("dotenv").config();
+
 const port = process.env.PORT;
 global.DEBUG = false;
 
 var cors = require("cors");
 app.use(cors({ origin: "http://localhost:3000" }));
 
-mongoose
-  .connect(process.env.URI2)
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Could not connect to MongoDB...", err));
+require("./startup/logging")();
+require("./startup/db")();
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -42,5 +40,5 @@ app.use("/api/auth", authRouter);
 app.use(error);
 
 app.listen(port, () => {
-  console.log(`App running on port ${port}.`);
+  winston.info(`App running on port ${port}.`);
 });

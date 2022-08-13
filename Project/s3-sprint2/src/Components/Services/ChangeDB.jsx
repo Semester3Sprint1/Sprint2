@@ -20,16 +20,17 @@ const ChangeDB = ({ databasePackage }) => {
         className={useMongo ? ` ${styled + "active"}` : `${styled}`}
         onClick={() => changeDB(true)}
       >
-         <icon  className="mr-1"><SiMongodb size={30}/></icon>MongoDB
+          <SiMongodb className="mr-1" size={30}/>MongoDB
       </button>
       <button
         type="button"
         className={!useMongo ? `${styled + "active"}` : `${styled}`}
         onClick={() => changeDB(false)}
       >
-          <icon  className="mr-1"><SiPostgresql 
+          <SiPostgresql 
+          className="mr-1"
           size={30}
-          /></icon>PostgreSQL
+          />PostgreSQL
       </button>
     </div>
   );
