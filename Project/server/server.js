@@ -2,6 +2,7 @@ const express = require("express");
 const winston = require("winston");
 const app = express();
 const error = require("./middleware/error");
+
 require("dotenv").config();
 
 const port = process.env.PORT;
@@ -30,12 +31,14 @@ const pgMovieRouter = require("./routes/pgMovies");
 const searchEngine = require("./routes/search");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+// const pgSearchRouter = require("./routes/pgSearch");
 
 app.use("/search", searchEngine);
 app.use("/movies/mongo", mongoMovieRouter);
 app.use("/movies/pg", pgMovieRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+// app.use("/pgsearch", pgSearchRouter);
 
 app.use(error);
 
