@@ -69,7 +69,7 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
             </div>
           </div>
 
-          <div className="col-2">
+          <div className="col-3">
             <SearchBar
               handleSearch={searchMovies}
               setSearched={setSearched}

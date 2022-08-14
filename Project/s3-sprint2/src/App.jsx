@@ -63,8 +63,8 @@ function App() {
 
   const currentMongoSearchResults = useMemo(
     () =>
-      mongoSearchResults.filter((movie) =>
-        movie.genres.includes(selectedMongoGenre)
+      mongoSearchResults.filter(
+        (movie) => movie.genres && movie.genres.includes(selectedMongoGenre)
       ),
     [mongoSearchResults, selectedMongoGenre]
   );
@@ -202,8 +202,10 @@ function App() {
     });
     const data = await res.json();
 
-    setMongoSearched(true);
-    setMongoSearchResults(data);
+    setTimeout(() => {
+      setMongoSearched(true);
+      setMongoSearchResults(data);
+    }, 1000);
   };
 
   const loadNextMongoPage = () => {
