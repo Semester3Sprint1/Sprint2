@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "jest --watchAll --verbose",
     "start": "nodemon ./server.js"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
     "mongoose": "^6.5.2",
     "nodemon": "^2.0.19",
     "pg": "^8.7.3",
+    "supertest": "^6.2.4",
     "winston": "^3.8.1"
   },
   "description": ""
