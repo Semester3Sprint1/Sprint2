@@ -57,13 +57,6 @@ const Table = ({ rows, columns, onSelect, loadMoreData }) => {
 
   return (
     <>
-      {/* <Pagination
-        activePage={activePage}
-        count={count}
-        rowsPerPage={rowsPerPage}
-        totalPages={totalPages}
-        setActivePage={setActivePage}
-      /> */}
       <table className="table table">
         <thead className="thead-dark">
           <tr>
@@ -72,13 +65,13 @@ const Table = ({ rows, columns, onSelect, loadMoreData }) => {
                 <th key={column.accessor} scope="col">
                   <span>{column.label}</span>{" "}
                   {column.type === "rating" ? (
-                    <button onClick={() => handleSort(column.accessor)}>
+                    <span onClick={() => handleSort(column.accessor)}>
                       <SortIcons sort={sort} accessor={column.accessor} />
-                    </button>
+                    </span>
                   ) : (
-                    <button onClick={() => handleSort(column.accessor)}>
+                    <span onClick={() => handleSort(column.accessor)}>
                       <SortIcons sort={sort} accessor={column.accessor} />
-                    </button>
+                    </span>
                   )}
                 </th>
               );

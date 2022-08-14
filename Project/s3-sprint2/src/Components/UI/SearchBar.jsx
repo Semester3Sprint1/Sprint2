@@ -12,17 +12,21 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
   };
 
   return (
-    <div className="mt-2">
+    <div className="mt">
       <form className={styles.searchBar} onSubmit={searchMovies}>
-        <input
-          type="text"
-          id="search"
-          placeholder="Search movies..."
-          name="searchText"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-        />
-        <button type="submit">
+        <div>
+          <input
+            type="text"
+            id="search"
+            placeholder="Search movies..."
+            className="form-control"
+            name="searchText"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary">
           <AiOutlineSearch />
         </button>
       </form>{" "}

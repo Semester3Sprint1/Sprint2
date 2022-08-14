@@ -9,6 +9,7 @@ const searchMovies = async (body) => {
     .find({ $text: { $search: `"${searchText}"` } });
   const results = await cursor.toArray();
   DEBUG && console.log(results);
+  DEBUG && console.log("Total results:", results.length);
 
   return results;
 };
