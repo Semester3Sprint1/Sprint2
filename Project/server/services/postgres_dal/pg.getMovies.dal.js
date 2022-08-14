@@ -76,6 +76,7 @@ const getFilmDirectors = async (id) => {
 
 const getGenres = async () => {
   const sql = `SELECT name AS genre FROM public.category
+  WHERE type = 'generic'
   ORDER BY category_id ASC`;
   let res = await dal.query(sql);
 
