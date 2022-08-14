@@ -43,13 +43,18 @@ function App() {
   const authCtx = useContext(AuthContext);
 
   const currentPgGenre = useMemo(
-    () => pgMovies.filter((movie) => movie.genres.includes(selectedPgGenre)),
+    () =>
+      pgMovies.filter(
+        (movie) => movie.genres && movie.genres.includes(selectedPgGenre)
+      ),
     [pgMovies, selectedPgGenre]
   );
 
   const currentPgSearchResults = useMemo(
     () =>
-      pgSearchResults.filter((movie) => movie.genres.includes(selectedPgGenre)),
+      pgSearchResults.filter(
+        (movie) => movie.genres && movie.genres.includes(selectedPgGenre)
+      ),
     [pgSearchResults, selectedPgGenre]
   );
 
