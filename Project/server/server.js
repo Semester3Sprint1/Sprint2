@@ -42,6 +42,8 @@ app.use("/api/auth", authRouter);
 
 app.use(error);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   winston.info(`App running on port ${port}.`);
 });
+
+module.exports = server;

@@ -58,8 +58,6 @@ const AuthForm = () => {
 
       setisLoading(false);
       const data = await res.json();
-      console.log(`data ${data}`)
-
       if (!res.ok) {
         let errorMessage = data;
         throw new Error(errorMessage);
