@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const winston = require("winston");
+const logger = require("../startup/logging");
 const { Search, validate } = require("../models/search");
 const { searchMovies } = require("../services/mongo_dal/searchMovies.dal");
 
@@ -8,7 +8,7 @@ router.post("/mongo", async (req, res) => {
   const { searchText } = req.body;
   const { error } = await validate(req.body);
   if (error) {
-    winston.error("invalid Search");
+    logger.error("invalid Search");
     return res.status(400).send(error.details[0].message);
   }
   let response = await Search.find({ $text: { $search: `"${searchText}"` } });
