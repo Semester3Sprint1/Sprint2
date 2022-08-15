@@ -1,8 +1,11 @@
 const dal = require("./pg");
+const { getReviews } = require("./reviews.dal");
 
 let getMovies = async () => {
-  const sql =
-    "SELECT movie, plot, release_year as year, length, rated, language, actor, genre, writer, director, poster, imdb  FROM vw_full_movies";
+  const sql = `SELECT film_id AS _id, movie as title, plot AS fullplot, release_year as released,length as runtime,rated,language as languages,poster,imdb  
+    FROM vw_full_movies
+    GROUP BY film_id, movie, plot, release_year, length, rated, language, poster, imdb
+    ORDER BY film_id ASC`;
   let res = await dal.query(sql);
   DEBUG && console.log(`Get Stores rows ${res.rows}`);
   return res.rows;
@@ -89,12 +92,26 @@ const getGenres = async () => {
   return arr;
 };
 
+const getFilmDetails = async (films) => {
+  for (film of films) {
+    let actors = await getFilmActors(film._id);
+    let genres = await getFilmGenres(film._id);
+    let writers = await getFilmWriters(film._id);
+    let directors = await getFilmDirectors(film._id);
+    let reviews = await getReviews(film._id);
+
+    film.cast = actors;
+    film.genres = genres;
+    film.writers = writers;
+    film.directors = directors;
+    film.reviews = reviews;
+  }
+
+  return films;
+};
+
 module.exports = {
   getMovies,
-  getFilms,
-  getFilmActors,
-  getFilmGenres,
-  getFilmWriters,
-  getFilmDirectors,
   getGenres,
+  getFilmDetails,
 };
