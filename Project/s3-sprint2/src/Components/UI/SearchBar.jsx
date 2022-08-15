@@ -28,6 +28,11 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
     }
   };
 
+  const resetSearch = () => {
+    setSearched(false);
+    setSearchText("");
+  };
+
   return (
     <div className="mt">
       <form className={styles.searchBar} onSubmit={searchMovies}>
@@ -53,7 +58,7 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
           <button
             style={{ marginLeft: "3%" }}
             onClick={() => {
-              setSearched(false);
+              resetSearch();
             }}
             className="btn btn-primary"
           >

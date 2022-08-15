@@ -43,9 +43,9 @@ function App() {
   const [pgSearched, setPgSearched] = useState(false);
 
   const authCtx = useContext(AuthContext);
-  const token = authCtx.token
-  const loggedIn = authCtx.isLoggedIn
-  const username = authCtx.username
+  const token = authCtx.token;
+  const loggedIn = authCtx.isLoggedIn;
+  const username = authCtx.username;
 
   const currentPgGenre = useMemo(
     () =>
@@ -86,10 +86,9 @@ function App() {
     getPgGenres();
   }, []);
 
-  useEffect(() =>{
-   getUsers();
-  },[username, loggedIn])
-
+  useEffect(() => {
+    getUsers();
+  }, [username, loggedIn]);
 
   const loadingToast = (message) => {
     toast.info(message, {
@@ -123,7 +122,7 @@ function App() {
 
   const getPgMoviesBySearch = async (text) => {
     const res = await fetch(
-      `http://localhost:3001/search/pg?searchText=${text}`,
+      `http://localhost:3001/search/pg?searchText=${text}&user=${username}`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -186,11 +185,11 @@ function App() {
   // -------------- MONGO MOVIES SECTION BEGIN HERE ---------------- //
 
   let getUsers = async () => {
-    http.setJwT(token)
-    const res =  await http.get("http://localhost:3001/api/users/me");
-    await authCtx.getUser(res.data.username)
+    http.setJwT(token);
+    const res = await http.get("http://localhost:3001/api/users/me");
+    await authCtx.getUser(res.data.username);
   };
-   
+
   const getMongoMovies = async (page, genre) => {
     const page_num = encodeURIComponent(page);
     const res = await fetch(
@@ -221,7 +220,7 @@ function App() {
 
   const getMongoMoviesBySearch = async (text) => {
     const res = await fetch(
-      `http://localhost:3001/search/mongo?searchText=${text}`,
+      `http://localhost:3001/search/mongo?searchText=${text}&user=${username}`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
