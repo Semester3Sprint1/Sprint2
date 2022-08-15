@@ -1,5 +1,9 @@
 const winston = require("winston");
+
+require("express-async-errors");
+
 var path = require("path");
+
 
 const logger = winston.createLogger({
   transports: [
