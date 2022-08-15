@@ -2,7 +2,6 @@ import { useState, useRef, useContext } from "react";
 import AuthContext from "../../Context/auth-context";
 import { useNavigate } from "react-router-dom";
 import classes from "./AuthForm.module.css";
-
 const AuthForm = () => {
   const navigate = useNavigate();
   const emailInputRef = useRef();
@@ -75,6 +74,7 @@ const AuthForm = () => {
   };
 
   return (
+    
     <section className={classes.auth}>
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>

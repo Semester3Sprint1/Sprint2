@@ -20,6 +20,7 @@ import MovieRoutes from "./Components/Movies/MovieRoutes";
 import ReviewTemplate from "./Components/ReviewTemplate/ReviewTemplate";
 import http from "../src/Components/Services/http";
 
+
 function App() {
   // General States
   const [useMongo, setUseMongo] = useState(true);
@@ -290,12 +291,14 @@ function App() {
     <Fragment>
       <header>
         <NavBar dbPackage={databasePackage} />
+      
       </header>
 
       <main className="App">
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Main />} />
+          {authCtx.isLoggedIn &&
           <Route
             path="/movies/*"
             element={
@@ -314,11 +317,8 @@ function App() {
               )
             }
           />
-          <Route path="/ReviewTemplate" element={<ReviewTemplate />} />
-
-          {authCtx.isLoggedIn && (
-            <Route path="/account" element={<Account />}></Route>
-          )}
+        }
+        
           {!authCtx.isLoggedIn && (
             <Route path="/auth" element={<Auth />}></Route>
           )}

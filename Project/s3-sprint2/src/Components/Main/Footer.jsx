@@ -32,7 +32,7 @@ const Footer = () => {
         {/* Contact Us */}
         <span className="list-group-item list-group-item-action active">
           <h5 className="mb-1">Contact Us</h5>
-          <p className="mb-1">Toll Free: 1-800-555-GARY</p>
+          <p className="mb-1">Toll Free: 1-800-555-Movies</p>
           <p className="mb-1">
             <a href="mailto:moviereviews@email.ca" target="_blank">
               Email: moviereviews@email.com

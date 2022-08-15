@@ -23,9 +23,9 @@ export default function NavBar(props) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div className="container-fluid">
+      <div className="container-fluid fs-2">
         <Link className="navbar-brand" to="/">
-          <h1 className="d-inline">Movies Reviews {authCtx.username}</h1>
+          <h1 className="d-inline" >Squishy Kitty Movies</h1>
         </Link>
         <button
           onClick={handleNavCollapse}
@@ -45,9 +45,10 @@ export default function NavBar(props) {
           } navbar-collapse justify-content-end`}
           id="navbarNav"
         >
+          {isLoggedIn &&
           <div className="collapse navbar-collapse justify-content-center">
           <ChangeDB databasePackage={props.dbPackage} />
-          </div>
+          </div>}
           <ul className="navbar-nav me-4 text-center ">
             <li className="nav-item px-2">
               <NavLink
@@ -58,19 +59,13 @@ export default function NavBar(props) {
                 Home
               </NavLink>
             </li>
-          
+          {isLoggedIn &&
             <li className="nav-item px-2">
               <NavLink className="nav-link clickable h3" to="/movies">
                 Movies
               </NavLink>
             </li>
-            {isLoggedIn && (
-              <li className="nav-item">
-                <NavLink className="nav-link clickable h3" to="/account">
-                  Account
-                </NavLink>
-              </li>
-            )}
+            } 
           </ul>
         </div>
         {!isLoggedIn && (
