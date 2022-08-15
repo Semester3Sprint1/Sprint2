@@ -25,7 +25,7 @@ export default function NavBar(props) {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <h1 className="d-inline">Movies Reviews {authCtx.username}</h1>
+          <h1 className="d-inline">Movies Reviews</h1>
         </Link>
         <button
           onClick={handleNavCollapse}
@@ -64,13 +64,6 @@ export default function NavBar(props) {
                 Movies
               </NavLink>
             </li>
-            {isLoggedIn && (
-              <li className="nav-item">
-                <NavLink className="nav-link clickable h3" to="/account">
-                  Account
-                </NavLink>
-              </li>
-            )}
           </ul>
         </div>
         {!isLoggedIn && (
