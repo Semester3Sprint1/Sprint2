@@ -87,8 +87,8 @@ function App() {
   }, []);
 
   useEffect(() =>{
-    loggedIn && getUsers();
-  },[username])
+   getUsers();
+  },[username, loggedIn])
 
 
   const loadingToast = (message) => {
