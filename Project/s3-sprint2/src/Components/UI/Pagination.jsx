@@ -8,6 +8,7 @@ const Pagination = ({
   totalPages,
   setActivePage,
   loadMoreData,
+  searched,
 }) => {
   const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
   const end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
@@ -41,7 +42,8 @@ const Pagination = ({
         <p>
           Page {activePage} of {totalPages}
         </p>
-        <button onClick={loadMoreData}>Load More</button>
+        {searched ? <></> : <button onClick={loadMoreData}>Load More</button>}
+
         <p>
           Rows: {beginning === end ? end : `${beginning} - ${end}`} of {count}
         </p>

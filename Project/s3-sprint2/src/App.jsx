@@ -22,6 +22,7 @@ import ReviewTemplate from "./Components/ReviewTemplate/ReviewTemplate";
 function App() {
   // General States
   const [useMongo, setUseMongo] = useState(true);
+  const [activePage, setActivePage] = useState(1);
 
   // Mongo States
   const [pageNum, setPageNum] = useState(1);
@@ -112,15 +113,18 @@ function App() {
   };
 
   const getPgMoviesBySearch = async (text) => {
-    const res = await fetch(`http://localhost:3001/search/pg`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ searchText: text }),
-    });
+    const res = await fetch(
+      `http://localhost:3001/search/pg?searchText=${text}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const data = await res.json();
 
     setPgSearched(true);
     setPgSearchResults(data);
+    setActivePage(1);
   };
 
   const handlePgMovieSelect = (movie) => {
@@ -160,11 +164,12 @@ function App() {
         accessor: "rated",
         label: "Rated",
       },
-      {
-        accessor: "imdb",
-        label: "IMDB Rating",
-      },
+      // {
+      //   accessor: "imdb",
+      //   label: "IMDB Rating",
+      // },
     ],
+    pages: { activePage, setActivePage },
   };
 
   // -------------- PG MOVIES SECTION END HERE ---------------- //
@@ -200,17 +205,18 @@ function App() {
   };
 
   const getMongoMoviesBySearch = async (text) => {
-    const res = await fetch(`http://localhost:3001/search/mongo`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ searchText: text }),
-    });
+    const res = await fetch(
+      `http://localhost:3001/search/mongo?searchText=${text}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const data = await res.json();
 
-    setTimeout(() => {
-      setMongoSearched(true);
-      setMongoSearchResults(data);
-    }, 1000);
+    setMongoSearched(true);
+    setMongoSearchResults(data);
+    setActivePage(1);
   };
 
   const loadNextMongoPage = () => {
@@ -256,6 +262,7 @@ function App() {
         label: "Rated",
       },
     ],
+    pages: { activePage, setActivePage },
   };
 
   // -------------- MONGO MOVIES SECTION END HERE ---------------- //

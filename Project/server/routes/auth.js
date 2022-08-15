@@ -20,13 +20,17 @@ router.post("/", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (!user) {
     logger.error(` ${req.body.email} (Invalid email).`);
-    return res.status(400).send(JSON.stringify("Invalid email or password."));
+    return res
+      .status(400)
+      .send(JSON.stringify("Invalid email address. Please try again."));
   }
   //confirms password
   const validPassword = await bcrypt.compare(req.body.password, user.password);
   if (!validPassword) {
     logger.error(` ${req.body.email} (Invalid  Password).`);
-    return res.status(400).send(JSON.stringify("Invalid email or password."));
+    return res
+      .status(400)
+      .send(JSON.stringify("Invalid password. Please try again."));
   }
   logger.info(`${req.body.email} Logged in`);
   //generates a JSON TOKEN

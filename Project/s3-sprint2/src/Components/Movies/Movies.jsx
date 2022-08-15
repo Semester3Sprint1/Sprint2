@@ -19,6 +19,7 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
     loadNextData,
     filteredMovies,
     filteredSearchResults,
+    pages,
   } = moviePackage;
 
   const navigate = useNavigate();
@@ -57,6 +58,8 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
                   columns={columns}
                   onSelect={onSelect}
                   loadMoreData={loadNextData}
+                  pages={pages}
+                  searched={searched}
                 />
               ) : (
                 <Table
@@ -64,6 +67,8 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
                   columns={columns}
                   onSelect={onSelect}
                   loadMoreData={loadNextData}
+                  pages={pages}
+                  searched={searched}
                 />
               )}
             </div>
