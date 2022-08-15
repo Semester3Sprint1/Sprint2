@@ -1,5 +1,5 @@
 const winston = require("winston");
-
+require("express-async-errors");
 const logger = winston.createLogger({
   transports: [
     new winston.transports.File({ filename: "error.log", level: "error" }),

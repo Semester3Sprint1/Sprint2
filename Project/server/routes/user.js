@@ -37,9 +37,11 @@ router.post("/", async (req, res) => {
   const token = user.generateAuthToken();
   // const token = jwt.sign({ _id: user._id }, process.env.KEY);
   // adds the token to the header
-  res
-    .header("x-auth-token", token)
-    .send(_.pick(user, ["_id", "username", "email"]));
+  let info = _.pick(user, ["_id", "username", "email"]);
+
+  let userData = { info: info, token: token };
+  res.header("x-auth-token", token).send(userData);
+  // .send(_.pick(user, ["_id", "username", "email"]))
 });
 
 module.exports = router;

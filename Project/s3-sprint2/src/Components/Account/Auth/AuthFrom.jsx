@@ -46,24 +46,28 @@ const AuthForm = () => {
         password: password,
       };
     }
-
+   
     try {
       const res = await fetch(url, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
       });
-
       setisLoading(false);
       const data = await res.json();
       if (!res.ok) {
         let errorMessage = data;
         throw new Error(errorMessage);
       }
-
-      authCtx.login(data);
+      
+      if (isLogin) {
+        authCtx.login(data);
+      } else {
+        authCtx.getUser(data.info.username)
+        authCtx.login(data.token)
+      }
       navigate("/", { replace: true });
     } catch (error) {
       alert(error.message);
