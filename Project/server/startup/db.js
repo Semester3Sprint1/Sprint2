@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const winston = require("winston");
+const logger = require("../startup/logging");
 
 module.exports = function () {
   mongoose
     .connect(process.env.URI2)
-    .then(() => winston.info("Connected to MongoDB"));
+    .then(() => logger.info("Connected to MongoDB"));
 };

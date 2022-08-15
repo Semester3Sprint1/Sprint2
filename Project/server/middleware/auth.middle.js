@@ -1,8 +1,12 @@
 const jwt = require("jsonwebtoken");
+const logger = require("../startup/logging");
 
 function auth(req, res, next) {
   const token = req.header("x-auth-token");
-  if (!token) return res.status(401).send("Acess denied. No Token provided");
+  if (!token) {
+    logger.error(`Acess denied. No Token provided`);
+    return res.status(401).send("Acess denied. No Token provided");
+  }
   try {
     const decoded = jwt.verify(token, process.env.KEY);
 
@@ -10,6 +14,7 @@ function auth(req, res, next) {
     req.user = decoded;
     next();
   } catch (ex) {
+    logger.error("Invalid Token");
     res.status(400).send("Invalid Token.");
   }
 }

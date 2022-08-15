@@ -1,8 +1,7 @@
 const express = require("express");
-const winston = require("winston");
 const app = express();
 const error = require("./middleware/error");
-
+require("express-async-errors");
 require("dotenv").config();
 
 const port = process.env.PORT;
@@ -11,7 +10,7 @@ global.DEBUG = false;
 var cors = require("cors");
 app.use(cors({ origin: "http://localhost:3000" }));
 
-require("./startup/logging")();
+const logger = require("./startup/logging");
 require("./startup/db")();
 
 app.use(express.json());
@@ -39,11 +38,10 @@ app.use("/movies/pg", pgMovieRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 // app.use("/pgsearch", pgSearchRouter);
-
 app.use(error);
 
 const server = app.listen(port, () => {
-  winston.info(`App running on port ${port}.`);
+  logger.info(`App running on port ${port}.`);
 });
 
 module.exports = server;
