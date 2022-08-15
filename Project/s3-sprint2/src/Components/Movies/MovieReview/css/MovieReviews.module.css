@@ -23,6 +23,14 @@
   justify-content: space-between;
 }
 
+.reviewHeader h2 {
+  text-decoration: underline;
+}
+
 .reviewRating {
   text-align: right;
+}
+
+.reviewDetails h4 {
+  font-style: italic;
 }
