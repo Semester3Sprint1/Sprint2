@@ -18,6 +18,7 @@ import AuthContext from "./Components/Context/auth-context";
 import NotFound from "./Components/Main/notFound";
 import MovieRoutes from "./Components/Movies/MovieRoutes";
 import ReviewTemplate from "./Components/ReviewTemplate/ReviewTemplate";
+import http from "../src/Components/Services/http";
 
 function App() {
   // General States
@@ -42,6 +43,9 @@ function App() {
   const [pgSearched, setPgSearched] = useState(false);
 
   const authCtx = useContext(AuthContext);
+  const token = authCtx.token
+  const loggedIn = authCtx.isLoggedIn
+  const username = authCtx.username
 
   const currentPgGenre = useMemo(
     () =>
@@ -81,6 +85,11 @@ function App() {
     getPgMovies();
     getPgGenres();
   }, []);
+
+  useEffect(() =>{
+   getUsers();
+  },[username, loggedIn])
+
 
   const loadingToast = (message) => {
     toast.info(message, {
@@ -176,6 +185,12 @@ function App() {
 
   // -------------- MONGO MOVIES SECTION BEGIN HERE ---------------- //
 
+  let getUsers = async () => {
+    http.setJwT(token)
+    const res =  await http.get("http://localhost:3001/api/users/me");
+    await authCtx.getUser(res.data.username)
+  };
+   
   const getMongoMovies = async (page, genre) => {
     const page_num = encodeURIComponent(page);
     const res = await fetch(
