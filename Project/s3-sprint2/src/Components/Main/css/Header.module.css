@@ -17,6 +17,7 @@
   .header h2{
     margin: 5rem;
     text-align: center;
+    line-height: 1.2;
 
   }
 
@@ -24,6 +25,7 @@
     font-size: 1.5rem;
    text-align: center;
    width: 25ch;
+   line-height: 1.2;
   }
   
   .slideshow {

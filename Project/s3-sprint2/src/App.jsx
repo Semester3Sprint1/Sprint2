@@ -299,6 +299,7 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Main />} />
+          {authCtx.isLoggedIn &&
           <Route
             path="/movies/*"
             element={
@@ -317,11 +318,8 @@ function App() {
               )
             }
           />
-          <Route path="/ReviewTemplate" element={<ReviewTemplate />} />
-
-          {authCtx.isLoggedIn && (
-            <Route path="/account" element={<Account />}></Route>
-          )}
+        }
+        
           {!authCtx.isLoggedIn && (
             <Route path="/auth" element={<Auth />}></Route>
           )}

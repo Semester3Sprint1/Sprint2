@@ -18,7 +18,7 @@ const Header = () => {
         {!authCtx.isLoggedIn &&
         <p className={classes.pHeader}>Log in to get acess to everything our site has to offer</p>}
         {authCtx.isLoggedIn &&
-        <p className={classes.pHeader}>Select a Movie Database To Begin</p>}
+        <p className={classes.pHeader}>Select a Movie Database To Start Searching</p>}
       </header>
     </Fragment>
   );

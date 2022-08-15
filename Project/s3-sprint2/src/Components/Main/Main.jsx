@@ -2,15 +2,24 @@ import { Fragment } from "react";
 import styles from "./css/Main.module.css";
 import joe from "./images/joeYoung.jpg";
 import devil from "./images/devilToPay.jpg";
-import React from "react";
+import {useContext} from "react";
 import Header from "./header";
+import Auth from "../Account/Auth/Auth";
+import AuthContext from "../Context/auth-context";
 
 
 
 const Main = () => {
+
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
   return (
     <Fragment>
           <Header/>
+
+          {!isLoggedIn && <Auth/>
+          }
+       {isLoggedIn &&   
       <div className={styles.pagewrapper}>
     
         <p>
@@ -67,7 +76,7 @@ const Main = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div>}
     </Fragment>
   );
 };
