@@ -4,8 +4,8 @@ import { sortRows, filterRows, paginateRows } from "./helpers/helpers";
 import SortIcons from "./SortIcons";
 import styles from "./css/table.module.css";
 
-const Table = ({ rows, columns, onSelect, loadMoreData }) => {
-  const [activePage, setActivePage] = useState(1);
+const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
+  const { activePage, setActivePage } = pages;
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState({ order: "asc", orderBy: "" });
   const rowsPerPage = 20;
@@ -131,6 +131,7 @@ const Table = ({ rows, columns, onSelect, loadMoreData }) => {
         totalPages={totalPages}
         setActivePage={setActivePage}
         loadMoreData={loadMoreData}
+        searched={searched}
       />
     </>
   );
