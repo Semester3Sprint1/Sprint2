@@ -6,5 +6,6 @@
     background: linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    transform: rotateZ(-2deg) translateY(-4rem) translateX(0.25rem);
+    transform: rotateZ(-2deg) translateY(0rem) translateX(0.25rem);
+
   }

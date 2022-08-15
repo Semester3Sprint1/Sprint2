@@ -33,6 +33,9 @@ footer h5 {
   color: white;
 }
 
+.nav{
+  z-index: 0;
+}
 
 /* .App {
   text-align: center;

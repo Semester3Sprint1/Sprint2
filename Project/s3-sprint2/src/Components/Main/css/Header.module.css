@@ -12,6 +12,7 @@
     z-index: 10;
     transform: rotateZ(-2deg) translateY(-4rem) translateX(0.25rem);
     border-radius: 2rem;
+    position:absolute
   }
 
   .header h2{
