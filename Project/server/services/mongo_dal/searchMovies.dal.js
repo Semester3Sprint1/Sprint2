@@ -17,24 +17,31 @@ const searchMovies = async (body) => {
             {
               autocomplete: {
                 query: `${searchText}`,
-                path: "title",
-                fuzzy: { maxEdits: 2, prefixLength: 3, maxExpansions: 256 },
+                path: "fullplot",
+                fuzzy: { maxEdits: 1, prefixLength: 4, maxExpansions: 100 },
               },
               autocomplete: {
                 query: `${searchText}`,
-                path: "fullplot",
-                fuzzy: { maxEdits: 1, prefixLength: 4, maxExpansions: 256 },
+                path: "title",
+                fuzzy: { maxEdits: 1, prefixLength: 3, maxExpansions: 100 },
               },
             },
           ],
         },
       },
     },
-    { $sort: { score: { $meta: "textScore" } } },
+    {
+      $project: {
+        _id: 0,
+        title: 1,
+        score: { $meta: "searchScore" },
+      },
+    },
+    //{ $sort: { score: { $meta: "searchScore" } } },
   ];
 
   const results = await cursor.aggregate(agg).toArray();
-  DEBUG && console.log(results);
+  console.log(results);
   DEBUG && console.log("Total results:", results.length);
 
   return results;
