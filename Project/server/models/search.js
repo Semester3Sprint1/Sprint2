@@ -8,10 +8,10 @@ const searchSchema = new mongoose.Schema({
   },
 });
 
-searchSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign({ _id: this._id }, process.env.KEY);
-  return token;
-};
+// searchSchema.methods.generateAuthToken = function () {
+//   const token = jwt.sign({ _id: this._id }, process.env.KEY);
+//   return token;
+// };
 const Search = mongoose.model("movies", searchSchema);
 
 function validateSearch(search) {
