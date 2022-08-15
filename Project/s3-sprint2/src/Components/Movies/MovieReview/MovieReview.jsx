@@ -15,7 +15,7 @@ const MovieReview = ({ review }) => {
           <span>{review_date.toLocaleDateString()}</span>
         </div>
       </div>
-      <div>
+      <div className={styles.reviewDetails}>
         <h4>{tagline}</h4>
         <p>{details}</p>
       </div>
