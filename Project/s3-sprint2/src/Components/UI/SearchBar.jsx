@@ -37,6 +37,7 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
             onClick={() => {
               setSearched(false);
             }}
+            className="btn btn-primary"
           >
             Reset Search <AiOutlineUndo />
           </button>
