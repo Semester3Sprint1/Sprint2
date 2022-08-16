@@ -3,6 +3,8 @@ import Pagination from "./Pagination";
 import { sortRows, filterRows, paginateRows } from "./helpers/helpers";
 import SortIcons from "./SortIcons";
 import styles from "./css/table.module.css";
+import Card from "../UI/Card"
+import { AiOutlineSearch} from "react-icons/ai";
 
 const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
   const { activePage, setActivePage } = pages;
@@ -57,8 +59,10 @@ const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
 
   return (
     <>
-      <table className="table table">
-        <thead className="thead-dark">
+    <Card>
+
+      <table className={styles.table}>
+        <thead className={styles.head}>
           <tr>
             {columns.map((column) => {
               return (
@@ -81,8 +85,9 @@ const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
             {columns.map((column) => {
               if (column.type !== "rating") {
                 return (
-                  <th>
+                  <th> <AiOutlineSearch size={40}/>
                     <input
+                    className={styles.searchInput}
                       key={`${column.accessor}-search`}
                       type="search"
                       placeholder={`Filter by ${column.label}`}
@@ -133,6 +138,7 @@ const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
         loadMoreData={loadMoreData}
         searched={searched}
       />
+      </Card>
     </>
   );
 };

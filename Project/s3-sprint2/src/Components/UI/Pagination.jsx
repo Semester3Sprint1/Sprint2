@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./css/table.module.css";
+import {AiFillFastBackward, AiFillStepBackward, AiFillFastForward, AiFillStepForward} from 'react-icons/ai'
 
 const Pagination = ({
   activePage,
@@ -17,32 +18,32 @@ const Pagination = ({
     <>
       <div className={styles.controlBar}>
         <button disabled={activePage === 1} onClick={() => setActivePage(1)}>
-          ⏮️ First
+          <AiFillFastBackward className={styles.badge}  size={35} />First
         </button>
         <button
           disabled={activePage === 1}
           onClick={() => setActivePage(activePage - 1)}
         >
-          ⬅️ Previous
+          <AiFillStepBackward className={styles.badge}  size={35}/> Previous
         </button>
         <button
           disabled={activePage === totalPages}
           onClick={() => setActivePage(activePage + 1)}
         >
-          Next ➡️
+          Next <AiFillStepForward className={styles.badge}  size={35}/>
         </button>
         <button
           disabled={activePage === totalPages}
           onClick={() => setActivePage(totalPages)}
         >
-          Last ⏭️
+          Last <AiFillFastForward className={styles.badge}  size={35}/>
         </button>
       </div>
       <div className={styles.pageInfo}>
         <p>
           Page {activePage} of {totalPages}
         </p>
-        {searched ? <></> : <button onClick={loadMoreData}>Load More</button>}
+        {searched ? <></> : <button className={styles.btnLoad} onClick={loadMoreData}>Load More</button>}
 
         <p>
           Rows: {beginning === end ? end : `${beginning} - ${end}`} of {count}
