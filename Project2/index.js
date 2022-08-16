@@ -18,6 +18,9 @@ app.get("/proc", async (req, res) => {
   res.render("proc");
 });
 
+app.get("/records", async (req, res) => {
+  res.render("records");
+});
 const Router = require("./routes/routes");
 app.use("/", Router);
 
