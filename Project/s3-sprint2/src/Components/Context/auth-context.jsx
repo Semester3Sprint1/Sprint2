@@ -37,6 +37,7 @@ export const AuthContextProvider = (props) => {
   const getUserHandler = (user) =>{
     setUsername(user)
   }
+ 
 
   const contextValue = {
     token: token,
@@ -44,7 +45,7 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
     username: username,
-    getUser : getUserHandler
+    getUser : getUserHandler,
   };
 
   return (
