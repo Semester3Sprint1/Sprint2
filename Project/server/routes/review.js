@@ -5,8 +5,9 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { error } = await validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // const { error } = await validate(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
+  // console.log("is this breaking me");
 
   const user = await User.findById(req.body.userID);
   if (!user) return res.status(400).send("Invalid Users.");
@@ -19,6 +20,8 @@ router.post("/", async (req, res) => {
     user: {
       _id: user._id,
       username: user.username,
+      password: user.password,
+      email: user.email,
     },
     movie: {
       _id: movie._id,
