@@ -4,11 +4,11 @@ import MovieImage from "./MovieImage";
 import classes from "./MovieDetails.module.css";
 import MovieBody from "./MovieBody";
 import Card from "../../UI/Card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieReviews from "../MovieReview/MovieReviews";
 
-const MovieDetail = ({ movie, useMongo, onAddReview }) => {
+const MovieDetail = ({ movie, useMongo, onAddReview, currentReviews }) => {
   const {
     _id,
     awards,
@@ -48,7 +48,7 @@ const MovieDetail = ({ movie, useMongo, onAddReview }) => {
           <div className={classes.image}>
             <MovieImage
               image={poster}
-              reviews={reviews && reviews.length > 0 ? reviews : []}
+              reviews={reviews && reviews.length > 0 ? reviews : currentReviews}
               setViewReviews={setViewReviews}
               goToMovieReview={goToMovieReview}
             />
@@ -71,7 +71,7 @@ const MovieDetail = ({ movie, useMongo, onAddReview }) => {
         </div>
       ) : (
         <MovieReviews
-          reviews={reviews && reviews.length > 0 ? reviews : []}
+          reviews={reviews && reviews.length > 0 ? reviews : currentReviews}
           setViewReviews={setViewReviews}
           movieID={movie._id}
           useMongo={useMongo}

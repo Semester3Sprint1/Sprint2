@@ -38,7 +38,7 @@ const MovieReviews = ({
               {reviews.map((review) => {
                 return (
                   <>
-                    <MovieReview review={review} />
+                    <MovieReview review={review} useMongo={useMongo} />
                     <hr />
                   </>
                 );

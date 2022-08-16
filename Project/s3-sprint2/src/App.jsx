@@ -19,11 +19,11 @@ import MovieRoutes from "./Components/Movies/MovieRoutes";
 import http from "../src/Components/Services/http";
 
 function App() {
-  // General States
+  // -------------- GENERAL STATES ---------------- //
   const [useMongo, setUseMongo] = useState(true);
   const [activePage, setActivePage] = useState(1);
 
-  // Mongo States
+  // -------------- MONGO STATES ---------------- //
   const [pageNum, setPageNum] = useState(1);
   const [mongoMovies, setMongoMovies] = useState([]);
   const [selectedMongoMovie, setSelectedMongoMovie] = useState(false);
@@ -31,8 +31,9 @@ function App() {
   const [selectedMongoGenre, setSelectedMongoGenre] = useState("All");
   const [mongoSearchResults, setMongoSearchResults] = useState([]);
   const [mongoSearched, setMongoSearched] = useState(false);
+  const [mongoReviews, setMongoReviews] = useState([]);
 
-  // PG States
+  // -------------- PG STATES ---------------- //
   const [pgMovies, setPgMovies] = useState([]);
   const [selectedPgMovie, setSelectedPgMovie] = useState(false);
   const [pgGenres, setPgGenres] = useState([{ genres: ["Genre"] }]);
@@ -40,11 +41,13 @@ function App() {
   const [pgSearchResults, setPgSearchResults] = useState([]);
   const [pgSearched, setPgSearched] = useState(false);
 
+  // -------------- CONTEXTUAL STATES ---------------- //
   const authCtx = useContext(AuthContext);
   const token = authCtx.token;
   const loggedIn = authCtx.isLoggedIn;
   const username = authCtx.username;
 
+  // -------------- MEMORY ---------------- //
   const currentPgGenre = useMemo(
     () =>
       pgMovies.filter(
@@ -77,6 +80,7 @@ function App() {
     [mongoSearchResults, selectedMongoGenre]
   );
 
+  // This will load the first batch of Mongo Movies, all the PG movies, and both groups of genres (for the right side filter bar)
   useEffect(() => {
     getMongoMovies(0, "All");
     getMongoGenres();
@@ -84,6 +88,7 @@ function App() {
     getPgGenres();
   }, []);
 
+  // This will fire off each time a user logs in or logs out - it updates the current user state
   useEffect(() => {
     loggedIn && getUsers();
   }, [username, loggedIn]);
@@ -103,14 +108,15 @@ function App() {
 
   // -------------- PG MOVIES SECTION BEGIN HERE ---------------- //
 
+  // Loads all PG movies
   const getPgMovies = async () => {
     const res = await fetch(`http://localhost:3001/movies/pg/`);
     const data = await res.json();
-    // console.log(data);
 
     setPgMovies(data);
   };
 
+  // Loads all PG genres
   const getPgGenres = async () => {
     const res = await fetch(`http://localhost:3001/movies/pg/genres`);
     const data = await res.json();
@@ -118,6 +124,7 @@ function App() {
     setPgGenres(data);
   };
 
+  // Loads the results when a user searches for a PG movie
   const getPgMoviesBySearch = async (text) => {
     const res = await fetch(
       `http://localhost:3001/search/pg?searchText=${text}&user=${username}`,
@@ -133,18 +140,12 @@ function App() {
     setActivePage(1);
   };
 
+  // Changes the selected movie state when a user clicks on a movie
   const handlePgMovieSelect = (movie) => {
     setSelectedPgMovie(movie);
   };
 
-  // var reviewPackage = {
-  //   movieID: movieID,
-  //   userID: username,
-  //   tagline: tagline,
-  //   rating: reviewRating,
-  //   details: details,
-  // };
-
+  // Adds a review to a PG movie, and updates the state storing the movies
   const addReviewPg = async (review) => {
     const res = await fetch(`http://localhost:3001/movies/pg/review/new`, {
       method: "POST",
@@ -163,7 +164,7 @@ function App() {
       tagline: review.tagline,
       viewer_name: review.userID,
     };
-    // put the code to update the movie list here
+
     setPgMovies(
       pgMovies.map((movie) =>
         movie._id === review.movieID
@@ -175,6 +176,7 @@ function App() {
     return data;
   };
 
+  // Stores all of the relevant movie states and state changers - easier to put it into one object instead of passing all of these down to all of the components that need them
   const pgMoviePackage = {
     movies: pgMovies,
     setMovies: setPgMovies,
@@ -196,6 +198,7 @@ function App() {
     handleSelect: handlePgMovieSelect,
     selectedMovie: selectedPgMovie,
     onAddReview: addReviewPg,
+    currentReviews: null,
     columns: [
       {
         accessor: "title",
@@ -209,10 +212,6 @@ function App() {
         accessor: "rated",
         label: "Rated",
       },
-      // {
-      //   accessor: "imdb",
-      //   label: "IMDB Rating",
-      // },
     ],
     pages: { activePage, setActivePage },
   };
@@ -280,6 +279,7 @@ function App() {
 
   const handleMongoMovieSelect = (movie) => {
     setSelectedMongoMovie(movie);
+    fetchReviewMongo(movie._id);
   };
 
   const addReviewMongo = async (review) => {
@@ -290,26 +290,17 @@ function App() {
     });
     const data = await res.json();
 
-    // This code is to update the currently stored movie object without needing to query the DB again
-    // const date = new Date();
-    // const newReview = {
-    //   date: date.toLocaleDateString(),
-    //   details: review.details,
-    //   rating: review.rating,
-    //   review_id: 0,
-    //   tagline: review.tagline,
-    //   viewer_name: review.userID,
-    // };
-    // // put the code to update the movie list here
-    // setMongoMovies(
-    //   mongoMovies.map((movie) =>
-    //     movie._id === review.movieID
-    //       ? { ...movie, reviews: [...movie.reviews, newReview] }
-    //       : movie
-    //   )
-    // );
+    fetchReviewMongo(review.movieID);
+  };
 
-    return data;
+  const fetchReviewMongo = async (id) => {
+    const res = await fetch(`http://localhost:3001/api/review/${id}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+    const data = await res.json();
+
+    setMongoReviews(data);
   };
 
   const mongoMoviePackage = {
@@ -329,6 +320,7 @@ function App() {
     handleSelect: handleMongoMovieSelect,
     selectedMovie: selectedMongoMovie,
     onAddReview: addReviewMongo,
+    currentReviews: mongoReviews,
     columns: [
       {
         accessor: "title",
