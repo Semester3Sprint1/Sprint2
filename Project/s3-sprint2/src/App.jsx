@@ -11,13 +11,11 @@ import React, {
 import { ToastContainer, toast, Flip } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Main from "./Components/Main/Main";
-import Account from "./Components/Account/Account";
 import Auth from "./Components/Account/Auth/Auth";
 import Footer from "./Components/Main/Footer";
 import AuthContext from "./Components/Context/auth-context";
 import NotFound from "./Components/Main/notFound";
 import MovieRoutes from "./Components/Movies/MovieRoutes";
-import ReviewTemplate from "./Components/ReviewTemplate/ReviewTemplate";
 import http from "../src/Components/Services/http";
 
 function App() {

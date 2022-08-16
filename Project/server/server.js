@@ -3,6 +3,8 @@ const app = express();
 const error = require("./middleware/error");
 require("express-async-errors");
 require("dotenv").config();
+const Joi = require("joi");
+Joi.objectId = require("joi-objectid")(Joi);
 
 const port = process.env.PORT;
 global.DEBUG = false;
@@ -30,6 +32,7 @@ const pgMovieRouter = require("./routes/pgMovies");
 const searchEngine = require("./routes/search");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+const reviewRouter = require("./routes/review");
 // const pgSearchRouter = require("./routes/pgSearch");
 
 app.use("/search", searchEngine);
@@ -37,6 +40,8 @@ app.use("/movies/mongo", mongoMovieRouter);
 app.use("/movies/pg", pgMovieRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/review", reviewRouter);
+
 // app.use("/pgsearch", pgSearchRouter);
 app.use(error);
 

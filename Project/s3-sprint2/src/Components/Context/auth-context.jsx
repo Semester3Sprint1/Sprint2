@@ -34,13 +34,10 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("token", token);
   };
 
-  const getUserHandler = (user) => {
-    setUsername(user);
-  };
-
-  const getUserIdHandler = (id) => {
-    setUserId(id);
-  };
+  const getUserHandler = (user) =>{
+    setUsername(user)
+  }
+ 
 
   const contextValue = {
     token: token,
@@ -48,9 +45,7 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
     username: username,
-    getUser: getUserHandler,
-    getUserId: getUserIdHandler,
-    userId: userId,
+    getUser : getUserHandler,
   };
 
   return (
