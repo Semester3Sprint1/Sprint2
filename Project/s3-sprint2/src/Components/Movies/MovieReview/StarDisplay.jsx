@@ -4,25 +4,20 @@ import { FaStar } from "react-icons/fa";
 
 const StarDisplay = ({ rating }) => {
   const displayStars = () => {
-    var counter = 0;
-    while (counter < 10) {
-      if (rating.length >= counter) {
-        counter++;
-        return <FaStar className={classes.star} color={"#ffc107"} size={50} />;
-      } else {
-        counter++;
-        return <FaStar className={classes.star} color={"#e4e5e9"} size={50} />;
-      }
-    }
+    return (
+      <>
+        {[...Array(10)].map((star, i) => {
+          if (i < rating) {
+            return <FaStar color={"#ffc107"} size={50} />;
+          } else {
+            return <FaStar color={"#e4e5e9"} size={50} />;
+          }
+        })}
+      </>
+    );
   };
 
-  return (
-    <div>
-      {rating.forEach((star) => {
-        return <>1</>;
-      })}
-    </div>
-  );
+  return <div>{displayStars()}</div>;
 };
 
 export default StarDisplay;
