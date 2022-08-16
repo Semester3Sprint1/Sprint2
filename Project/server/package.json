@@ -11,10 +11,14 @@
   "license": "ISC",
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "assert": "^2.0.0",
     "bcrypt": "^5.0.1",
 >>>>>>> 60552da1c3b39faf7d0a97c099e8d5c855de8e1d
+=======
+  }
+>>>>>>> parent of 2844614 (commit)
     "concurrently": "^7.3.0",
     "cors": "^2.8.5",
     "date-fns": "^2.29.1",
