@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./css/MovieReviews.module.css";
 import AuthContext from "../../Context/auth-context";
 import StarRating from "../MovieDetails/StarRating";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 
-const AddReview = ({ movieID, useMongo, onNewReview }) => {
+const AddReview = ({ movieID, useMongo, onAddReview, setAddReview }) => {
   const [tagline, setTagline] = useState("");
   const [reviewRating, setReviewRating] = useState(0);
   const [details, setDetails] = useState("");
@@ -13,17 +14,23 @@ const AddReview = ({ movieID, useMongo, onNewReview }) => {
   const id = authCtx.userId;
   const username = authCtx.username;
 
+  const toastProps = {
+    position: "top-center",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    transition: Bounce,
+  };
+
   const invalidToast = (message) => {
-    toast.error(message, {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      transition: Bounce,
-    });
+    toast.error(message, toastProps);
+  };
+
+  const successToast = (message) => {
+    toast.success(message, toastProps);
   };
 
   const submitReview = (e) => {
@@ -52,6 +59,10 @@ const AddReview = ({ movieID, useMongo, onNewReview }) => {
         details: details,
       };
     }
+
+    onAddReview(reviewPackage);
+    successToast("Review posted successfully!");
+    setAddReview(false);
   };
 
   return (

@@ -5,18 +5,18 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  // const { error } = await validate(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
-  // console.log("is this breaking me");
+  const { movieID, userID, tagline, rating, details } = req.body;
+  const { error } = await validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
-  const user = await User.findById(req.body.userID);
+  const user = await User.findById(userID);
   if (!user) return res.status(400).send("Invalid Users.");
-  const movie = await Movie.findById(req.body.movieID);
+  const movie = await Movie.findById(movieID);
   if (!movie) return res.status(400).send("Invalid Movie.");
 
   const review = new Review({
-    tagline: req.body.tagline,
-    details: req.body.details,
+    tagline: tagline,
+    details: details,
     user: {
       _id: user._id,
       username: user.username,
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
       _id: movie._id,
       title: movie.title,
     },
-    rating: req.body.rating,
+    rating: rating,
   });
   await review.save();
   res.send(review);

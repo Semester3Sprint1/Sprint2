@@ -5,7 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AddReview from "./AddReview";
 
-const MovieReviews = ({ reviews, setViewReviews, movieID, useMongo }) => {
+const MovieReviews = ({
+  reviews,
+  setViewReviews,
+  movieID,
+  useMongo,
+  onAddReview,
+}) => {
   const [addReview, setAddReview] = useState(false);
 
   const navigate = useNavigate();
@@ -47,7 +53,12 @@ const MovieReviews = ({ reviews, setViewReviews, movieID, useMongo }) => {
           )}
         </>
       ) : (
-        <AddReview movieID={movieID} useMongo={useMongo} />
+        <AddReview
+          movieID={movieID}
+          useMongo={useMongo}
+          onAddReview={onAddReview}
+          setAddReview={setAddReview}
+        />
       )}
     </div>
   );

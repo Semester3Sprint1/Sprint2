@@ -6,7 +6,7 @@ import SearchBar from "../UI/SearchBar";
 import Table from "../UI/Table";
 import BackGround from "../UI/BackGround";
 
-const Movies = ({ handleSelect, toast, moviePackage }) => {
+const Movies = ({ handleSelect, moviePackage }) => {
   const {
     columns,
     movies,
@@ -36,19 +36,16 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
   };
 
   return (
-  
-      <>
-      
-      
-        <div className={styles.search}>
-            <SearchBar
-              handleSearch={searchMovies}
-              setSearched={setSearched}
-              searched={searched}
-            />
-          </div>
-      
-        <div className={styles.container}>
+    <>
+      <div className={styles.search}>
+        <SearchBar
+          handleSearch={searchMovies}
+          setSearched={setSearched}
+          searched={searched}
+        />
+      </div>
+
+      <div className={styles.container}>
         <div className="row">
           <div className="col-2">
             <ListGroup
@@ -57,7 +54,6 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
               onItemSelect={handleGenreSelect}
             />
           </div>
-         
 
           <div className="col">
             <div className={styles.searchResults}>
@@ -86,12 +82,9 @@ const Movies = ({ handleSelect, toast, moviePackage }) => {
               )}
             </div>
           </div>
-        
-          
-          
         </div>
       </div>
-      </>
+    </>
   );
 };
 
