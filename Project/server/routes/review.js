@@ -20,6 +20,8 @@ router.post("/", async (req, res) => {
     user: {
       _id: user._id,
       username: user.username,
+      password: user.password,
+      email: user.email,
     },
     movie: {
       _id: movie._id,
