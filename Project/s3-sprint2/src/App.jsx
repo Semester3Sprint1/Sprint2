@@ -88,6 +88,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    loggedIn &&
     getUsers();
   }, [username, loggedIn]);
 
