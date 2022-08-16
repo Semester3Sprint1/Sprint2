@@ -282,6 +282,36 @@ function App() {
     setSelectedMongoMovie(movie);
   };
 
+  const addReviewMongo = async (review) => {
+    const res = await fetch(`http://localhost:3001/api/review`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    });
+    const data = await res.json();
+
+    // This code is to update the currently stored movie object without needing to query the DB again
+    // const date = new Date();
+    // const newReview = {
+    //   date: date.toLocaleDateString(),
+    //   details: review.details,
+    //   rating: review.rating,
+    //   review_id: 0,
+    //   tagline: review.tagline,
+    //   viewer_name: review.userID,
+    // };
+    // // put the code to update the movie list here
+    // setMongoMovies(
+    //   mongoMovies.map((movie) =>
+    //     movie._id === review.movieID
+    //       ? { ...movie, reviews: [...movie.reviews, newReview] }
+    //       : movie
+    //   )
+    // );
+
+    return data;
+  };
+
   const mongoMoviePackage = {
     movies: mongoMovies,
     setMovies: setMongoMovies,
@@ -298,6 +328,7 @@ function App() {
     filteredSearchResults: currentMongoSearchResults,
     handleSelect: handleMongoMovieSelect,
     selectedMovie: selectedMongoMovie,
+    onAddReview: addReviewMongo,
     columns: [
       {
         accessor: "title",
