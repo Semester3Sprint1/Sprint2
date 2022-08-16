@@ -12,9 +12,9 @@ const MovieReview = ({ review }) => {
           <h2>{viewer_name}</h2>
         </div>
         <div className={styles.reviewRating}>
-          <div>
+          {/* <div>
             <StarDisplay rating={rating} />
-          </div>
+          </div> */}
           <h3>{rating} / 10</h3>
           <span>{review_date.toLocaleDateString()}</span>
         </div>
