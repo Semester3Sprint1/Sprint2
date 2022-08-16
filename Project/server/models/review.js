@@ -13,6 +13,7 @@ const reviewSchema = new mongoose.Schema({
   user: {
     type: userSchema,
     required: true,
+    immutable: true,
   },
   movie: {
     type: movieSchema,
