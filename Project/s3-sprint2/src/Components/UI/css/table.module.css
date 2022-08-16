@@ -2,18 +2,49 @@
   transition: all 0.2s ease-in-out;
 }
 
-.dataRow:hover {
-  cursor: pointer;
-  background-color: rgb(209, 208, 208) !important;
-  transition: all 0.2s ease-in-out;
+.table{
+  width: 100%;
+  border-collapse: collapse
 }
 
-.dataSelect {
-  color: blue;
-  margin: 1% auto;
-  display: flex;
-  justify-content: space-between;
+.table td{
+  font-size: 1.2rem;
+  text-align: center;
+  
 }
+
+.table th{
+  background: rgb(3,4,94);
+    background: linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
+    color: white;
+    font-size: 1.7rem;
+    text-align: center;
+    
+}
+
+
+
+ .table th, .table td {
+  border-bottom:  1px solid #ddd;
+  padding: 0.5rem;
+}
+
+ .table .dataRow:hover {
+  cursor: pointer;
+  background:  linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
+  color: white;
+  transform: scale(1.02);
+  border-radius: 30px;
+}
+
+.searchInput{
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 15rem;
+  max-width: 100%;
+  font-size: 1rem;
+}
+
 
 .controlBar {
   display: flex;
@@ -23,5 +54,61 @@
 .pageInfo {
   display: flex;
   justify-content: space-between;
-  margin-top: 3%;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 0.5rem 2rem;
+  white-space: nowrap;
+  margin-top: 1rem;
+  
 }
+
+.pageInfo p{
+  font-size: 1.5rem;
+  background: #0077b6;;
+  color:white;
+  border-radius: 40px;
+  padding: 0.5rem 2rem;
+ 
+  
+}
+
+.controlBar button, .btnLoad {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background: rgb(3,4,94);
+  color: white;
+  padding: 0.75rem 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  width: 18rem;
+}
+
+.controlBar button:hover,
+.controlBar button:active, .btnLoad:hover, .btnLoad:active {
+  background:  linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
+}
+
+.controlBar button:disabled{
+  background: #ddd;
+  cursor:not-allowed;
+}
+
+.badge{
+ 
+    background-color: #0077b6;
+    border-radius: 9px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  
+}
+
+/* .controlBar button:hover .badge,
+.controlBar button:active .badge {
+  background-color: rgb(3,4,94);
+} */
