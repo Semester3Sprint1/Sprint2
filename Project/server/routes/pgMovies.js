@@ -22,7 +22,7 @@ router.get("/genres", async (req, res) => {
 });
 
 router.post("/review/new", async (req, res) => {
-  let response = await addReview();
+  let response = await addReview(req.body);
   res.status(200).send(response);
 });
 

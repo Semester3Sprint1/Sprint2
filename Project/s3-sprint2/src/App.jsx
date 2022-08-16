@@ -140,8 +140,8 @@ function App() {
   };
 
   // var reviewPackage = {
-  //   _id: movieID,
-  //   name: username,
+  //   movieID: movieID,
+  //   userID: username,
   //   tagline: tagline,
   //   rating: reviewRating,
   //   details: details,
@@ -154,11 +154,25 @@ function App() {
       body: JSON.stringify(review),
     });
     const data = await res.json();
+
+    // This code is to update the currently stored movie object without needing to query the DB again
+    const date = new Date();
+    const newReview = {
+      date: date.toLocaleDateString(),
+      details: review.details,
+      rating: review.rating,
+      review_id: 0,
+      tagline: review.tagline,
+      viewer_name: review.userID,
+    };
     // put the code to update the movie list here
-    pgMovies.forEach((movie) => {
-      if (movie._id === review._id) {
-      }
-    });
+    setPgMovies(
+      pgMovies.map((movie) =>
+        movie._id === review.movieID
+          ? { ...movie, reviews: [...movie.reviews, newReview] }
+          : movie
+      )
+    );
 
     return data;
   };
@@ -183,6 +197,7 @@ function App() {
     loadNextData: null,
     handleSelect: handlePgMovieSelect,
     selectedMovie: selectedPgMovie,
+    onAddReview: addReviewPg,
     columns: [
       {
         accessor: "title",

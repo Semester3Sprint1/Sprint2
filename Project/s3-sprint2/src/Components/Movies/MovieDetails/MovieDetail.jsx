@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieReviews from "../MovieReview/MovieReviews";
 
-const MovieDetail = ({ movie, useMongo }) => {
+const MovieDetail = ({ movie, useMongo, onAddReview }) => {
   const {
     _id,
     awards,
@@ -75,6 +75,7 @@ const MovieDetail = ({ movie, useMongo }) => {
           setViewReviews={setViewReviews}
           movieID={movie._id}
           useMongo={useMongo}
+          onAddReview={onAddReview}
         />
       )}
     </div>

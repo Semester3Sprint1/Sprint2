@@ -10,11 +10,12 @@ const getReviews = async (id) => {
 };
 
 const addReview = async (body) => {
-  const { username, details, rating, film_id, tagline } = body;
+  console.log(body);
+  const { userID, details, rating, movieID, tagline } = body;
   let sql = `INSERT INTO public.review(
     viewer_name, details,  rating, film_id, tagline)
    VALUES ($1, $2, $3, $4, $5);`;
-  let res = await dal.query(sql, [username, details, rating, film_id, tagline]);
+  let res = await dal.query(sql, [userID, details, rating, movieID, tagline]);
 
   return res.rows;
 };
