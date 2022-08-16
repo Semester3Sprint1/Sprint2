@@ -5,7 +5,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "../Context/auth-context";
 import { useContext } from "react";
 import ChangeDB from "../Services/ChangeDB";
-import { toast, Bounce } from "react-toastify";
+import { successToast } from "../Services/toast";
 
 export default function NavBar(props) {
   const authCtx = useContext(AuthContext);
@@ -22,19 +22,6 @@ export default function NavBar(props) {
   // the item value comes from Cart Context handled in Cart Provider
 
   const userIcon = <FontAwesomeIcon icon={faUser} />;
-
-  const successToast = (message) => {
-    toast.success(message, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      transition: Bounce,
-    });
-  };
 
   const setLogout = () => {
     successToast(`Logging you out, ${username}. Please come again.`);

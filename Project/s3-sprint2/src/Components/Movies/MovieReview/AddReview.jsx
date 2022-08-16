@@ -74,7 +74,7 @@ const AddReview = ({ movieID, useMongo, onAddReview, setAddReview }) => {
           </div>
           {/* The stars will go here */}
           <div className={styles.reviewRating}>
-            <StarRating rating={reviewRating} setRating={setReviewRating} />
+            {/* <StarRating rating={reviewRating} setRating={setReviewRating} /> */}
             <h3>{reviewRating} / 10</h3>
           </div>
         </div>
