@@ -48,3 +48,26 @@
 .loadData:hover {
   cursor: pointer;
 }
+
+.search{
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  background: rgb(3,4,94);
+  background: linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
+  margin: 0.5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.container {
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  background-color: white;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}

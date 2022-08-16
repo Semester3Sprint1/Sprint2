@@ -3,10 +3,13 @@
   display: flex;
 }
 
-.searchBar div input {
+.searchBar input {
   border-radius: 8px 0px 0px 8px;
+  width: 70vw;
+  
 }
 
 .searchBar button {
   border-radius: 0px 8px 8px 0px;
 }
+

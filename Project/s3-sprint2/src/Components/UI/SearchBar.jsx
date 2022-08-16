@@ -49,7 +49,7 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          <AiOutlineSearch />
+          <AiOutlineSearch  />
         </button>
       </form>{" "}
       {searched && (
