@@ -34,3 +34,15 @@
 .reviewDetails h4 {
   font-style: italic;
 }
+
+.addReviewHeader,
+.addReviewBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.addReviewHeader label,
+.addReviewBody label {
+  font-weight: 700;
+  font-size: 1.5em;
+}

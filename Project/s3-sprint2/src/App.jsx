@@ -20,7 +20,6 @@ import MovieRoutes from "./Components/Movies/MovieRoutes";
 import ReviewTemplate from "./Components/ReviewTemplate/ReviewTemplate";
 import http from "../src/Components/Services/http";
 
-
 function App() {
   // General States
   const [useMongo, setUseMongo] = useState(true);
@@ -88,8 +87,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    loggedIn &&
-    getUsers();
+    loggedIn && getUsers();
   }, [username, loggedIn]);
 
   const loadingToast = (message) => {
@@ -141,6 +139,30 @@ function App() {
     setSelectedPgMovie(movie);
   };
 
+  // var reviewPackage = {
+  //   _id: movieID,
+  //   name: username,
+  //   tagline: tagline,
+  //   rating: reviewRating,
+  //   details: details,
+  // };
+
+  const addReviewPg = async (review) => {
+    const res = await fetch(`http://localhost:3001/movies/pg/review/new`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    });
+    const data = await res.json();
+    // put the code to update the movie list here
+    pgMovies.forEach((movie) => {
+      if (movie._id === review._id) {
+      }
+    });
+
+    return data;
+  };
+
   const pgMoviePackage = {
     movies: pgMovies,
     setMovies: setPgMovies,
@@ -190,6 +212,7 @@ function App() {
     http.setJwT(token);
     const res = await http.get("http://localhost:3001/api/users/me");
     await authCtx.getUser(res.data.username);
+    await authCtx.getUserId(res.data._id);
   };
 
   const getMongoMovies = async (page, genre) => {
@@ -292,34 +315,33 @@ function App() {
     <Fragment>
       <header>
         <NavBar dbPackage={databasePackage} />
-      
       </header>
 
       <main className="App">
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Main />} />
-          {authCtx.isLoggedIn &&
-          <Route
-            path="/movies/*"
-            element={
-              useMongo ? (
-                <MovieRoutes
-                  useMongo={useMongo}
-                  moviePackage={mongoMoviePackage}
-                  toast={loadingToast}
-                />
-              ) : (
-                <MovieRoutes
-                  useMongo={useMongo}
-                  moviePackage={pgMoviePackage}
-                  toast={loadingToast}
-                />
-              )
-            }
-          />
-        }
-        
+          {authCtx.isLoggedIn && (
+            <Route
+              path="/movies/*"
+              element={
+                useMongo ? (
+                  <MovieRoutes
+                    useMongo={useMongo}
+                    moviePackage={mongoMoviePackage}
+                    toast={loadingToast}
+                  />
+                ) : (
+                  <MovieRoutes
+                    useMongo={useMongo}
+                    moviePackage={pgMoviePackage}
+                    toast={loadingToast}
+                  />
+                )
+              }
+            />
+          )}
+
           {!authCtx.isLoggedIn && (
             <Route path="/auth" element={<Auth />}></Route>
           )}
