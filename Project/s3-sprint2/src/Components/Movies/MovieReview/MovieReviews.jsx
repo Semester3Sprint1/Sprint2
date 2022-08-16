@@ -1,7 +1,6 @@
 import React from "react";
 import MovieReview from "./MovieReview";
 import styles from "./css/MovieReviews.module.css";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AddReview from "./AddReview";
 
@@ -13,9 +12,6 @@ const MovieReviews = ({
   onAddReview,
 }) => {
   const [addReview, setAddReview] = useState(false);
-
-  const navigate = useNavigate();
-  const goToAddReview = (id) => navigate(`/movies/${id}/detail/reviews/add`);
 
   return (
     <div className={styles.reviewsContainer}>
@@ -42,7 +38,7 @@ const MovieReviews = ({
               {reviews.map((review) => {
                 return (
                   <>
-                    <MovieReview review={review} />
+                    <MovieReview review={review} useMongo={useMongo} />
                     <hr />
                   </>
                 );

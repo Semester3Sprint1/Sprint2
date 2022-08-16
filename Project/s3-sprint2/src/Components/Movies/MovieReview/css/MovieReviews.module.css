@@ -46,3 +46,8 @@
   font-weight: 700;
   font-size: 1.5em;
 }
+
+.reviewDate {
+  display: flex;
+  justify-content: space-between;
+}
