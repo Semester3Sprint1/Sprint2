@@ -6,7 +6,7 @@ import AddReview from "./MovieReview/AddReview";
 import MovieReviews from "./MovieReview/MovieReviews";
 import Movies from "./Movies";
 
-const MovieRoutes = ({ moviePackage, toast, useMongo }) => {
+const MovieRoutes = ({ moviePackage, useMongo }) => {
   const { handleSelect, selectedMovie, onAddReview } = moviePackage;
 
   return (
@@ -14,11 +14,7 @@ const MovieRoutes = ({ moviePackage, toast, useMongo }) => {
       <Route
         path="/"
         element={
-          <Movies
-            handleSelect={handleSelect}
-            toast={toast}
-            moviePackage={moviePackage}
-          />
+          <Movies handleSelect={handleSelect} moviePackage={moviePackage} />
         }
       />
       <Route

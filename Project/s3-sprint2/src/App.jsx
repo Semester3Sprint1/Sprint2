@@ -373,13 +373,11 @@ function App() {
                   <MovieRoutes
                     useMongo={useMongo}
                     moviePackage={mongoMoviePackage}
-                    toast={loadingToast}
                   />
                 ) : (
                   <MovieRoutes
                     useMongo={useMongo}
                     moviePackage={pgMoviePackage}
-                    toast={loadingToast}
                   />
                 )
               }

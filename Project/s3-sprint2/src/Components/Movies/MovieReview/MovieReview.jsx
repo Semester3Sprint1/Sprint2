@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./css/MovieReviews.module.css";
+import StarDisplay from "./StarDisplay";
 
 const MovieReview = ({ review }) => {
   const { viewer_name, rating, date, details, tagline } = review;
@@ -11,6 +12,9 @@ const MovieReview = ({ review }) => {
           <h2>{viewer_name}</h2>
         </div>
         <div className={styles.reviewRating}>
+          <div>
+            <StarDisplay rating={rating} />
+          </div>
           <h3>{rating} / 10</h3>
           <span>{review_date.toLocaleDateString()}</span>
         </div>
