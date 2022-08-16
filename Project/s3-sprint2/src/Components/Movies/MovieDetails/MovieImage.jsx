@@ -6,7 +6,7 @@ const MovieImage = ({ image, reviews, goToMovieReview, setViewReviews }) => {
   return (
     <div className={classes.image}>
       <img src={image} alt="Movie Poster" />
-      <StarRating />
+      {/* <StarRating /> */}
       <button
         className={classes.btnReview}
         onClick={() => setViewReviews(true)}
