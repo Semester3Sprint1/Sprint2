@@ -1,0 +1,56 @@
+@font-face {
+  font-family: wildwood;
+  src: url("../fonts/wildwood.ttf");
+}
+
+body {
+  width: 100%;
+  align-items: center;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: hidden;
+  background-image: url("../images/background.jpg");
+}
+
+h1 {
+  font-family: wildwood;
+  font-size: 40px;
+  color: green;
+  text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
+    1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+}
+
+h2 {
+  color: white;
+  text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
+    1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+  font-size: 25px;
+}
+
+.buttons {
+  background: url(../images/icon.png);
+  width: 100px;
+  height: 63px;
+  cursor: pointer;
+}
+
+a:link {
+  color: white;
+}
+a:visited {
+  color: skyblue;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  font-family: "wildwood";
+  font-size: 20px;
+  color: white;
+
+  text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
+    1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+}

@@ -10,10 +10,16 @@ app.listen(PORT, () => {
 });
 
 app.set("view engine", "ejs");
+app.get("/", async (req, res) => {
+  res.render("input", { status: app.locals.status });
+});
 
-const customerRouter = require("./routes/customer");
+app.get("/proc", async (req, res) => {
+  res.render("proc");
+});
 
-app.use("/customer", customerRouter);
+const Router = require("./routes/routes");
+app.use("/", Router);
 
 app.use((req, res) => {
   res.status(404).render("404");
