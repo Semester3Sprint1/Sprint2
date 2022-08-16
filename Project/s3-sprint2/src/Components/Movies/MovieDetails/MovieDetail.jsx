@@ -73,6 +73,8 @@ const MovieDetail = ({ movie, useMongo }) => {
         <MovieReviews
           reviews={reviews && reviews.length > 0 ? reviews : []}
           setViewReviews={setViewReviews}
+          movieID={movie._id}
+          useMongo={useMongo}
         />
       )}
     </div>
