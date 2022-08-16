@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./css/MovieReviews.module.css";
 import AuthContext from "../../Context/auth-context";
 import StarRating from "../MovieDetails/StarRating";
-import { ToastContainer, toast, Bounce } from "react-toastify";
+import { successToast, errorToast } from "../../Services/toast";
 
 const AddReview = ({ movieID, useMongo, onAddReview, setAddReview }) => {
   const [tagline, setTagline] = useState("");
@@ -14,30 +14,11 @@ const AddReview = ({ movieID, useMongo, onAddReview, setAddReview }) => {
   const id = authCtx.userId;
   const username = authCtx.username;
 
-  const toastProps = {
-    position: "top-center",
-    autoClose: 1000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    transition: Bounce,
-  };
-
-  const invalidToast = (message) => {
-    toast.error(message, toastProps);
-  };
-
-  const successToast = (message) => {
-    toast.success(message, toastProps);
-  };
-
   const submitReview = (e) => {
     e.preventDefault();
 
     if (tagline === "" || details === "") {
-      invalidToast("Invalid entry. No fields can be blank!");
+      errorToast("Invalid entry. No fields can be blank!");
       return;
     }
 

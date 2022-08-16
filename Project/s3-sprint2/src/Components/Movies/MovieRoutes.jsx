@@ -7,7 +7,8 @@ import MovieReviews from "./MovieReview/MovieReviews";
 import Movies from "./Movies";
 
 const MovieRoutes = ({ moviePackage, useMongo }) => {
-  const { handleSelect, selectedMovie, onAddReview } = moviePackage;
+  const { handleSelect, selectedMovie, onAddReview, currentReviews } =
+    moviePackage;
 
   return (
     <Routes>
@@ -24,12 +25,10 @@ const MovieRoutes = ({ moviePackage, useMongo }) => {
             movie={selectedMovie}
             useMongo={useMongo}
             onAddReview={onAddReview}
+            currentReviews={currentReviews}
           />
         }
       />
-      {/* Might just get rid of these */}
-      <Route path="/:id/detail/reviews" element={<MovieReviews />} />
-      <Route path="/:id/detail/reviews/add" element={<AddReview />} />
     </Routes>
   );
 };
