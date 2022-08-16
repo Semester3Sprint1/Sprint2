@@ -4,7 +4,10 @@
 
 .table{
   width: 100%;
-  border-collapse: collapse
+  border-collapse: collapse;
+  background-color:#fff;
+  border:  1px solid #ddd;
+  
 }
 
 .table td{
@@ -15,10 +18,10 @@
 
 .table th{
   background: rgb(3,4,94);
-    background: linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
     color: white;
     font-size: 1.7rem;
     text-align: center;
+    border-right: none;
     
 }
 

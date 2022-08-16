@@ -5,7 +5,7 @@
 
 .searchBar input {
   border-radius: 8px 0px 0px 8px;
-  width: 70vw;
+  width: 50vw;
   
 }
 
@@ -13,3 +13,30 @@
   border-radius: 0px 8px 8px 0px;
 }
 
+.search{
+  display: flex;
+}
+
+.reset {
+  cursor: pointer;
+  border: none;
+  background: rgb(3,4,94);
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reset:active, .reset:hover {
+  background:  linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
+}
+
+.btnSearch{
+  background: rgb(3,4,94);
+  color: white;
+}

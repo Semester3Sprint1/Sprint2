@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
   const token = user.generateAuthToken();
   res.send(JSON.stringify(token));
 });
-
+// validates user input before getting to DB
 function validate(req) {
   const schema = Joi.object({
     email: Joi.string().email().min(5).max(255).required(),
