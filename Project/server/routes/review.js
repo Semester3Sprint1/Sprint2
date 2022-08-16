@@ -3,6 +3,21 @@ const { User } = require("../models/user");
 const { Movie } = require("../models/movie");
 const express = require("express");
 const router = express.Router();
+const { ObjectId } = require("mongodb");
+router.get("/", async (req, res) => {
+  const reviews = await Review.find();
+  res.send(reviews);
+});
+
+router.get("/:id", async (req, res) => {
+  const filter = {
+    "movie._id": new ObjectId(req.params.id),
+  };
+  const review = await Review.find(filter);
+  console.log(review);
+  if (!review) return res.status(404).send("The Movie id was not found");
+  res.send(review);
+});
 
 router.post("/", async (req, res) => {
   const { movieID, userID, tagline, rating, details } = req.body;
