@@ -11,14 +11,19 @@ const MovieReview = ({ review }) => {
         <div>
           <h2>{viewer_name}</h2>
         </div>
+
         <div className={styles.reviewRating}>
-          {/* <div>
+          <div className={styles.reviewDate}>
+            <span>{review_date.toLocaleDateString()}</span>
+            <h3>{rating} / 10</h3>
+          </div>
+
+          <div>
             <StarDisplay rating={rating} />
-          </div> */}
-          <h3>{rating} / 10</h3>
-          <span>{review_date.toLocaleDateString()}</span>
+          </div>
         </div>
       </div>
+      <hr />
       <div className={styles.reviewDetails}>
         <h4>{tagline}</h4>
         <p>{details}</p>
