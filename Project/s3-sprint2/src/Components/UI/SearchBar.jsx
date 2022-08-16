@@ -34,7 +34,7 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
   };
 
   return (
-    <div className="mt">
+    <div className={styles.search}>
       <form className={styles.searchBar} onSubmit={searchMovies}>
         <div>
           <input
@@ -48,8 +48,8 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
-          <AiOutlineSearch  />
+        <button type="submit" className={styles.btnSearch}>
+          <AiOutlineSearch  size={20} />
         </button>
       </form>{" "}
       {searched && (
@@ -60,9 +60,9 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
             onClick={() => {
               resetSearch();
             }}
-            className="btn btn-primary"
+            className={styles.reset}
           >
-            Reset Search <AiOutlineUndo />
+            Reset Search <AiOutlineUndo size={40} />
           </button>
         </>
       )}
