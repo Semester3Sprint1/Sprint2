@@ -1,11 +1,17 @@
 const express = require("express");
 const app = express();
+const error = require("./middleware/error");
+require("express-async-errors");
 require("dotenv").config();
+
 const port = process.env.PORT;
 global.DEBUG = false;
 
 var cors = require("cors");
 app.use(cors({ origin: "http://localhost:3000" }));
+
+const logger = require("./startup/logging");
+require("./startup/db")();
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -19,12 +25,23 @@ app.use(function (req, res, next) {
 });
 
 // Routes
-const movieRouter = require("./routes/movies");
+const mongoMovieRouter = require("./routes/mongoMovies");
+const pgMovieRouter = require("./routes/pgMovies");
 const searchEngine = require("./routes/search");
+const userRouter = require("./routes/user");
+const authRouter = require("./routes/auth");
+// const pgSearchRouter = require("./routes/pgSearch");
 
 app.use("/search", searchEngine);
-app.use("/movies", movieRouter);
+app.use("/movies/mongo", mongoMovieRouter);
+app.use("/movies/pg", pgMovieRouter);
+app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
+// app.use("/pgsearch", pgSearchRouter);
+app.use(error);
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`);
+const server = app.listen(port, () => {
+  logger.info(`App running on port ${port}.`);
 });
+
+module.exports = server;

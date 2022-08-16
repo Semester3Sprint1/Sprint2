@@ -1,17 +1,21 @@
 import React from "react";
-import MovieHeader from './MovieHeader'
+import MovieHeader from "./MovieHeader";
 import MovieImage from "./MovieImage";
-import classes from "./MovieDetails.module.css"
+import classes from "./MovieDetails.module.css";
 import MovieBody from "./MovieBody";
 import Card from "../../UI/Card";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import MovieReviews from "../MovieReview/MovieReviews";
 
-const MovieDetail = ({ movie }) => {
+const MovieDetail = ({ movie, useMongo }) => {
   const {
     _id,
     awards,
     cast,
     languages,
     directors,
+    plot,
     fullplot,
     genres,
     imdb,
@@ -21,41 +25,58 @@ const MovieDetail = ({ movie }) => {
     runtime,
     title,
     writers,
+    reviews,
   } = movie;
+  const [pgLang, setPgLang] = useState([languages]);
+  const [pgRating, setPgRating] = useState({ rating: imdb });
+  const [viewReviews, setViewReviews] = useState(false);
 
-  
+  const navigate = useNavigate();
+  const goToMovieReview = (id) => navigate(`/movies/${id}/detail/reviews`);
 
-  return <div className="container">
-    <MovieHeader 
-  
-  movie = {title} 
-  rating = {rated}
-  date = {released}
-  length = {runtime}
-  lang = {languages}
-  />
-  <div className={classes.grid}>
-    <div className={classes.image}>
-  <MovieImage image = {poster} />
-  </div>
-  
-  <Card>
-  <div className={classes.body}>
-    <MovieBody 
-    plot = {fullplot}
-    genre = {genres}
-    director = {directors}
-    writer = {writers}
-    stars = {cast}
-    imdb = {imdb}
-    award = {awards}
-    />
+  return (
+    <div className="container">
+      <MovieHeader
+        movie={title}
+        rating={rated}
+        date={released}
+        length={runtime}
+        lang={useMongo ? languages : pgLang}
+      />
+      {!viewReviews ? (
+        <div className={classes.grid}>
+          <div className={classes.image}>
+            <MovieImage
+              image={poster}
+              reviews={reviews && reviews.length > 0 ? reviews : []}
+              setViewReviews={setViewReviews}
+              goToMovieReview={goToMovieReview}
+            />
+          </div>
+
+          <Card>
+            <div className={classes.body}>
+              <MovieBody
+                plot={fullplot}
+                otherPlot={plot}
+                genre={genres}
+                director={directors}
+                writer={writers}
+                stars={cast}
+                imdb={useMongo ? imdb : pgRating}
+                award={awards}
+              />
+            </div>
+          </Card>
+        </div>
+      ) : (
+        <MovieReviews
+          reviews={reviews && reviews.length > 0 ? reviews : []}
+          setViewReviews={setViewReviews}
+        />
+      )}
     </div>
-    
-  </Card>
-  </div>
-  
-  </div>;
+  );
 };
 
 export default MovieDetail;

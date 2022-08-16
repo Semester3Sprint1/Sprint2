@@ -7,6 +7,7 @@
   transform: translate3d(0, 0, 0);
 }
 
+
 .slideshow > div {
   height: 250px;
   width: 5000px;
@@ -50,3 +51,22 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.pagewrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+  margin-top: 4rem;
+  
+}
+
+
+
+@font-face {
+  font-family: "Showtime";
+  src: url("../fonts/Showtime.ttf");
+}
+
+.reviewTitle {
+  font-family: "Showtime";
+  font-size: 50px;
+}
+

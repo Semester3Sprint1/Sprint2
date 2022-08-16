@@ -2,32 +2,33 @@ import { Fragment } from "react";
 import styles from "./css/Main.module.css";
 import joe from "./images/joeYoung.jpg";
 import devil from "./images/devilToPay.jpg";
-import React from "react";
+import {useContext} from "react";
+import Header from "./header";
+import Auth from "../Account/Auth/Auth";
+import AuthContext from "../Context/auth-context";
 
-/*
---- COMPONENTS TO ADD ---
-Header
-Nav Bar
-Home Page
-Footer
-*/
+
 
 const Main = () => {
+
+  const authCtx = useContext(AuthContext);
+  const isLoggedIn = authCtx.isLoggedIn;
   return (
     <Fragment>
-      <div className={styles.slideshow}>
-        <div className={styles.mover1}></div>
-        <div className={styles.mover2}></div>
-      </div>
-      <div>
-        <h1>Your source for classic movie reviews!</h1>
+          <Header/>
+
+          {!isLoggedIn && <Auth/>
+          }
+       {isLoggedIn &&   
+      <div className={styles.pagewrapper}>
+    
         <p>
-          Classic movies from the early 1900's and up, Movies Reviews will have
-          what you need when you need information about your favorite classic
-          film. Tell the world what you think about the classics, whether it be
-          mainstream or obscure films. Movies Reviews has it all!
+          Classic and recent movies from the early 1900's and up, Movies Reviews
+          will have what you need when you need information about your favorite
+          film. Tell the world what you think about your favorite movie, whether
+          it be mainstream or obscure films. Movies Reviews has it all!
         </p>
-        <h2>Reviews:</h2>
+        <p className={styles.reviewTitle}>Reviews:</p>
         <div className={styles.gridContainer}>
           <div className={styles.review}>
             <img src={joe} alt="Joe Young" height="200" />
@@ -75,7 +76,7 @@ const Main = () => {
             </span>
           </div>
         </div>
-      </div>
+      </div>}
     </Fragment>
   );
 };

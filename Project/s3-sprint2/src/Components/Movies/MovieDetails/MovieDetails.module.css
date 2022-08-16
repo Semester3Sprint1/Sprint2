@@ -1,11 +1,14 @@
 .image{
     display: flex;
     justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .grid {
     display: grid;
   }
+
+
   
   @media screen and (min-width: 768px) {
     .grid {

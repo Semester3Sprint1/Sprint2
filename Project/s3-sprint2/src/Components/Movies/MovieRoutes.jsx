@@ -1,42 +1,30 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { toast, Flip } from "react-toastify";
+
 import MovieDetail from "./MovieDetails/MovieDetail";
-import { useState } from "react";
+import MovieReviews from "./MovieReview/MovieReviews";
 import Movies from "./Movies";
 
-const MovieRoutes = () => {
-  const [selectedMovie, setSelectedMovie] = useState(false);
-
-  const handleMovieSelect = (movie) => {
-    setSelectedMovie(movie);
-  };
-
-  const loadingToast = (message) => {
-    toast.info(message, {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      transition: Flip,
-    });
-  };
+const MovieRoutes = ({ moviePackage, toast, useMongo }) => {
+  const { handleSelect, selectedMovie } = moviePackage;
 
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <Movies handleSelect={handleMovieSelect} toast={loadingToast} />
+          <Movies
+            handleSelect={handleSelect}
+            toast={toast}
+            moviePackage={moviePackage}
+          />
         }
       />
       <Route
         path="/:id/detail"
-        element={<MovieDetail movie={selectedMovie} />}
+        element={<MovieDetail movie={selectedMovie} useMongo={useMongo} />}
       />
+      <Route path="/:id/detail/reviews" element={<MovieReviews />} />
     </Routes>
   );
 };

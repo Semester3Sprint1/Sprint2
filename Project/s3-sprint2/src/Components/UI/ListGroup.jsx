@@ -1,13 +1,21 @@
 import React from "react";
+import classes from './css/ListGroup.module.css'
 
-let ListGroup = ({ genres,  onItemSelect, selectedItem }) => {
-  // console.log(genres);
-
+let ListGroup = ({ genres, onItemSelect, selectedItem }) => {
+ 
   return (
-    <div className="mt-2">
-      <ul className="list-group clickable">
-        <li className="list-group-item active bg-dark">Select Genre</li>
-
+    <div className={classes.ListGroup}>
+      <ul >
+        <li  className={classes.dark}>Select Genre</li>
+        <li
+          onClick={() => {
+            onItemSelect("All");
+          }}
+          className= { selectedItem === "All" ? `${classes.active}`: classes.deactive}
+          
+        >
+          All
+        </li>
         {genres.map((genre, i) => {
           return (
             <li
@@ -16,9 +24,8 @@ let ListGroup = ({ genres,  onItemSelect, selectedItem }) => {
               }}
               key={i}
               className={
-                selectedItem === genre
-                  ? " bg-primary list-group-item list-group-item-action active "
-                  : " list-group-item list-group-item-action "
+                selectedItem === genre ? `${classes.active}`: classes.deactive
+                  
               }
             >
               {" "}
@@ -34,7 +41,6 @@ let ListGroup = ({ genres,  onItemSelect, selectedItem }) => {
 ListGroup.defaultProps = {
   selectedItem: "Action",
   textProperty: "genre",
-  
 };
 
 export default ListGroup;
