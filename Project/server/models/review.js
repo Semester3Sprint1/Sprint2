@@ -36,7 +36,7 @@ function validateReview(review) {
     tagline: Joi.string().min(3).max(200).required(),
     userID: Joi.objectId().required(),
     movieID: Joi.objectId().required(),
-    detail: Joi.string().min(0).required(),
+    details: Joi.string().min(0).required(),
     rating: Joi.number().min(0).max(10),
   });
   return schema.validate(review);
