@@ -1,6 +1,8 @@
 import { useState } from "react";
 import classes from "./StarRating.module.css";
-import { FaStar } from "react-icons/fa";
+// import { FaStar } from "react-icons/fa";
+import { FaPaw } from "react-icons/fa";
+
 const StarRating = ({ rating, setRating }) => {
   // const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
@@ -18,9 +20,9 @@ const StarRating = ({ rating, setRating }) => {
               value={ratingValue}
               onClick={() => setRating(ratingValue)}
             />
-            <FaStar
+            <FaPaw
               className={classes.star}
-              color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+              color={ratingValue <= (hover || rating) ? "#03045e" : "#e4e5e9"}
               size={50}
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
