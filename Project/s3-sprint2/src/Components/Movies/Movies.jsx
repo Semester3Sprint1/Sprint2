@@ -5,6 +5,7 @@ import ListGroup from "../UI/ListGroup";
 import SearchBar from "../UI/SearchBar";
 import Table from "../UI/Table";
 import BackGround from "../UI/BackGround";
+import Banner from "../UI/Banner";
 
 const Movies = ({ handleSelect, moviePackage }) => {
   const {
@@ -37,6 +38,7 @@ const Movies = ({ handleSelect, moviePackage }) => {
 
   return (
     <>
+      <Banner />
       <div className={styles.search}>
         <SearchBar
           handleSearch={searchMovies}

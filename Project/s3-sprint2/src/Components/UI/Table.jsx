@@ -3,8 +3,8 @@ import Pagination from "./Pagination";
 import { sortRows, filterRows, paginateRows } from "./helpers/helpers";
 import SortIcons from "./SortIcons";
 import styles from "./css/table.module.css";
-import Card from "../UI/Card"
-import { AiOutlineSearch} from "react-icons/ai";
+import Card from "../UI/Card";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
   const { activePage, setActivePage } = pages;
@@ -59,85 +59,90 @@ const Table = ({ rows, columns, onSelect, loadMoreData, pages, searched }) => {
 
   return (
     <>
-    <Card>
-
-      <table className={styles.table}>
-        <thead className={styles.head}>
-          <tr>
-            {columns.map((column) => {
-              return (
-                <th key={column.accessor} scope="col">
-                  <span>{column.label}</span>{" "}
-                  {column.type === "rating" ? (
-                    <span onClick={() => handleSort(column.accessor)}>
-                      <SortIcons sort={sort} accessor={column.accessor} />
-                    </span>
-                  ) : (
-                    <span onClick={() => handleSort(column.accessor)}>
-                      <SortIcons sort={sort} accessor={column.accessor} />
-                    </span>
-                  )}
-                </th>
-              );
-            })}
-          </tr>
-          <tr>
-            {columns.map((column) => {
-              if (column.type !== "rating") {
+      <Card>
+        <table className={styles.table}>
+          <thead className={styles.head}>
+            <tr>
+              {columns.map((column) => {
                 return (
-                  <th> <AiOutlineSearch size={40}/>
-                    <input
-                    className={styles.searchInput}
-                      key={`${column.accessor}-search`}
-                      type="search"
-                      placeholder={`Filter by ${column.label}`}
-                      value={filters[column.accessor]}
-                      onChange={(event) =>
-                        handleSearch(event.target.value, column.accessor)
-                      }
-                    />
+                  <th key={column.accessor} scope="col">
+                    <span>{column.label}</span>{" "}
+                    {column.type === "rating" ? (
+                      <span onClick={() => handleSort(column.accessor)}>
+                        <SortIcons sort={sort} accessor={column.accessor} />
+                      </span>
+                    ) : (
+                      <span onClick={() => handleSort(column.accessor)}>
+                        <SortIcons sort={sort} accessor={column.accessor} />
+                      </span>
+                    )}
                   </th>
                 );
-              } else {
-                return <th></th>;
-              }
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {calculatedRows.map((row) => {
-            return (
-              <tr
-                key={row._id}
-                className={styles.dataRow}
-                onClick={() => onSelect(row)}
-              >
-                {columns.map((column) => {
-                  if (column.type === "date") {
-                    let date = new Date(row[column.accessor]);
+              })}
+            </tr>
+            <tr>
+              {columns.map((column) => {
+                if (column.type !== "rating") {
+                  return (
+                    <th>
+                      {" "}
+                      <AiOutlineSearch size={40} />
+                      <input
+                        className={styles.searchInput}
+                        key={`${column.accessor}-search`}
+                        type="search"
+                        placeholder={`Filter by ${column.label}`}
+                        value={filters[column.accessor]}
+                        onChange={(event) =>
+                          handleSearch(event.target.value, column.accessor)
+                        }
+                      />
+                    </th>
+                  );
+                } else {
+                  return <th></th>;
+                }
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {calculatedRows.map((row) => {
+              return (
+                <tr
+                  key={row._id}
+                  className={styles.dataRow}
+                  onClick={() => onSelect(row)}
+                >
+                  {columns.map((column) => {
+                    if (column.type === "date") {
+                      let date = new Date(row[column.accessor]);
+                      return (
+                        <td key={column.accessor}>
+                          {date.toLocaleDateString()}
+                        </td>
+                      );
+                    } else if (column.type === "rating") {
+                      // This part of the code is NOT reusable, and will need to be deleted later. I wasn't sure how to access data that was within another object layer
+                      return <td key={column.accessor}>{row.imdb.rating}</td>;
+                    }
                     return (
-                      <td key={column.accessor}>{date.toLocaleDateString()}</td>
+                      <td key={column.accessor}>{row[column.accessor]}</td>
                     );
-                  } else if (column.type === "rating") {
-                    // This part of the code is NOT reusable, and will need to be deleted later. I wasn't sure how to access data that was within another object layer
-                    return <td key={column.accessor}>{row.imdb.rating}</td>;
-                  }
-                  return <td key={column.accessor}>{row[column.accessor]}</td>;
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <Pagination
-        activePage={activePage}
-        count={count}
-        rowsPerPage={rowsPerPage}
-        totalPages={totalPages}
-        setActivePage={setActivePage}
-        loadMoreData={loadMoreData}
-        searched={searched}
-      />
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+        <Pagination
+          activePage={activePage}
+          count={count}
+          rowsPerPage={rowsPerPage}
+          totalPages={totalPages}
+          setActivePage={setActivePage}
+          loadMoreData={loadMoreData}
+          searched={searched}
+        />
       </Card>
     </>
   );

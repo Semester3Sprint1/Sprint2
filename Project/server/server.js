@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const error = require("./middleware/error");
+
 require("express-async-errors");
 require("dotenv").config();
 const Joi = require("joi");
