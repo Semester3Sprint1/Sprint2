@@ -1,6 +1,5 @@
 import { useState } from "react";
 import classes from "./StarRating.module.css";
-// import { FaStar } from "react-icons/fa";
 import { FaPaw } from "react-icons/fa";
 
 const StarRating = ({ rating, setRating }) => {
@@ -9,7 +8,7 @@ const StarRating = ({ rating, setRating }) => {
 
   return (
     <div>
-      {[...Array(10)].map((star, i) => {
+      {[...Array(10)].map((paw, i) => {
         const ratingValue = i + 1;
         return (
           <label key={i}>
@@ -21,7 +20,7 @@ const StarRating = ({ rating, setRating }) => {
               onClick={() => setRating(ratingValue)}
             />
             <FaPaw
-              className={classes.star}
+              className={classes.paw}
               color={ratingValue <= (hover || rating) ? "#03045e" : "#e4e5e9"}
               size={50}
               onMouseEnter={() => setHover(ratingValue)}
