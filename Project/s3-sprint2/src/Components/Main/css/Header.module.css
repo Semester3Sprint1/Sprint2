@@ -19,7 +19,6 @@
     margin: 5rem;
     text-align: center;
     line-height: 1.2;
-
   }
 
   .pHeader{
@@ -27,6 +26,7 @@
    text-align: center;
    width: 25ch;
    line-height: 1.2;
+  
   }
   
   .slideshow {
@@ -64,11 +64,6 @@
     }
   }
   
-  
-  @font-face {
-    font-family: "Showtime";
-    src: url("../fonts/Showtime.ttf");
-  }
   
   .reviewTitle {
     font-family: "Showtime";

@@ -14,7 +14,7 @@ const Header = () => {
       </div>
       </Border>
       <header className={classes.header}>
-        <h2>Welcome {authCtx.username}  to Your Source for All Thing Movies</h2>
+        <h2>Welcome {authCtx.username}  to Squishy Kitty Reviews!  Your Goto Kitty for All Things Movies Reviews</h2>
         {!authCtx.isLoggedIn &&
         <p className={classes.pHeader}>Log in to get acess to everything our site has to offer</p>}
         {authCtx.isLoggedIn &&
