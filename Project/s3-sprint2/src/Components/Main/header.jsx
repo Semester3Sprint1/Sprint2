@@ -10,11 +10,16 @@ const Header = () => {
     <Fragment>
       <Border>
         <div className={classes.slideshow}>
-          <div className={classes.mover1}></div>
-          <div className={classes.mover2}></div>
+          <div className={classes.mover1}>
+            <Banner />
+          </div>
+
+          <div className={classes.mover2}>
+            <Banner />
+          </div>
         </div>
       </Border>
-      <Banner />
+
       <header className={classes.header}>
         <h2>
           Welcome {authCtx.username} to Squishy Kitty Reviews! Your Goto Kitty
