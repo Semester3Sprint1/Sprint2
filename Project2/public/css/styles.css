@@ -4,15 +4,15 @@
 }
 
 body {
-  width: 100%;
+  width: 99%;
   align-items: center;
   height: 100%;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  overflow: hidden;
   background-image: url("../images/background.jpg");
+  overflow: hidden;
 }
 
 h1 {
@@ -35,6 +35,7 @@ h2 {
   width: 100px;
   height: 63px;
   cursor: pointer;
+  border: none;
 }
 
 a:link {
@@ -53,4 +54,16 @@ a:visited {
 
   text-shadow: -1px -1px 0 #000, 0 -1px 0 #000, 1px -1px 0 #000, 1px 0 0 #000,
     1px 1px 0 #000, 0 1px 0 #000, -1px 1px 0 #000, -1px 0 0 #000;
+}
+
+.array {
+  position: relative;
+  font-size: 20px;
+  border: 2px;
+  border-style: solid;
+  width: 50%;
+  height: 70%;
+  background-color: white;
+  overflow: auto;
+  white-space: normal;
 }
