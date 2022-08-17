@@ -76,7 +76,6 @@ const getRandomMovies = async () => {
 };
 
 const getBannerPics = async () => {
-  console.log("I have been executed.");
   await client.connect();
   const coll = await client.db("sample_mflix").collection("movies");
 
@@ -95,7 +94,6 @@ const getBannerPics = async () => {
 
   const cursor = coll.aggregate(agg);
   const result = await cursor.toArray();
-  console.log(result);
 
   return result;
 };
