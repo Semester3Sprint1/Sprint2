@@ -52,13 +52,13 @@
   height: 100%;
 } */
 .slideshow .mover1 {
-  animation: moveSlideshow 25s linear infinite;
+  animation: moveSlideshow 60s linear infinite;
 }
 .slideshow .mover2 {
   opacity: 0;
   transition: opacity 0.5s ease-out;
   background-position: 0 -500px;
-  animation: moveSlideshow 25s linear infinite;
+  animation: moveSlideshow 60s linear infinite;
 }
 
 @keyframes moveSlideshow {
