@@ -7,12 +7,15 @@
   border-collapse: collapse;
   background-color:#fff;
   border:  1px solid #ddd;
+  table-layout: fixed;
   
 }
 
 .table td{
   font-size: 1.2rem;
   text-align: center;
+  overflow: hidden;
+  width: 100%;
   
 }
 
