@@ -6,6 +6,7 @@ import AuthContext from "../Context/auth-context";
 import { useContext } from "react";
 import ChangeDB from "../Services/ChangeDB";
 import { successToast } from "../Services/toast";
+import Logo from "./images/LogoWhite.svg"
 
 export default function NavBar(props) {
   const authCtx = useContext(AuthContext);
@@ -35,7 +36,14 @@ export default function NavBar(props) {
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid fs-2">
         <Link className="navbar-brand" to="/">
-          <h1 className="d-inline">Squishy Kitty Movies</h1>
+        <img
+            src={Logo}
+            alt="Our Logo"
+            width="80rem"
+            height="80rem"
+            className="d-inline-block align-text-centre me-4 rounded-1"
+          />
+          <h1 className="d-inline">Squishy Kitty Reviews</h1>
         </Link>
         <button
           onClick={handleNavCollapse}

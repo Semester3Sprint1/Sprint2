@@ -32,7 +32,7 @@
   margin-bottom: 1rem;
 }
 
-.reset:active, .reset:hover {
+.reset:active, .btnSearch:active, .btnSearch:hover, .reset:hover {
   background:  linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 50%, rgba(202,240,248,1) 100%);
 }
 

@@ -49,24 +49,52 @@
 
 .gridContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.pagewrapper {
   max-width: 1600px;
   margin: 0 auto;
   margin-top: 4rem;
   
 }
 
-
-
-@font-face {
-  font-family: "Showtime";
-  src: url("../fonts/Showtime.ttf");
+@media screen and (min-width: 768px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.reviewTitle {
-  font-family: "Showtime";
-  font-size: 50px;
+
+
+.logo{
+  transition: all 0.2s ease-in-out;
 }
 
+.logo:hover{
+  
+  transform: scale(1.20);
+}
+
+.facts{
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 50px;
+  background: rgb(3,4,94);
+  background: linear-gradient(90deg, rgba(3,4,94,1) 0%, rgba(13,110,253,1) 100%);
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  font-family: 'Hanalei Fill', cursive;
+
+
+}
+
+.facts ul{
+  list-style: none;
+  font-size: 2.5rem;
+}
+
+.facts h3{
+  text-align: center;
+  font-size: 3rem;
+  border-bottom: 1px solid  white;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+}
