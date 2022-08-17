@@ -31,7 +31,7 @@ router.get("/:genre", async (req, res) => {
   res.status(200).send(response);
 });
 
-router.get("/getBanner", async (req, res) => {
+router.get("/banner/getBanner", async (req, res) => {
   let response = await getBannerPics();
   res.status(200).send(response);
 });

@@ -83,7 +83,7 @@ const getBannerPics = async () => {
   const agg = [
     {
       $sample: {
-        size: 10,
+        size: 50,
       },
     },
     {

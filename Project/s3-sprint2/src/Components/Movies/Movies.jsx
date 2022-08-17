@@ -38,7 +38,6 @@ const Movies = ({ handleSelect, moviePackage }) => {
 
   return (
     <>
-      <Banner />
       <div className={styles.search}>
         <SearchBar
           handleSearch={searchMovies}
