@@ -32,17 +32,21 @@ app.post("/proc", async (req, res) => {
   MongoClient.connect(url, function (err, db) {
     if (err) throw err;
     var dbo = db.db("sprint2");
-
+    var inputvalues = req.body.inputvalues;
     dbo
       .collection("treeify")
-      .insertOne(JSON.parse(StringArray), function (err, res) {
-        if (err) throw err;
-        console.log("1 document inserted");
-        db.close();
-      });
-  });
 
-  res.render("proc", { StringArray });
+      .insertMany(
+        [{ inputvalues }, JSON.parse(StringArray)],
+        function (err, res) {
+          if (err) throw err;
+          console.log("1 document inserted");
+          db.close();
+        }
+      );
+  });
+  console.log(inputvalues);
+  res.render("proc", { StringArray, inputvalues });
 });
 
 app.get("/records", async (req, res) => {
