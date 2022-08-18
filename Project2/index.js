@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const { treeify, inputvalues } = require("./services/binaryTree");
 const PORT = process.env.PORT || 4000;
+var MongoClient = require("mongodb").MongoClient;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,18 +24,42 @@ app.get("/proc", async (req, res) => {
   res.render("proc", { status: app.locals.status });
 });
 
-app.post("/proc", function (req, res) {
-  var tree = treeify(req.body.inputvalues);
+app.post("/proc", async (req, res) => {
+  var tree = await treeify(req.body.inputvalues);
   var StringArray = JSON.stringify(tree, null, 2);
-  console.log(StringArray);
-  res.render("proc", { StringArray, tree });
+
+  var url = "mongodb+srv://sprint2:sprint2@cluster0.svdzfgf.mongodb.net/test";
+  MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("sprint2");
+
+    dbo
+      .collection("treeify")
+      .insertOne(JSON.parse(StringArray), function (err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        db.close();
+      });
+  });
+
+  res.render("proc", { StringArray });
 });
 
 app.get("/records", async (req, res) => {
-  res.render("records");
+  var url = "mongodb+srv://sprint2:sprint2@cluster0.svdzfgf.mongodb.net/test";
+  MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("sprint2");
+    dbo
+      .collection("treeify")
+      .find({})
+      .toArray(function (err, result) {
+        if (err) throw err;
+        stringDBArray = JSON.stringify(result);
+        res.render("records", { stringDBArray });
+      });
+  });
 });
-const Router = require("./routes/routes");
-app.use("/", Router);
 
 app.use((req, res) => {
   res.status(404).render("404");
