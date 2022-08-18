@@ -36,7 +36,7 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
 
   return (
     <div className={styles.search}>
-      <div className={styles.reset}>
+      <div className={styles.btnMovies}>
         <button
           onClick={() => {
             setTarget("movie");
@@ -82,8 +82,8 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
       {searched && (
         <>
           <br />
+          <div className={styles.btnReset}>
           <button
-            style={{ marginLeft: "3%" }}
             onClick={() => {
               resetSearch();
             }}
@@ -91,6 +91,7 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
           >
             Reset Search <AiOutlineUndo size={40} />
           </button>
+          </div>
         </>
       )}
     </div>
