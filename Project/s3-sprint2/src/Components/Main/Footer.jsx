@@ -34,8 +34,8 @@ const Footer = () => {
           <h5 className="mb-1">Contact Us</h5>
           <p className="mb-1">Toll Free: 1-800-555-SquihyKitty</p>
           <p className="mb-1">
-            <a href="mailto:payreviews@email.com" target="_blank">
-              Email: payreviews@email.com
+            <a href="mailto:pawreviews@email.com" target="_blank">
+              Email: pawreviews@email.com
             </a>
           </p>
         </span>
