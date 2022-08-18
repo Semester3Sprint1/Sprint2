@@ -255,9 +255,9 @@ function App() {
     setMongoGenres(data);
   };
 
-  const getMongoMoviesBySearch = async (text) => {
+  const getMongoMoviesBySearch = async (text, target) => {
     const res = await fetch(
-      `http://localhost:3001/search/mongo?searchText=${text}&user=${username}`,
+      `http://localhost:3001/search/mongo?searchText=${text}&user=${username}&target=${target}`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
