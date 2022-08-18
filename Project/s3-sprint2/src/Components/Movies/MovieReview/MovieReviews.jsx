@@ -3,6 +3,7 @@ import MovieReview from "./MovieReview";
 import styles from "./css/MovieReviews.module.css";
 import { useState } from "react";
 import AddReview from "./AddReview";
+import banner from "../../Main/images/KittyBanner.png"
 
 const MovieReviews = ({
   reviews,
@@ -45,7 +46,11 @@ const MovieReviews = ({
               })}
             </>
           ) : (
-            <p>No reviews yet. Consider adding one!</p>
+           <img
+            src={banner}
+            alt="Leave a Review Kitty Banner"
+            className= {styles.noReview}
+          />
           )}
         </>
       ) : (
