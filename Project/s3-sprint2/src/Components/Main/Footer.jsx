@@ -10,7 +10,7 @@ const Footer = () => {
           aria-current="true"
         >
           {/* Store Hours */}
-          <h5 className="mb-1">Copyright &copy; for Movie Reviews</h5>
+          <h5 className="mb-1">Copyright &copy; for Squishy Kitty Tech</h5>
         </span>
         {/* Follow Us */}
         <span className="list-group-item list-group-item-action active">
@@ -32,10 +32,10 @@ const Footer = () => {
         {/* Contact Us */}
         <span className="list-group-item list-group-item-action active">
           <h5 className="mb-1">Contact Us</h5>
-          <p className="mb-1">Toll Free: 1-800-555-Movies</p>
+          <p className="mb-1">Toll Free: 1-800-555-SquihyKitty</p>
           <p className="mb-1">
-            <a href="mailto:moviereviews@email.ca" target="_blank">
-              Email: moviereviews@email.com
+            <a href="mailto:pawreviews@email.com" target="_blank">
+              Email: pawreviews@email.com
             </a>
           </p>
         </span>
