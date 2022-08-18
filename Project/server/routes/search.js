@@ -4,44 +4,62 @@ const logger = require("../startup/logging");
 const { logSearch } = require("../startup/searchLog");
 const { Search, validate } = require("../models/search");
 
-const { searchMovies } = require("../services/mongo_dal/searchMovies.dal");
+// const { searchMovies } = require("../services/mongo_dal/searchMovies.dal");
 
 router.get("/mongo", async (req, res) => {
-  const { searchText, user } = req.query;
+  const { searchText, user, target } = req.query;
   const { error } = await validate({ searchText });
   if (error) {
     logger.error("invalid Search");
     return res.status(400).send(error.details[0].message);
   }
-
-  const agg = [
-    {
-      $search: {
-        index: "searchBar",
-        compound: {
-          should: [
-            {
-              autocomplete: {
-                query: `${searchText}`,
-                path: "title",
-                fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
+  if (target === "movie") {
+    var agg = [
+      {
+        $search: {
+          index: "searchBar",
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: `${searchText}`,
+                  path: "title",
+                  fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
+                },
               },
-            },
-            {
-              autocomplete: {
-                query: `${searchText}`,
-                path: "fullplot",
-                fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
+              {
+                autocomplete: {
+                  query: `${searchText}`,
+                  path: "fullplot",
+                  fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
+                },
               },
-            },
-          ],
+            ],
+          },
         },
       },
-    },
-    {
-      $limit: 250,
-    },
-  ];
+      {
+        $limit: 250,
+      },
+    ];
+  } else {
+    var agg = [
+      {
+        $search: {
+          index: "searchBar",
+
+          text: {
+            query: `${searchText}`,
+            path: "cast",
+            fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
+          },
+        },
+      },
+      {
+        $limit: 250,
+      },
+    ];
+  }
 
   let response = await Search.aggregate(agg);
   logSearch(user, searchText, response.length, "MONGODB");
