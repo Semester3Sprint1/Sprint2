@@ -49,7 +49,56 @@ const getGenres = async () => {
   return cursor;
 };
 
-module.exports = { getMovies, getMoviesByGenre, getGenres };
+const getRandomMovies = async () => {
+  await client.connect();
+  const coll = await client.db("sample_mflix").collection("movies");
+
+  const agg = [
+    {
+      $sample: {
+        size: 3,
+      },
+    },
+    {
+      $project: {
+        title: 1,
+        _id: 1,
+        fullplot: 1,
+        "imdb.rating": 1,
+      },
+    },
+  ];
+
+  const cursor = coll.aggregate(agg);
+  const result = await cursor.toArray();
+
+  return result;
+};
+
+const getBannerPics = async () => {
+  await client.connect();
+  const coll = await client.db("sample_mflix").collection("movies");
+
+  const agg = [
+    {
+      $sample: {
+        size: 50,
+      },
+    },
+    {
+      $project: {
+        poster: 1,
+      },
+    },
+  ];
+
+  const cursor = coll.aggregate(agg);
+  const result = await cursor.toArray();
+
+  return result;
+};
+
+module.exports = { getMovies, getMoviesByGenre, getGenres, getBannerPics };
 
 // const getMovies = async () => {
 //     //   const { searchText } = body;

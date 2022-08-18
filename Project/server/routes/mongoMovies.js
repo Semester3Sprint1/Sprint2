@@ -4,9 +4,11 @@ const {
   getMovies,
   getMoviesByGenre,
   getGenres,
+  getBannerPics,
 } = require("../services/mongo_dal/getMovies.dal");
 
 router.get("/", async (req, res) => {
+  console.log("query happened");
   let { page } = req.query;
   DEBUG && console.log(page);
   let response = await getMovies({ page_number: 0, page_size: 3000 });
@@ -26,6 +28,11 @@ router.get("/:genre", async (req, res) => {
     page_size: 3000,
     genre: req.params.genre,
   });
+  res.status(200).send(response);
+});
+
+router.get("/banner/getBanner", async (req, res) => {
+  let response = await getBannerPics();
   res.status(200).send(response);
 });
 

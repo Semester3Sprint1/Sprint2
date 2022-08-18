@@ -5,6 +5,7 @@ import ListGroup from "../UI/ListGroup";
 import SearchBar from "../UI/SearchBar";
 import Table from "../UI/Table";
 import BackGround from "../UI/BackGround";
+import Banner from "../UI/Banner";
 
 const Movies = ({ handleSelect, moviePackage }) => {
   const {

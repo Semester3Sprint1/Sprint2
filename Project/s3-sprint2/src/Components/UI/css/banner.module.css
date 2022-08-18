@@ -1,0 +1,29 @@
+.banner {
+  position: relative;
+  display: flex;
+  /* overflow: hidden; */
+  /* max-width: 100%; */
+  /* left: 50%; */
+  /* animation: move 25s linear infinite; */
+  /* transform: translateX(-50%); */
+}
+
+.banner img {
+  height: 300px;
+  width: 175px;
+}
+
+/* @keyframes move {
+  0% {
+    left: 100%;
+    transform: translateX(-100%);
+  }
+  50% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    left: 100%;
+    transform: translateX(-100%);
+  }
+} */
