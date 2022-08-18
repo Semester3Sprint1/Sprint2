@@ -55,7 +55,7 @@ app.get("/records", async (req, res) => {
       .find({})
       .toArray(function (err, result) {
         if (err) throw err;
-        stringDBArray = JSON.stringify(result);
+        stringDBArray = JSON.stringify(result, null, 2);
         res.render("records", { stringDBArray });
       });
   });
