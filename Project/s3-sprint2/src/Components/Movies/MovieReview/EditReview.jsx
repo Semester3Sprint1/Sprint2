@@ -3,6 +3,7 @@ import styles from "./css/MovieReviews.module.css";
 import StarDisplay from "./StarDisplay";
 import StarRating from "../MovieDetails/StarRating";
 import AuthContext from "../../Context/auth-context";
+import { successToast } from "../../Services/toast";
 
 const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
   const authCtx = useContext(AuthContext);
@@ -39,6 +40,7 @@ const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
     }
 
     await onEdit({ review: newReview, id: review_id });
+    successToast("Review edited!");
     setEditReview(false);
   };
 
