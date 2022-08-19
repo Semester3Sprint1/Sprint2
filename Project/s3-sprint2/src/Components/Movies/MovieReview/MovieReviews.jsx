@@ -13,6 +13,7 @@ const MovieReviews = ({
   onAddReview,
 }) => {
   const [addReview, setAddReview] = useState(false);
+  
 
   return (
     <div className={styles.reviewsContainer}>
@@ -61,6 +62,8 @@ const MovieReviews = ({
           setAddReview={setAddReview}
         />
       )}
+
+      
     </div>
   );
 };
