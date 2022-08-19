@@ -1,10 +1,22 @@
 import React from "react";
+import { useState, useContext, useEffect } from "react";
 import styles from "./css/MovieReviews.module.css";
+import AuthContext from "../../Context/auth-context";
+import { collapseToast } from "react-toastify";
+import { AiFillEdit } from "react-icons/ai";
 import StarDisplay from "./StarDisplay";
 
-const EditReview = ({ review, useMongo, setEditReview }) => {
+const ShowReview = ({ review, useMongo, setEditReview }) => {
+  const authCtx = useContext(AuthContext);
+  const username = authCtx.username;
+
+  const [confirmUser, setconfirmUser] = useState(false);
+  useEffect(() => {
+    username === viewer_name ? setconfirmUser(true) : setconfirmUser(false);
+  }, []);
+
   if (useMongo) {
-    var { _id, user, rating, details, tagline } = review;
+    var { user, rating, details, tagline } = review;
     var viewer_name = user.username;
   } else {
     var { viewer_name, rating, date, details, tagline } = review;
@@ -16,11 +28,19 @@ const EditReview = ({ review, useMongo, setEditReview }) => {
       <div className={styles.reviewHeader}>
         <div>
           <h2>
-            {viewer_name}
-
-            <button onClick={() => setEditReview(false)}>
-              {/* <AiFillEdit size={20} /> */} Confirm
-            </button>
+            {" "}
+            {viewer_name}{" "}
+            {confirmUser ? (
+              <>
+                {useMongo && (
+                  <button onClick={() => setEditReview(true)}>
+                    <AiFillEdit size={20} />{" "}
+                  </button>
+                )}
+              </>
+            ) : (
+              ""
+            )}
           </h2>
         </div>
 
@@ -49,4 +69,4 @@ const EditReview = ({ review, useMongo, setEditReview }) => {
   );
 };
 
-export default EditReview;
+export default ShowReview;
