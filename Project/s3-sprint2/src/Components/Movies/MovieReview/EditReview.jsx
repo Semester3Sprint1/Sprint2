@@ -4,6 +4,7 @@ import StarDisplay from "./StarDisplay";
 import StarRating from "../MovieDetails/StarRating";
 import AuthContext from "../../Context/auth-context";
 import { successToast } from "../../Services/toast";
+import {FaCheck} from "react-icons/fa";
 
 const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
   const authCtx = useContext(AuthContext);
@@ -52,8 +53,8 @@ const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
             <h2>
               {viewer_name}
 
-              <button type="submit">
-                {/* <AiFillEdit size={20} /> */} Confirm
+              <button className={styles.btnCheck} type="submit">
+                <FaCheck/>  <span>Confirm</span>
               </button>
             </h2>
           </div>

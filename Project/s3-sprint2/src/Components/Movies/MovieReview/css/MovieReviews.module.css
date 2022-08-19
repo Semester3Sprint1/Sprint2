@@ -78,3 +78,26 @@
   display: flex;
   justify-content: space-between;
 }
+
+
+.btnCheck, .btnEdit ,.btnDelete{
+  border: none;
+}
+
+.btnDelete{
+  font-size: 1rem;
+}
+
+.btnCheck:hover{
+  color: green
+}
+.btnEdit:hover{
+  color: rgba(13,110,253,1)
+}
+.btnDelete:hover{
+  color: red
+}
+
+.btnCheck span{
+  font-size: 1rem;
+}
