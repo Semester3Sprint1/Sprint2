@@ -5,6 +5,7 @@ import AuthContext from "../../Context/auth-context";
 import { collapseToast } from "react-toastify";
 import { AiFillEdit } from "react-icons/ai";
 import StarDisplay from "./StarDisplay";
+import { successToast } from "../../Services/toast";
 
 const ShowReview = ({
   review,
@@ -23,6 +24,11 @@ const ShowReview = ({
     var review_date = new Date(date);
   }
 
+  const deleteReview = () => {
+    onDelete(review_id, movieID);
+    successToast("Review deleted!");
+  };
+
   return (
     <div className={styles.movieReview}>
       <div className={styles.reviewHeader}>
@@ -35,7 +41,7 @@ const ShowReview = ({
                 <button onClick={() => setEditReview(true)}>
                   <AiFillEdit size={20} />{" "}
                 </button>
-                <button onClick={() => onDelete(review_id, movieID)}>X</button>
+                <button onClick={() => deleteReview()}>X</button>
               </>
             ) : (
               ""
