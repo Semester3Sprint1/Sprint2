@@ -14,6 +14,7 @@ const MovieDetail = ({
   onAddReview,
   onEditReview,
   currentReviews,
+  onDelete,
 }) => {
   const {
     _id,
@@ -83,6 +84,7 @@ const MovieDetail = ({
           useMongo={useMongo}
           onAddReview={onAddReview}
           onEditReview={onEditReview}
+          onDelete={onDelete}
         />
       )}
     </div>

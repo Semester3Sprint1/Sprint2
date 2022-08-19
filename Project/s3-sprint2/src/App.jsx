@@ -187,6 +187,14 @@ function App() {
     // Needs a little extra
   };
 
+  const deleteReviewPg = async (review) => {
+    await fetch(`http://localhost:3001/movies/pg/review/delete`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    });
+  };
+
   // Stores all of the relevant movie states and state changers - easier to put it into one object instead of passing all of these down to all of the components that need them
   const pgMoviePackage = {
     movies: pgMovies,
@@ -210,6 +218,7 @@ function App() {
     selectedMovie: selectedPgMovie,
     onAddReview: addReviewPg,
     onEditReview: editReviewPg,
+    onDeleteReview: deleteReviewPg,
     currentReviews: null,
     columns: [
       {
@@ -306,16 +315,22 @@ function App() {
   };
 
   const editReviewMongo = async (review) => {
-    const res = await fetch(
-      `http://localhost:3001/api/review/${review.reviewID}`,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(review),
-      }
-    );
+    const res = await fetch(`http://localhost:3001/api/review/${review.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review.review),
+    });
     const data = await res.json();
-    fetchReviewMongo(review.movieID);
+    fetchReviewMongo(review.review.movieID);
+  };
+
+  const deleteReviewMongo = async (reviewID, movieID) => {
+    await fetch(`http://localhost:3001/api/review/${reviewID}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    fetchReviewMongo(movieID);
   };
 
   const fetchReviewMongo = async (id) => {
@@ -346,6 +361,7 @@ function App() {
     selectedMovie: selectedMongoMovie,
     onAddReview: addReviewMongo,
     onEditReview: editReviewMongo,
+    onDeleteReview: deleteReviewMongo,
     currentReviews: mongoReviews,
     columns: [
       {

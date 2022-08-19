@@ -6,20 +6,20 @@ import { collapseToast } from "react-toastify";
 import { AiFillEdit } from "react-icons/ai";
 import StarDisplay from "./StarDisplay";
 
-const ShowReview = ({ review, useMongo, setEditReview }) => {
-  const authCtx = useContext(AuthContext);
-  const username = authCtx.username;
-
-  const [confirmUser, setconfirmUser] = useState(false);
-  useEffect(() => {
-    username === viewer_name ? setconfirmUser(true) : setconfirmUser(false);
-  }, []);
-
+const ShowReview = ({
+  review,
+  useMongo,
+  setEditReview,
+  onDelete,
+  movieID,
+  confirmUser,
+}) => {
   if (useMongo) {
-    var { user, rating, details, tagline } = review;
+    var { _id, user, rating, details, tagline } = review;
     var viewer_name = user.username;
+    var review_id = review._id;
   } else {
-    var { viewer_name, rating, date, details, tagline } = review;
+    var { review_id, viewer_name, rating, date, details, tagline } = review;
     var review_date = new Date(date);
   }
 
@@ -32,11 +32,10 @@ const ShowReview = ({ review, useMongo, setEditReview }) => {
             {viewer_name}{" "}
             {confirmUser ? (
               <>
-                {useMongo && (
-                  <button onClick={() => setEditReview(true)}>
-                    <AiFillEdit size={20} />{" "}
-                  </button>
-                )}
+                <button onClick={() => setEditReview(true)}>
+                  <AiFillEdit size={20} />{" "}
+                </button>
+                <button onClick={() => onDelete(review_id, movieID)}>X</button>
               </>
             ) : (
               ""

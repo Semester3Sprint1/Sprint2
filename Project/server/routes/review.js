@@ -92,8 +92,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   const check = await Review.findById(req.params.id);
   if (!check) return res.status(400).send("Review no longer exists");
-  if (req.body.userID != check.user._id)
-    return res.status(400).send("User Does Not Match Owner of Post");
+
   const review = await Review.findByIdAndDelete(req.params.id);
 
   if (!review)
