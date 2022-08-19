@@ -3,7 +3,7 @@ import MovieReview from "./MovieReview";
 import styles from "./css/MovieReviews.module.css";
 import { useState } from "react";
 import AddReview from "./AddReview";
-import banner from "../../Main/images/KittyBanner.png"
+import banner from "../../Main/images/KittyBanner.png";
 
 const MovieReviews = ({
   reviews,
@@ -11,9 +11,9 @@ const MovieReviews = ({
   movieID,
   useMongo,
   onAddReview,
+  onEditReview,
 }) => {
   const [addReview, setAddReview] = useState(false);
-  
 
   return (
     <div className={styles.reviewsContainer}>
@@ -40,18 +40,23 @@ const MovieReviews = ({
               {reviews.map((review) => {
                 return (
                   <>
-                    <MovieReview review={review} useMongo={useMongo} />
+                    <MovieReview
+                      review={review}
+                      useMongo={useMongo}
+                      movieID={movieID}
+                      onEditReview={onEditReview}
+                    />
                     <hr />
                   </>
                 );
               })}
             </>
           ) : (
-           <img
-            src={banner}
-            alt="Leave a Review Kitty Banner"
-            className= {styles.noReview}
-          />
+            <img
+              src={banner}
+              alt="Leave a Review Kitty Banner"
+              className={styles.noReview}
+            />
           )}
         </>
       ) : (
@@ -62,8 +67,6 @@ const MovieReviews = ({
           setAddReview={setAddReview}
         />
       )}
-
-      
     </div>
   );
 };

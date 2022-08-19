@@ -176,6 +176,17 @@ function App() {
     return data;
   };
 
+  const editReviewPg = async (review) => {
+    const res = await fetch(`http://localhost:3001/movies/pg/review/edit`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    });
+    const data = await res.json();
+
+    // Needs a little extra
+  };
+
   // Stores all of the relevant movie states and state changers - easier to put it into one object instead of passing all of these down to all of the components that need them
   const pgMoviePackage = {
     movies: pgMovies,
@@ -198,6 +209,7 @@ function App() {
     handleSelect: handlePgMovieSelect,
     selectedMovie: selectedPgMovie,
     onAddReview: addReviewPg,
+    onEditReview: editReviewPg,
     currentReviews: null,
     columns: [
       {
@@ -293,6 +305,19 @@ function App() {
     fetchReviewMongo(review.movieID);
   };
 
+  const editReviewMongo = async (review) => {
+    const res = await fetch(
+      `http://localhost:3001/api/review/${review.reviewID}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(review),
+      }
+    );
+    const data = await res.json();
+    fetchReviewMongo(review.movieID);
+  };
+
   const fetchReviewMongo = async (id) => {
     const res = await fetch(`http://localhost:3001/api/review/${id}`, {
       method: "GET",
@@ -320,6 +345,7 @@ function App() {
     handleSelect: handleMongoMovieSelect,
     selectedMovie: selectedMongoMovie,
     onAddReview: addReviewMongo,
+    onEditReview: editReviewMongo,
     currentReviews: mongoReviews,
     columns: [
       {

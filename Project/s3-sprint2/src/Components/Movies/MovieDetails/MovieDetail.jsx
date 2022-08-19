@@ -8,7 +8,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MovieReviews from "../MovieReview/MovieReviews";
 
-const MovieDetail = ({ movie, useMongo, onAddReview, currentReviews }) => {
+const MovieDetail = ({
+  movie,
+  useMongo,
+  onAddReview,
+  onEditReview,
+  currentReviews,
+}) => {
   const {
     _id,
     awards,
@@ -76,6 +82,7 @@ const MovieDetail = ({ movie, useMongo, onAddReview, currentReviews }) => {
           movieID={movie._id}
           useMongo={useMongo}
           onAddReview={onAddReview}
+          onEditReview={onEditReview}
         />
       )}
     </div>
