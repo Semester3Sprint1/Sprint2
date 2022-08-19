@@ -41,7 +41,7 @@ export default function NavBar(props) {
             alt="Our Logo"
             width="80rem"
             height="80rem"
-            className="d-inline-block align-text-centre me-4 rounded-1"
+            className="d-inline-block align-text-centre me-4 rounded-1 "
           />
           <h1 className="d-inline">Squishy Kitty Reviews</h1>
         </Link>

@@ -2,6 +2,8 @@ import { useState, useRef, useContext } from "react";
 import AuthContext from "../../Context/auth-context";
 import { useNavigate } from "react-router-dom";
 import classes from "./AuthForm.module.css";
+import {errorToast } from "../../Services/toast";
+
 const AuthForm = () => {
   const navigate = useNavigate();
   const emailInputRef = useRef();
@@ -58,8 +60,12 @@ const AuthForm = () => {
       const data = await res.json();
       if (!res.ok) {
         let errorMessage = data;
-        throw new Error(errorMessage);
+        errorToast(`${errorMessage}`)
+        return
+       
       }
+
+
       
       if (isLogin) {
         authCtx.login(data);
