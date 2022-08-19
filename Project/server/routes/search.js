@@ -18,23 +18,10 @@ router.get("/mongo", async (req, res) => {
       {
         $search: {
           index: "searchBar",
-          compound: {
-            should: [
-              {
-                autocomplete: {
-                  query: `${searchText}`,
-                  path: "title",
-                  fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
-                },
-              },
-              {
-                autocomplete: {
-                  query: `${searchText}`,
-                  path: "fullplot",
-                  fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
-                },
-              },
-            ],
+          autocomplete: {
+            query: `${searchText}`,
+            path: "title",
+            fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
           },
         },
       },
@@ -48,15 +35,11 @@ router.get("/mongo", async (req, res) => {
         $search: {
           index: "searchBar",
 
-          text: {
+          phrase: {
             query: `${searchText}`,
             path: "cast",
-            fuzzy: { maxEdits: 2, prefixLength: 2, maxExpansions: 100 },
           },
         },
-      },
-      {
-        $limit: 250,
       },
     ];
   }
@@ -85,3 +68,38 @@ router.get("/pg", async (req, res) => {
 });
 
 module.exports = router;
+
+// Exact text search - exactly what you need but doesn't allow for typos
+// var agg = [
+//   {
+//     $search: {
+//       index: "searchBar",
+
+//       phrase: {
+//         query: `${searchText}`,
+//         path: "cast",
+//       },
+//     },
+//   },
+// ];
+
+// Less exact - allows for fuzzy searching but less relevant results
+// const searchTerms = searchText.split(" ");
+// const searchArr = [];
+// searchTerms.forEach((word) => {
+//   searchArr.push({
+//     text: {
+//       query: `${word}`,
+//       path: "cast",
+//       fuzzy: { maxEdits: 2.0 },
+//     },
+//   });
+// });
+// var agg = [
+//   {
+//     $search: {
+//       index: "searchBar",
+//       compound: { must: searchArr },
+//     },
+//   },
+// ];

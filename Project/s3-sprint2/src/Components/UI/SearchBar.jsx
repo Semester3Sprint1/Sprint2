@@ -5,7 +5,7 @@ import { useState, useContext } from "react";
 import AuthContext from "../Context/auth-context";
 import { toast, Bounce } from "react-toastify";
 
-const SearchBar = ({ handleSearch, setSearched, searched }) => {
+const SearchBar = ({ handleSearch, setSearched, searched, useMongo }) => {
   const [searchText, setSearchText] = useState("");
   const [target, setTarget] = useState("movie");
   const authCtx = useContext(AuthContext);
@@ -36,32 +36,34 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
 
   return (
     <div className={styles.search}>
-      <div className={styles.btnMovies}>
-        <button
-          onClick={() => {
-            setTarget("movie");
-          }}
-          className={
-            target === "movie"
-              ? `${styles.targetButton} ${styles.pressedButton}`
-              : `${styles.targetButton}`
-          }
-        >
-          Search by Movie
-        </button>
-        <button
-          onClick={() => {
-            setTarget("actor");
-          }}
-          className={
-            target === "actor"
-              ? `${styles.targetButton} ${styles.pressedButton}`
-              : `${styles.targetButton}`
-          }
-        >
-          Search by Actor
-        </button>
-      </div>
+      {useMongo && (
+        <div className={styles.btnMovies}>
+          <button
+            onClick={() => {
+              setTarget("movie");
+            }}
+            className={
+              target === "movie"
+                ? `${styles.targetButton} ${styles.pressedButton}`
+                : `${styles.targetButton}`
+            }
+          >
+            Search Movies by Title
+          </button>
+          <button
+            onClick={() => {
+              setTarget("actor");
+            }}
+            className={
+              target === "actor"
+                ? `${styles.targetButton} ${styles.pressedButton}`
+                : `${styles.targetButton}`
+            }
+          >
+            Search Movies by Actor
+          </button>
+        </div>
+      )}
       <form className={styles.searchBar} onSubmit={searchMovies}>
         <div>
           <input
@@ -83,14 +85,14 @@ const SearchBar = ({ handleSearch, setSearched, searched }) => {
         <>
           <br />
           <div className={styles.btnReset}>
-          <button
-            onClick={() => {
-              resetSearch();
-            }}
-            className={styles.reset}
-          >
-            Reset Search <AiOutlineUndo size={40} />
-          </button>
+            <button
+              onClick={() => {
+                resetSearch();
+              }}
+              className={styles.reset}
+            >
+              Reset Search <AiOutlineUndo size={40} />
+            </button>
           </div>
         </>
       )}

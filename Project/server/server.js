@@ -2,7 +2,7 @@
 
 Software Development, Semester 3, Sprint Project 2 - Group Project
 
-Developer: Alex Ridgeley, Mike Wadden, Cody Barrett
+Developers: Alex Ridgeley, Mike Wadden, Cody Barrett
 Date: August 2022
 
 Objective:
@@ -16,7 +16,7 @@ of the PG database and a copy of several CSV files that you can import into Mong
 TO RUN THE APP:
 
 1)  Install postgreSQL and MongoDB. Create a database and restore the backup DB found in the 'BackUp' folder.
-    Create a MongoDB database called 'sample_mflix', and add the following collections: **IF YOU RENAME THE DATABASE, YOU WILL NEED TO UPDATE THE CODE**
+    Create a MongoDB database called 'sample_mflix', and add the following collections: **IF YOU NAME THE DATABASE ANYTHING ELSE, YOU WILL NEED TO UPDATE THE CODE**
       'movies'    <----------- import the 'movies.csv' file here
       'reviews'   <----------- import the 'reviews.csv' file here
 

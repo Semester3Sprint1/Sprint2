@@ -15,7 +15,11 @@ const MovieRoutes = ({ moviePackage, useMongo }) => {
       <Route
         path="/"
         element={
-          <Movies handleSelect={handleSelect} moviePackage={moviePackage} />
+          <Movies
+            handleSelect={handleSelect}
+            moviePackage={moviePackage}
+            useMongo={useMongo}
+          />
         }
       />
       <Route
