@@ -7,7 +7,7 @@ import Table from "../UI/Table";
 import BackGround from "../UI/BackGround";
 import Banner from "../UI/Banner";
 
-const Movies = ({ handleSelect, moviePackage }) => {
+const Movies = ({ handleSelect, moviePackage, useMongo }) => {
   const {
     columns,
     movies,
@@ -43,6 +43,7 @@ const Movies = ({ handleSelect, moviePackage }) => {
           handleSearch={searchMovies}
           setSearched={setSearched}
           searched={searched}
+          useMongo={useMongo}
         />
       </div>
 
