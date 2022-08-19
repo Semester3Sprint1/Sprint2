@@ -26,7 +26,7 @@
   padding-bottom: 1rem;
 }
 
-.btnMovies button, .reset{
+ .reset{
  margin-right: 1rem;
  align-self: left;
  cursor: pointer;
@@ -43,6 +43,48 @@
 
 }
 
+.targetButton{
+  margin-right: 1rem;
+ align-self: left;
+ cursor: pointer;
+ align-items: center;
+  border-radius: 35px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  border: 3px solid white;
+  background-color: rgba(13, 110, 253, 1);
+  color: white;
+}
+
+
+.pressedButton{
+  margin-right: 1rem;
+ align-self: left;
+ cursor: pointer;
+ align-items: center;
+  border-radius: 35px;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  border: 3px solid white;
+  color: white;
+  background-color: rgb(7, 50, 125);
+}
+
+
+.pressedButton:hover{
+  background-color: rgba(13, 110, 253, 1);
+}
+
+.targetButton:hover{
+  background-color:rgb(7, 50, 125);
+}
+
 .reset:active,
 .btnSearch:active,
 .btnSearch:hover,
@@ -55,10 +97,8 @@
   );
 }
 
-.btnMovives button:active,
-.btnMovies button:hover {
-  background-color: rgb(7, 50, 125);
-}
+
+
 
 
 .btnSearch {
@@ -67,3 +107,5 @@
 
 
 }
+
+

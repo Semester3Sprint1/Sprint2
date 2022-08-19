@@ -1,7 +1,4 @@
-// this is a test code
-
 import React, { useState } from "react";
-import http from "../Services/http";
 // this context allows variables to be passed between many pages. The Loggedin state as one important one
 const AuthContext = React.createContext({
   token: "",
