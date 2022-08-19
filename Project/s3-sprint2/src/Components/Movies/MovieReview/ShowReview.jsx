@@ -38,10 +38,10 @@ const ShowReview = ({
             {viewer_name}{" "}
             {confirmUser ? (
               <>
-                <button onClick={() => setEditReview(true)}>
+                <button className={styles.btnEdit} onClick={() => setEditReview(true)}>
                   <AiFillEdit size={20} />{" "}
                 </button>
-                <button onClick={() => deleteReview()}>X</button>
+                <button className={styles.btnDelete} onClick={() => deleteReview()}>X</button>
               </>
             ) : (
               ""
