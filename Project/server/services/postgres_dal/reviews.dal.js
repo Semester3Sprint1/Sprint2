@@ -10,7 +10,6 @@ const getReviews = async (id) => {
 };
 
 const addReview = async (body) => {
-  console.log(body);
   const { userID, details, rating, movieID, tagline } = body;
   let sql = `INSERT INTO public.review(
     viewer_name, details,  rating, film_id, tagline)
@@ -20,4 +19,23 @@ const addReview = async (body) => {
   return res.rows;
 };
 
-module.exports = { getReviews, addReview };
+const uppdateReview = async (body) => {
+  const { reviewID, details, rating, tagline } = body;
+  let sql = `UPDATE public.review
+	SET  details=$2, rating=$3, tagline=$4
+	WHERE review_id = $1`;
+  let res = await dal.query(sql, [reviewID, details, rating, tagline]);
+
+  return res.rows;
+};
+
+const deleteReview = async (body) => {
+  const { reviewID } = body;
+  let sql = `DELETE FROM public.review
+	WHERE $1`;
+  let res = await dal.query(sql, [reviewID]);
+
+  return res.rows;
+};
+
+module.exports = { getReviews, addReview, uppdateReview, deleteReview };
