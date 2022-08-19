@@ -13,6 +13,7 @@ const MovieRoutes = ({ moviePackage, useMongo }) => {
     onAddReview,
     currentReviews,
     onEditReview,
+    onDeleteReview,
   } = moviePackage;
 
   return (
@@ -36,6 +37,7 @@ const MovieRoutes = ({ moviePackage, useMongo }) => {
             onAddReview={onAddReview}
             onEditReview={onEditReview}
             currentReviews={currentReviews}
+            onDelete={onDeleteReview}
           />
         }
       />

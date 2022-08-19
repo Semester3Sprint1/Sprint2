@@ -12,6 +12,7 @@ const MovieReviews = ({
   useMongo,
   onAddReview,
   onEditReview,
+  onDelete,
 }) => {
   const [addReview, setAddReview] = useState(false);
 
@@ -45,6 +46,7 @@ const MovieReviews = ({
                       useMongo={useMongo}
                       movieID={movieID}
                       onEditReview={onEditReview}
+                      onDelete={onDelete}
                     />
                     <hr />
                   </>

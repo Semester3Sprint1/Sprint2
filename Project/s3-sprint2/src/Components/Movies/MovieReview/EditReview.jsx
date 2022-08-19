@@ -11,6 +11,7 @@ const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
   if (useMongo) {
     var { user, rating, details, tagline } = review;
     var viewer_name = user.username;
+    var review_id = review._id;
   } else {
     var { review_id, viewer_name, rating, date, details, tagline } = review;
     var review_date = new Date(date);
@@ -19,12 +20,11 @@ const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
   const [newDetails, setNewDetails] = useState(details);
   const [newTagline, setNewTagline] = useState(tagline);
 
-  const submitEdit = (e) => {
+  const submitEdit = async (e) => {
     e.preventDefault();
     if (useMongo) {
       var newReview = {
         userID: userID,
-        reviewID: review._id,
         movieID: review.movie._id,
         rating: newRating,
         details: newDetails,
@@ -32,14 +32,13 @@ const EditReview = ({ review, useMongo, setEditReview, onEdit }) => {
       };
     } else {
       var newReview = {
-        review_id: review_id,
         rating: newRating,
         details: newDetails,
         tagline: newTagline,
       };
     }
 
-    onEdit(newReview);
+    await onEdit({ review: newReview, id: review_id });
     setEditReview(false);
   };
 
